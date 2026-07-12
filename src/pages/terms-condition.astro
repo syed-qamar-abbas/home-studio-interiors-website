@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+<Base title="Terms & Conditions — Home Studio Interiors" description="The terms governing the use of the Home Studio Interiors website and services.">
+  <section class="container-page pt-40 pb-28 md:pt-48 md:pb-36">
+    <p class="eyebrow">Legal</p>
+    <h1 class="display-lg mt-4">Terms &amp; Conditions</h1>
+    <div class="mt-12 max-w-2xl space-y-6 text-muted">
+      <p>These terms govern your use of {site.url} and any services provided by Home Studio Interiors. By using this website you agree to these terms.</p>
+      <h2 class="font-display text-2xl text-ink">Services</h2>
+      <p>Project scope, materials, timelines and pricing are confirmed in a written proposal and itemised BOQ before work begins. Estimates shared on this website are indicative only.</p>
+      <h2 class="font-display text-2xl text-ink">Intellectual property</h2>
+      <p>All content, designs and imagery on this website belong to Home Studio Interiors and may not be reproduced without permission.</p>
+      <h2 class="font-display text-2xl text-ink">Warranty</h2>
+      <p>We provide a one-year workmanship warranty on our fit-out work, subject to the terms set out in your project agreement.</p>
+      <h2 class="font-display text-2xl text-ink">Contact</h2>
+      <p>Questions about these terms? Email <a href={`mailto:${site.email}`} class="link-underline text-accent">{site.email}</a>.</p>
+      <p class="text-sm">This is a general template — please review with your legal advisor before publishing.</p>
+    </div>
+  </section>
+</Base>

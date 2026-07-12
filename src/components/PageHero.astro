@@ -1,0 +1,15 @@
+---
+interface Props { eyebrow?: string; title: string; subtitle?: string; image: string; }
+const { eyebrow, title, subtitle, image } = Astro.props;
+---
+<section class="relative flex min-h-[68vh] items-end overflow-hidden">
+  <div class="absolute inset-0">
+    <img src={image} alt="" class="h-full w-full scale-110 object-cover" data-parallax="0.1" fetchpriority="high" />
+    <div class="absolute inset-0 bg-gradient-to-t from-graphite/85 via-graphite/45 to-graphite/40"></div>
+  </div>
+  <div class="container-page relative z-10 pb-16 pt-40 text-white">
+    {eyebrow && <p class="eyebrow text-accent" data-reveal>{eyebrow}</p>}
+    <h1 class="display-lg mt-5 max-w-4xl text-white" data-reveal style="--reveal-delay:.1s">{title}</h1>
+    {subtitle && <p class="mt-6 max-w-2xl text-lg text-white/75" data-reveal style="--reveal-delay:.2s">{subtitle}</p>}
+  </div>
+</section>

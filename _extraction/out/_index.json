@@ -1,0 +1,132 @@
+{
+  "home": {
+    "title": "Interior Designer in Islamabad | Home Studio Interiors",
+    "metaDesc": "Full home interior design in Islamabad & Rawalpindi — 3D, materials, and turnkey fit-outs. Kitchens, wardrobes, vanities, media walls. Book a free visit.",
+    "h1": [],
+    "imageCount": 71,
+    "h2Count": 20,
+    "pCount": 54
+  },
+  "about": {
+    "title": "About - homestudiointeriors.pk",
+    "metaDesc": "",
+    "h1": [
+      "About Home Studio Interiors"
+    ],
+    "imageCount": 5,
+    "h2Count": 6,
+    "pCount": 20
+  },
+  "services": {
+    "title": "Services - homestudiointeriors.pk",
+    "metaDesc": "",
+    "h1": [
+      "Tailored Interior Services for Every Home"
+    ],
+    "imageCount": 5,
+    "h2Count": 2,
+    "pCount": 22
+  },
+  "kitchen": {
+    "title": "Kitchen - homestudiointeriors.pk",
+    "metaDesc": "",
+    "h1": [
+      "Where life meets flavor"
+    ],
+    "imageCount": 67,
+    "h2Count": 0,
+    "pCount": 20
+  },
+  "wardrobe": {
+    "title": "Wardrobe - homestudiointeriors.pk",
+    "metaDesc": "",
+    "h1": [
+      "Luxury behind every door"
+    ],
+    "imageCount": 25,
+    "h2Count": 0,
+    "pCount": 8
+  },
+  "vanities": {
+    "title": "Vanities - homestudiointeriors.pk",
+    "metaDesc": "",
+    "h1": [
+      "Elegant & Functional Vanity Designs"
+    ],
+    "imageCount": 8,
+    "h2Count": 0,
+    "pCount": 10
+  },
+  "media-walls": {
+    "title": "Media Walls - homestudiointeriors.pk",
+    "metaDesc": "",
+    "h1": [
+      "Your world, on display"
+    ],
+    "imageCount": 8,
+    "h2Count": 0,
+    "pCount": 10
+  },
+  "doors": {
+    "title": "Doors - homestudiointeriors.pk",
+    "metaDesc": "",
+    "h1": [
+      "The doors that define your home"
+    ],
+    "imageCount": 8,
+    "h2Count": 0,
+    "pCount": 10
+  },
+  "projects": {
+    "title": "Projects - homestudiointeriors.pk",
+    "metaDesc": "",
+    "h1": [
+      "Project",
+      "GET STARTED",
+      "Start Your Project Today"
+    ],
+    "imageCount": 30,
+    "h2Count": 8,
+    "pCount": 59
+  },
+  "blog": {
+    "title": "Blog - homestudiointeriors.pk",
+    "metaDesc": "",
+    "h1": [
+      "Design Stories & Inspiration"
+    ],
+    "imageCount": 0,
+    "h2Count": 0,
+    "pCount": 2
+  },
+  "testimonials": {
+    "title": "Testimonials - homestudiointeriors.pk",
+    "metaDesc": "",
+    "h1": [
+      "Voices Behind the Builds"
+    ],
+    "imageCount": 6,
+    "h2Count": 1,
+    "pCount": 4
+  },
+  "careers": {
+    "title": "Careers - homestudiointeriors.pk",
+    "metaDesc": "",
+    "h1": [
+      "Join the Team That Builds With Purpose"
+    ],
+    "imageCount": 4,
+    "h2Count": 4,
+    "pCount": 11
+  },
+  "contact": {
+    "title": "Contact - homestudiointeriors.pk",
+    "metaDesc": "",
+    "h1": [
+      "Get in Touch With Us"
+    ],
+    "imageCount": 0,
+    "h2Count": 2,
+    "pCount": 5
+  }
+}

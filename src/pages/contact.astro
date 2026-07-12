@@ -1,0 +1,76 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, heroImage } from '../data/site';
+// Replace with your Web3Forms access key (free at web3forms.com) before deploy.
+const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
+---
+<Base title="Contact — Book a Free Interior Design Consultation | Home Studio Interiors"
+  description="Get in touch with Home Studio Interiors in Islamabad. Book a free consultation for kitchens, wardrobes, vanities, media walls and full-home interior design.">
+  <section class="bg-graphite pt-40 pb-24 text-white md:pt-48 md:pb-32">
+    <div class="container-page grid gap-16 lg:grid-cols-2">
+      <div>
+        <p class="eyebrow text-accent" data-reveal>Get in touch</p>
+        <h1 class="display-lg mt-5 text-white" data-reveal>Let's talk about your space.</h1>
+        <p class="mt-6 max-w-md text-white/70" data-reveal>Fill out the form, call, or message us on WhatsApp. We'll arrange a free consultation and site visit to begin your project.</p>
+
+        <div class="mt-12 space-y-8" data-reveal>
+          <div>
+            <p class="eyebrow text-accent">Studio</p>
+            <p class="mt-2 text-lg">{site.address}</p>
+          </div>
+          <div>
+            <p class="eyebrow text-accent">Email</p>
+            <a href={`mailto:${site.email}`} class="link-underline mt-2 block text-lg">{site.email}</a>
+          </div>
+          <div>
+            <p class="eyebrow text-accent">Call / WhatsApp</p>
+            <a href={`tel:${site.phoneIntl}`} class="link-underline mt-2 block text-lg">{site.phone}</a>
+          </div>
+          <div>
+            <p class="eyebrow text-accent">Rated</p>
+            <p class="mt-2 text-lg">{site.rating.value} / 5 · {site.rating.count}+ reviews</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-bone p-8 text-ink md:p-10" data-reveal>
+        <form action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
+          <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
+          <input type="hidden" name="subject" value="New enquiry — Home Studio Interiors" />
+          <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+          <div class="grid gap-6 sm:grid-cols-2">
+            <label class="block">
+              <span class="eyebrow text-muted">Name</span>
+              <input required name="name" type="text" class="mt-2 w-full border-b border-line bg-transparent py-2 outline-none focus:border-accent" />
+            </label>
+            <label class="block">
+              <span class="eyebrow text-muted">Phone</span>
+              <input required name="phone" type="tel" class="mt-2 w-full border-b border-line bg-transparent py-2 outline-none focus:border-accent" />
+            </label>
+          </div>
+          <label class="block">
+            <span class="eyebrow text-muted">Email</span>
+            <input required name="email" type="email" class="mt-2 w-full border-b border-line bg-transparent py-2 outline-none focus:border-accent" />
+          </label>
+          <label class="block">
+            <span class="eyebrow text-muted">Service</span>
+            <select name="service" class="mt-2 w-full border-b border-line bg-transparent py-2 outline-none focus:border-accent">
+              <option>Full Home Interior</option>
+              <option>Kitchen</option>
+              <option>Wardrobe</option>
+              <option>Vanity</option>
+              <option>Media Wall</option>
+              <option>Doors</option>
+            </select>
+          </label>
+          <label class="block">
+            <span class="eyebrow text-muted">Tell us about your project</span>
+            <textarea name="message" rows="4" class="mt-2 w-full border-b border-line bg-transparent py-2 outline-none focus:border-accent"></textarea>
+          </label>
+          <button type="submit" class="btn btn-solid w-full justify-center">Send Enquiry</button>
+          <p class="text-xs text-muted">Prefer to chat? <a href={`https://wa.me/${site.whatsapp.replace(/\D/g, '')}`} class="link-underline text-accent">Message us on WhatsApp →</a></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</Base>

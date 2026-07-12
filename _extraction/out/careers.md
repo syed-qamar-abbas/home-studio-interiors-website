@@ -1,0 +1,40 @@
+# careers  (https://homestudiointeriors.pk/careers/)
+
+**Title:** Careers - homestudiointeriors.pk
+**Meta:** 
+
+## H1
+- Join the Team That Builds With Purpose
+
+## H2
+- Join the Team That Builds With Purpose.
+- Why Work With Us
+- We don’t just build structures. We build relationships.
+- Open Roles
+
+## H3
+
+## Paragraphs
+- building with integrity
+- At Brikly, we’re not just constructing homes and commercial spaces — we’re building trust, opportunity, and lasting impact across Central Texas. We’re always looking for passionate, skilled professionals who take pride in their craft and want to be part of something meaningful.
+- Whether you’re on the job site or behind the scenes, every team member plays a role in shaping the spaces our clients call home or grow their businesses in.
+- At Brikly, you’re more than just a team member — you’re a builder of homes, dreams, and communities. We value your skills, respect your time, and support your growth.
+- Collaborative, team-first environment
+- Competitive pay and benefits
+- Licensed Projects you’ll be proud of
+- Career growth and training opportunities
+- Respectful culture top to bottom
+- “At Brikly, every project is personal. I started this company with a simple belief: quality work, delivered with honesty, never goes out of style. Our goal isn’t just to complete jobs. it’s to exceed expectations, earn trust, and make a lasting impact on the communities we serve. From my first site visit to the final nail, I’m proud of the team that brings it all to life.”
+- Site Supervisor Austin, TX Oversees daily operations, ensures site safety, coordinates teams, and monitors progress. Responsible for maintaining quality and delivering builds on time and within scope. Apply Now Project Manager Remote Manages home construction projects from planning to handover. Handles budgets, schedules, client updates, and ensures adherence to design, compliance, and quality standards. Apply Now Junior Architect In-Office Assists with architectural drawings, layout development, and client revisions. Collaborates with senior designers and engineers to bring residential and commercial plans to life. Apply Now Scroll to Top WhatsApp us
+
+## List items
+
+## CTAs / link labels
+- Skip to content
+- Apply Now
+
+## Images (4)
+- https://homestudiointeriors.pk/wp-content/uploads/2025/07/Careers-Img-1.png
+- https://homestudiointeriors.pk/wp-content/uploads/2025/07/Careers-Img-2.png
+- https://homestudiointeriors.pk/wp-content/uploads/2025/07/Why-Work-Image.png
+- https://homestudiointeriors.pk/wp-content/uploads/2025/07/Founder-Image.png

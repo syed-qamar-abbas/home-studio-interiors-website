@@ -1,0 +1,40 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { services, heroImage } from '../../data/site';
+---
+<Base title="Interior Design Services — Kitchens, Wardrobes, Vanities, Media Walls & Doors | Home Studio Interiors"
+  description="Full-spectrum interior design and fit-out services in Islamabad & Rawalpindi — kitchens, wardrobes, vanities, media walls and doors, from 3D design to turnkey installation.">
+  <PageHero eyebrow="What we do" title="Full-spectrum interior craft."
+    subtitle="From kitchens and wardrobes to doors, vanities and media walls — we design and build spaces that last. One team manages design, materials and turnkey installation."
+    image={heroImage} />
+
+  <section class="container-page py-28 md:py-36">
+    <div class="space-y-24">
+      {services.map((s, i) => (
+        <div class={`grid items-center gap-12 lg:grid-cols-2 ${i % 2 === 1 ? 'lg:[&>a]:order-2' : ''}`}>
+          <a href={`/services/${s.slug}`} data-reveal="img" class="group block overflow-hidden">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img src={s.image} alt={`${s.title} — ${s.tagline}`} loading="lazy" class="h-full w-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105" />
+            </div>
+          </a>
+          <div>
+            <p class="eyebrow" data-reveal>{String(i + 1).padStart(2, '0')} · Service</p>
+            <h2 class="display-md mt-4" data-reveal>{s.title}</h2>
+            <p class="mt-2 text-lg italic text-accent" data-reveal>{s.tagline}</p>
+            <p class="mt-5 max-w-md text-muted" data-reveal>{s.excerpt}</p>
+            <ul class="mt-6 space-y-2" data-reveal>
+              {s.features.map((f) => (
+                <li class="flex items-center gap-3 text-sm text-muted"><span class="h-px w-5 bg-accent"></span>{f}</li>
+              ))}
+            </ul>
+            <a href={`/services/${s.slug}`} class="link-underline mt-7 inline-block text-sm uppercase tracking-[0.16em] text-ink" data-reveal>Explore {s.title} →</a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

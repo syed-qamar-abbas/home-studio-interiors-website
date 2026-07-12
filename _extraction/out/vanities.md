@@ -1,0 +1,53 @@
+# vanities  (https://homestudiointeriors.pk/vanities/)
+
+**Title:** Vanities - homestudiointeriors.pk
+**Meta:** 
+
+## H1
+- Elegant & Functional Vanity Designs
+
+## H2
+
+## H3
+- More Services
+- Contact Us
+
+## Paragraphs
+- A statement of luxury, crafted to reflect your style
+- Wardrobe Media Walls kitchens Doors Contact Us 0339 2001959 info@homestudiointeriors.pk Islamabad Capital Territory REGAL Embodying grandeur and sophistication,Regal features bold lines and luxurious finishes. Its majestic design exudes an air of royalty, creating a statement of elegance and refinement in any room.
+- Inspired by nature’s grace, Willow combines soft, flowing lines with a natural finish. Its light, airy feel and subtle textures create a calm and inviting atmosphere in any room.
+- A symbol of luxury and elegance, Ambrosia offers a rich blend of intricate details and refined finishes. Its sophisticated design brings a sense of opulence and tranquility to any space.
+- Exuding timeless elegance, Pearl showcases a lustrous finish that enhances any space. Its subtle, refined design captures the essence of understated luxury, creating a serene and sophisticated ambiance.
+- A perfect blend of natural beauty and modern design, Maple features warm, inviting tones and smooth textures. Its timeless appeal adds a touch of rustic charm while maintaining a contemporary elegance.
+- A timeless embodiment of chic elegance, Celine blends soft curves with sleek finishes. Its understated beauty and modern design create a refined, luxurious atmosphere in any space.
+- Inspired by the city’s blend of history and modernity, Prague combines classic charm with contemporary design. Its elegant lines and subtle details create a sophisticated yet inviting atmosphere.
+- With a blend of vibrant culture and understated elegance, Lisbon features clean lines and warm tones. Its timeless design evokes a sense of both sophistication and comfort, perfect for modern living spaces.
+- Scroll to Top WhatsApp us
+
+## List items
+- Wardrobe
+- Media Walls
+- kitchens
+- Doors
+- 0339 2001959
+- info@homestudiointeriors.pk
+- Islamabad Capital Territory
+
+## CTAs / link labels
+- Skip to content
+- Wardrobe
+- Media Walls
+- kitchens
+- Doors
+- info@homestudiointeriors.pk
+- Islamabad Capital Territory
+
+## Images (8)
+- https://homestudiointeriors.pk/wp-content/uploads/2025/10/3-1024x574.jpg
+- https://homestudiointeriors.pk/wp-content/uploads/2025/10/7-1024x574.jpg
+- https://homestudiointeriors.pk/wp-content/uploads/2025/10/4-1024x574.jpg
+- https://homestudiointeriors.pk/wp-content/uploads/2025/10/5-1024x574.jpg
+- https://homestudiointeriors.pk/wp-content/uploads/2025/10/6-1024x574.jpg
+- https://homestudiointeriors.pk/wp-content/uploads/2025/10/modern-bathroom-vanity-with-elegant-mirror-design-1024x574.jpg
+- https://homestudiointeriors.pk/wp-content/uploads/2025/10/8-1024x574.jpg
+- https://homestudiointeriors.pk/wp-content/uploads/2025/10/2-1024x574.jpg

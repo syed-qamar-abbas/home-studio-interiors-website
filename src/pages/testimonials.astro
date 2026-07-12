@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { testimonials, site, heroImage } from '../data/site';
+---
+<Base title="Client Testimonials — Home Studio Interiors, Islamabad"
+  description="Real feedback from homeowners across Islamabad & Rawalpindi — clear communication, on-time delivery and beautiful results from a trusted interior designer.">
+  <PageHero eyebrow="Client stories" title="What our clients say."
+    subtitle={`Real feedback from homeowners across Islamabad & Rawalpindi. Rated ${site.rating.value} of 5 from ${site.rating.count}+ reviews.`}
+    image={heroImage} />
+
+  <section class="container-page py-28 md:py-36">
+    <div class="grid gap-x-12 gap-y-14 md:grid-cols-2">
+      {testimonials.map((t) => (
+        <blockquote class="border-t border-line pt-8" data-reveal>
+          <p class="text-accent">★★★★★</p>
+          <p class="mt-4 font-display text-2xl leading-snug text-ink md:text-3xl">“{t.quote}”</p>
+          <footer class="mt-6 text-sm uppercase tracking-[0.14em] text-muted">{t.name} · <span class="text-accent">{t.place}</span></footer>
+        </blockquote>
+      ))}
+    </div>
+  </section>
+
+  <CtaBand title="Join 2,488+ happy homeowners." />
+</Base>

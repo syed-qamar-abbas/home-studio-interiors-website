@@ -1,0 +1,86 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Icon from '../../components/Icon.astro';
+import { services, serviceDetail, site } from '../../data/site';
+
+export function getStaticPaths() {
+  return services.map((s) => ({ params: { slug: s.slug }, props: { service: s } }));
+}
+const { service } = Astro.props;
+const detail = serviceDetail[service.slug];
+const others = services.filter((s) => s.slug !== service.slug);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: `${service.title} Design & Installation`,
+  serviceType: `${service.title} interior design`,
+  provider: { '@type': 'LocalBusiness', name: site.name, telephone: site.phoneIntl, areaServed: site.areaServed },
+  areaServed: site.areaServed,
+  description: service.excerpt,
+};
+---
+<Base title={`${service.title} Design in Islamabad — ${service.tagline} | Home Studio Interiors`}
+  description={service.excerpt} image={service.image} jsonLd={jsonLd}>
+  <PageHero eyebrow={`Services · ${service.title}`} title={service.tagline} subtitle={service.excerpt} image={service.image} />
+
+  <section class="container-page py-28 md:py-36">
+    <div class="grid gap-16 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <p class="eyebrow" data-reveal>Overview</p>
+        <h2 class="display-md mt-4 max-w-xl" data-reveal>{service.title} designed around real life.</h2>
+        <p class="mt-6 text-lg text-muted" data-reveal>{detail.intro}</p>
+      </div>
+      <div class="lg:col-span-5">
+        <p class="eyebrow" data-reveal>What we specify</p>
+        <ul class="mt-6 divide-y divide-line border-t border-line" data-reveal>
+          {detail.materials.map((m) => (
+            <li class="flex items-center gap-3 py-4 text-sm text-ink"><span class="h-px w-6 bg-accent"></span>{m}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="bg-sand py-24 md:py-32">
+    <div class="container-page">
+      <p class="eyebrow" data-reveal>Selected {service.title.toLowerCase()}</p>
+      <h2 class="display-md mt-4" data-reveal>A closer look.</h2>
+      <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {detail.gallery.map((g, i) => (
+          <div class={`card-hover group rounded-xl border border-line ${i === 0 ? 'sm:col-span-2 sm:row-span-2' : ''}`} data-reveal="img">
+            <img src={g} alt={`${service.title} project by Home Studio Interiors`} loading="lazy"
+              class={`w-full object-cover ${i === 0 ? 'aspect-square sm:h-full' : 'aspect-[4/3]'}`} />
+            <div class="card-hover-label pointer-events-none absolute inset-0 flex items-end justify-between p-5">
+              <span class="font-display text-xl text-white">{service.title}</span>
+              <span class="grid h-9 w-9 place-items-center rounded-full bg-accent text-white"><Icon name="arrow" size={15} /></span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Other services -->
+  <section class="container-page py-24 md:py-32">
+    <div class="flex items-end justify-between">
+      <h2 class="display-md" data-reveal>Explore more services</h2>
+      <a href="/services" class="link-underline text-sm uppercase tracking-[0.16em]" data-reveal>All services →</a>
+    </div>
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {others.map((s) => (
+        <a href={`/services/${s.slug}`} class="group block" data-reveal>
+          <div class="aspect-[4/5] overflow-hidden">
+            <img src={s.image} alt={s.title} loading="lazy" class="h-full w-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105" />
+          </div>
+          <h3 class="mt-4 font-display text-2xl">{s.title}</h3>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <CtaBand title={`Planning a new ${service.title.toLowerCase().replace(/s$/, '')}?`} />
+</Base>

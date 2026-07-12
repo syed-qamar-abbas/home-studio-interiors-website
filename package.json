@@ -1,0 +1,21 @@
+{
+  "name": "home-studio-interiors",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "@tailwindcss/vite": "^4.0.0",
+    "astro": "^5.1.0",
+    "gsap": "^3.12.5",
+    "lenis": "^1.1.18",
+    "sharp": "^0.33.5",
+    "tailwindcss": "^4.0.0"
+  }
+}

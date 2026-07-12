@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { stats, processSteps, differentiators, aboutImage, heroImage } from '../data/site';
+---
+<Base title="About — Home Studio Interiors | Interior Design Studio in Islamabad"
+  description="A residential interior design studio in Islamabad & Rawalpindi. Eight years of craft, 2,488+ homes delivered, and one accountable team from concept to handover.">
+  <PageHero eyebrow="About the studio" title="Designing spaces that define you."
+    subtitle="A residential interior design studio in Islamabad — blending smart planning with warm materials to create homes that feel effortless and endure."
+    image={heroImage} />
+
+  <section class="container-page py-28 md:py-36">
+    <div class="grid items-center gap-16 lg:grid-cols-2">
+      <div data-reveal="img" class="overflow-hidden">
+        <img src={aboutImage} alt="Contemporary living room interior by Home Studio Interiors" loading="lazy" class="h-full w-full object-cover" />
+      </div>
+      <div>
+        <p class="eyebrow" data-reveal>Who we are</p>
+        <h2 class="display-md mt-4" data-reveal>Creativity, met with practicality.</h2>
+        <p class="mt-6 text-muted" data-reveal>At Home Studio Interiors we blend smart planning with warm materials to create homes built for daily life. With over eight years shaping interiors across Islamabad and Rawalpindi, we pair local craftsmanship with modern detail and accountable project management.</p>
+        <p class="mt-4 text-muted" data-reveal>From modular kitchens and custom wardrobes to vanities, doors and media walls, one team carries your project from first sketch to final handover — with 3D visualisation, an itemised BOQ and a one-year workmanship warranty.</p>
+      </div>
+    </div>
+
+    <div class="mt-24 grid grid-cols-2 gap-8 border-t border-line pt-12 lg:grid-cols-4">
+      {stats.map((s) => (
+        <div data-reveal>
+          <p class="font-display text-5xl text-ink">{s.value}</p>
+          <p class="mt-2 text-xs uppercase tracking-[0.16em] text-muted">{s.label}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-sand py-28 md:py-36">
+    <div class="container-page">
+      <p class="eyebrow" data-reveal>Our philosophy</p>
+      <h2 class="display-lg mt-4 max-w-3xl" data-reveal>Calm, functional interiors that inspire and endure.</h2>
+      <div class="mt-16 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        {differentiators.map((d) => (
+          <div class="border-t border-line pt-6" data-reveal>
+            <h3 class="font-display text-2xl">{d.title}</h3>
+            <p class="mt-3 text-sm text-muted">{d.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="container-page py-28 md:py-36">
+    <p class="eyebrow" data-reveal>How we work</p>
+    <h2 class="display-lg mt-4 max-w-3xl" data-reveal>A calm, transparent process.</h2>
+    <div class="mt-16 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+      {processSteps.map((step) => (
+        <div class="border-t border-line pt-6" data-reveal>
+          <p class="font-display text-5xl text-accent">{step.no}</p>
+          <h3 class="mt-4 font-display text-2xl">{step.title}</h3>
+          <p class="mt-3 text-sm text-muted">{step.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

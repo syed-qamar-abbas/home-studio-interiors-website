@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { site, heroImage } from '../data/site';
+
+const roles = [
+  { title: 'Interior Designer', type: 'Full-time · Islamabad', text: 'Lead residential projects from concept and 3D visualisation to material selection and site coordination.' },
+  { title: 'Site Project Manager', type: 'Full-time · Islamabad', text: 'Own execution on site — carpentry, finishes and lighting — with weekly updates and rigorous quality checks.' },
+  { title: '3D Visualiser', type: 'Full-time · Islamabad', text: 'Produce photoreal interior renders that help clients approve layouts, finishes and lighting with confidence.' },
+];
+---
+<Base title="Careers — Join Home Studio Interiors, Islamabad"
+  description="Build beautiful homes with a growing interior design studio in Islamabad. Explore open roles for designers, project managers and 3D visualisers.">
+  <PageHero eyebrow="Careers" title="Build beautiful homes with us."
+    subtitle="We're a growing studio of architects, designers and project managers who care about craft. If that's you, we'd love to talk."
+    image={heroImage} />
+
+  <section class="container-page py-28 md:py-36">
+    <p class="eyebrow" data-reveal>Open roles</p>
+    <h2 class="display-md mt-4" data-reveal>Where you might fit.</h2>
+    <div class="mt-14 divide-y divide-line border-y border-line">
+      {roles.map((r) => (
+        <a href={`mailto:${site.email}?subject=Application — ${r.title}`} class="group flex flex-col gap-4 py-8 transition-colors hover:bg-sand md:flex-row md:items-center md:justify-between md:px-4" data-reveal>
+          <div>
+            <h3 class="font-display text-3xl">{r.title}</h3>
+            <p class="mt-2 text-sm text-muted">{r.text}</p>
+          </div>
+          <div class="flex items-center gap-6 md:shrink-0">
+            <span class="text-xs uppercase tracking-[0.16em] text-accent">{r.type}</span>
+            <span class="text-2xl text-accent transition-transform group-hover:translate-x-1">→</span>
+          </div>
+        </a>
+      ))}
+    </div>
+    <p class="mt-12 text-muted" data-reveal>Don't see your role? Send your portfolio to <a href={`mailto:${site.email}`} class="link-underline text-accent">{site.email}</a> — we're always glad to meet talented people.</p>
+  </section>
+</Base>

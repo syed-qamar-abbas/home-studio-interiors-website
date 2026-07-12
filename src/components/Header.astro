@@ -1,0 +1,74 @@
+---
+import { nav, site } from '../data/site';
+import Icon from './Icon.astro';
+const current = Astro.url.pathname;
+---
+<header id="site-header" class="fixed top-0 left-0 z-40 w-full transition-all duration-500" data-header>
+  <div class="container-page flex items-center justify-between py-4">
+    <a href="/" aria-label={`${site.name} home`} class="block">
+      <img src="/logo.png" alt="Home Studio Interiors" class="h-10 w-auto md:h-11" width="182" height="120" />
+    </a>
+
+    <nav class="hidden items-center gap-9 lg:flex" aria-label="Primary">
+      {nav.map((item) => (
+        <div class="group relative">
+          <a href={item.href} class:list={["link-underline text-[0.82rem] font-medium uppercase tracking-[0.14em]", current === item.href ? "text-accent" : "text-white/90 hover:text-white"]} data-navlink>{item.label}</a>
+          {item.children && (
+            <div class="invisible absolute left-1/2 top-full z-10 mt-4 w-56 -translate-x-1/2 translate-y-2 border border-white/10 bg-graphite/95 p-2 opacity-0 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] backdrop-blur transition-all duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+              {item.children.map((c) => (
+                <a href={c.href} class="block px-4 py-2.5 text-[0.8rem] uppercase tracking-[0.12em] text-white/70 transition-colors hover:bg-white/5 hover:text-accent">{c.label}</a>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-5">
+      <a href={`tel:${site.phoneIntl}`} class="hidden items-center gap-2 text-sm font-medium tracking-wide text-white xl:flex"><Icon name="phone" size={16} class="text-accent" />{site.phone}</a>
+      <a href="/contact" class="btn btn-cta hidden sm:inline-flex">Get in Touch <Icon name="arrow" size={14} class="arrow" /></a>
+      <button id="menu-toggle" class="flex flex-col gap-1.5 lg:hidden" aria-label="Open menu" aria-expanded="false">
+        <span class="block h-px w-7 bg-white transition-all"></span>
+        <span class="block h-px w-7 bg-white transition-all"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div id="mobile-menu" class="fixed inset-0 z-50 hidden bg-graphite text-white">
+  <div class="container-page flex h-full flex-col">
+    <div class="flex items-center justify-between py-4">
+      <img src="/logo.png" alt="Home Studio Interiors" class="h-10 w-auto" />
+      <button id="menu-close" class="text-4xl leading-none text-white" aria-label="Close menu">&times;</button>
+    </div>
+    <nav class="mt-8 flex flex-col gap-1" aria-label="Mobile">
+      {nav.map((item) => (
+        <a href={item.href} class="border-b border-white/10 py-4 font-display text-3xl text-white">{item.label}</a>
+      ))}
+    </nav>
+    <a href={`tel:${site.phoneIntl}`} class="mt-auto py-8 text-lg tracking-wide text-accent">{site.phone}</a>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var menu = document.getElementById('mobile-menu');
+    var open = document.getElementById('menu-toggle');
+    var close = document.getElementById('menu-close');
+    if (open) open.addEventListener('click', function () { menu.classList.remove('hidden'); document.body.style.overflow = 'hidden'; });
+    if (close) close.addEventListener('click', function () { menu.classList.add('hidden'); document.body.style.overflow = ''; });
+    menu && menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { menu.classList.add('hidden'); document.body.style.overflow = ''; }); });
+  })();
+</script>
+
+<style>
+  /* Elegant dark bar on scroll so the white wordmark reads in every state */
+  [data-header].is-scrolled { background: rgba(32, 29, 24, 0.96); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.08); }
+  [data-header].is-scrolled .container-page { padding-block: 0.35rem; }
+
+  .btn-cta { border: 1px solid rgba(255,255,255,0.55); color: #fff; }
+  .btn-cta:hover { background: var(--color-accent); border-color: var(--color-accent); color: #fff; }
+  [data-header].is-scrolled .btn-cta { background: var(--color-accent); border-color: var(--color-accent); color: #fff; }
+  [data-header].is-scrolled .btn-cta:hover { background: var(--color-accent-dark); border-color: var(--color-accent-dark); }
+</style>

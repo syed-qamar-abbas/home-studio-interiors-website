@@ -1,0 +1,31 @@
+# testimonials  (https://homestudiointeriors.pk/testimonials/)
+
+**Title:** Testimonials - homestudiointeriors.pk
+**Meta:** 
+
+## H1
+- Voices Behind the Builds
+
+## H2
+- Our Google Rating
+
+## H3
+
+## Paragraphs
+- “Brikly made building our first home feel effortless. Their team was honest, responsive, and delivered exactly what we envisioned — ahead of schedule.” Marcus Nguyen Round Rock, TX “Reliable, transparent, and skilled. Brikly handled our office expansion with total professionalism. The quality of work truly exceeded expectations.” Leo Martinez Cedar Park, TX “From the first meeting to final walkthrough, Brikly treated our renovation like a priority. Every detail was done right — and on time.” Jason Turner Georgetown, TX “I’ve worked with several contractors over the years, and Brikly is hands-down the most professional. Their communication and site cleanliness stood out.” Priya Desai Leander, TX “We chose Brikly to remodel our kitchen and it was the best decision. Clear timelines, fair pricing, and top-notch craftsmanship.” Dr. Melanie Kim Hutto, TX “Our medical clinic project came with strict specs — Brikly handled it with total precision. Great team, reliable delivery.” Rated Across Texas
+- Don’t just take our word for it — see what real homeowners and business owners are saying about their experience with Brikly.
+- 260+ reviews (4.95 of 5)
+- Scroll to Top WhatsApp us
+
+## List items
+
+## CTAs / link labels
+- Skip to content
+
+## Images (6)
+- https://homestudiointeriors.pk/wp-content/uploads/2025/07/Testimonial-Img-1-1-150x150.png
+- https://homestudiointeriors.pk/wp-content/uploads/2025/07/Testimonial-Img-2-150x150.png
+- https://homestudiointeriors.pk/wp-content/uploads/2025/07/Testimonial-Img-3-150x150.png
+- https://homestudiointeriors.pk/wp-content/uploads/2025/07/Testimonial-Img-4-150x150.png
+- https://homestudiointeriors.pk/wp-content/uploads/2025/07/Testimonial-Img-5-150x150.png
+- https://homestudiointeriors.pk/wp-content/uploads/2025/07/Testimonial-Img-6-150x150.png
