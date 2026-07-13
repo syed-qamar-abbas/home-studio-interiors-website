@@ -1,75 +1,79 @@
 ---
 import Base from '../layouts/Base.astro';
-import { site, heroImage } from '../data/site';
-// Replace with your Web3Forms access key (free at web3forms.com) before deploy.
-const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
+import Icon from '../components/Icon.astro';
+import { site, heroImage, services, designPackages, areasServed } from '../data/site';
+const whatsapp = `https://wa.me/${site.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent('Hi Home Studio, I want to book a free design consultation.')}`;
 ---
 <Base title="Contact — Book a Free Interior Design Consultation | Home Studio Interiors"
-  description="Get in touch with Home Studio Interiors in Islamabad. Book a free consultation for kitchens, wardrobes, vanities, media walls and full-home interior design.">
-  <section class="bg-graphite pt-40 pb-24 text-white md:pt-48 md:pb-32">
-    <div class="container-page grid gap-16 lg:grid-cols-2">
+  description="Book a free interior design consultation in Islamabad & Rawalpindi for kitchens, wardrobes, vanities, media walls, doors and full-home turnkey interiors.">
+  <section class="relative overflow-hidden bg-graphite pt-36 pb-20 text-white md:pt-44 md:pb-28">
+    <div class="absolute inset-0">
+      <img src={heroImage} alt="" class="h-full w-full object-cover opacity-28" />
+      <div class="absolute inset-0 bg-gradient-to-r from-graphite via-graphite/80 to-graphite/25"></div>
+    </div>
+    <div class="container-page relative grid gap-12 lg:grid-cols-[1fr_.9fr] lg:items-start">
       <div>
-        <p class="eyebrow text-accent" data-reveal>Get in touch</p>
-        <h1 class="display-lg mt-5 text-white" data-reveal>Let's talk about your space.</h1>
-        <p class="mt-6 max-w-md text-white/70" data-reveal>Fill out the form, call, or message us on WhatsApp. We'll arrange a free consultation and site visit to begin your project.</p>
-
-        <div class="mt-12 space-y-8" data-reveal>
-          <div>
-            <p class="eyebrow text-accent">Studio</p>
-            <p class="mt-2 text-lg">{site.address}</p>
-          </div>
-          <div>
-            <p class="eyebrow text-accent">Email</p>
-            <a href={`mailto:${site.email}`} class="link-underline mt-2 block text-lg">{site.email}</a>
-          </div>
-          <div>
-            <p class="eyebrow text-accent">Call / WhatsApp</p>
-            <a href={`tel:${site.phoneIntl}`} class="link-underline mt-2 block text-lg">{site.phone}</a>
-          </div>
-          <div>
-            <p class="eyebrow text-accent">Rated</p>
-            <p class="mt-2 text-lg">{site.rating.value} / 5 · {site.rating.count}+ reviews</p>
-          </div>
+        <p class="section-kicker" data-reveal>Get in touch</p>
+        <h1 class="display-lg mt-5 text-white" data-reveal>Let’s design the space you keep imagining.</h1>
+        <p class="mt-6 max-w-xl text-base leading-8 text-white/72" data-reveal>Call, WhatsApp, or send a project brief. We’ll guide you through scope, budget, materials and the next site visit.</p>
+        <div class="mt-9 flex flex-wrap gap-3" data-reveal>
+          <a href="/contact" data-open-quote class="btn btn-solid">Get a Quote <Icon name="arrow" size={15} class="arrow" /></a>
+          <a href={`tel:${site.phoneIntl}`} class="btn btn-ghost">Call {site.phone}</a>
+        </div>
+        <div class="mt-12 grid gap-4 sm:grid-cols-2" data-reveal>
+          {[
+            ['Studio', site.address],
+            ['Email', site.email],
+            ['Rating', `${site.rating.value} / 5 · ${site.rating.count}+ reviews`],
+            ['Coverage', 'Islamabad & Rawalpindi'],
+          ].map(([label, value]) => (
+            <div class="rounded-2xl border border-white/10 bg-white/[0.045] p-5">
+              <p class="number-mark">{label}</p>
+              <p class="mt-2 text-sm text-white/78">{value}</p>
+            </div>
+          ))}
         </div>
       </div>
 
-      <div class="bg-bone p-8 text-ink md:p-10" data-reveal>
-        <form action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
-          <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
-          <input type="hidden" name="subject" value="New enquiry — Home Studio Interiors" />
-          <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
-          <div class="grid gap-6 sm:grid-cols-2">
-            <label class="block">
-              <span class="eyebrow text-muted">Name</span>
-              <input required name="name" type="text" class="mt-2 w-full border-b border-line bg-transparent py-2 outline-none focus:border-accent" />
-            </label>
-            <label class="block">
-              <span class="eyebrow text-muted">Phone</span>
-              <input required name="phone" type="tel" class="mt-2 w-full border-b border-line bg-transparent py-2 outline-none focus:border-accent" />
-            </label>
-          </div>
-          <label class="block">
-            <span class="eyebrow text-muted">Email</span>
-            <input required name="email" type="email" class="mt-2 w-full border-b border-line bg-transparent py-2 outline-none focus:border-accent" />
-          </label>
-          <label class="block">
-            <span class="eyebrow text-muted">Service</span>
-            <select name="service" class="mt-2 w-full border-b border-line bg-transparent py-2 outline-none focus:border-accent">
-              <option>Full Home Interior</option>
-              <option>Kitchen</option>
-              <option>Wardrobe</option>
-              <option>Vanity</option>
-              <option>Media Wall</option>
-              <option>Doors</option>
-            </select>
-          </label>
-          <label class="block">
-            <span class="eyebrow text-muted">Tell us about your project</span>
-            <textarea name="message" rows="4" class="mt-2 w-full border-b border-line bg-transparent py-2 outline-none focus:border-accent"></textarea>
-          </label>
-          <button type="submit" class="btn btn-solid w-full justify-center">Send Enquiry</button>
-          <p class="text-xs text-muted">Prefer to chat? <a href={`https://wa.me/${site.whatsapp.replace(/\D/g, '')}`} class="link-underline text-accent">Message us on WhatsApp →</a></p>
-        </form>
+      <div class="rounded-[1.8rem] border border-white/10 bg-graphite/82 p-6 text-white shadow-[0_30px_90px_-45px_rgba(0,0,0,.9)] backdrop-blur-xl md:p-8" data-reveal>
+        <p class="section-kicker">Project quote</p>
+        <h2 class="mt-4 font-display text-3xl text-white md:text-4xl">Get a guided quote before your site visit.</h2>
+        <p class="mt-5 text-sm leading-7 text-muted">Share your project type, budget and timeline in a short premium form. We’ll open WhatsApp with a clean, ready-to-send enquiry for the Home Studio team.</p>
+        <div class="mt-8 grid gap-3">
+          {[
+            'Required client details',
+            'Project type and expected budget',
+            'Timeline for planning and installation',
+          ].map((item) => (
+            <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+              <Icon name="check" size={18} class="text-accent" />
+              <span class="text-sm text-white/78">{item}</span>
+            </div>
+          ))}
+        </div>
+        <a href="/contact" data-open-quote class="btn btn-solid mt-8 w-full justify-center">Get a Quote <Icon name="arrow" size={14} class="arrow" /></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-page py-20 md:py-28">
+    <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+      {designPackages.map((p) => (
+        <a href={whatsapp} class="lux-card rounded-[1.4rem] p-6" data-reveal>
+          <h2 class="font-display text-2xl">{p.title}</h2>
+          <p class="mt-3 text-sm leading-7 text-muted">{p.text}</p>
+          <span class="link-underline mt-5 inline-block text-xs uppercase tracking-[0.16em] text-accent">{p.cta} →</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-sand py-20 md:py-28">
+    <div class="container-page">
+      <p class="section-kicker" data-reveal>Areas served</p>
+      <h2 class="display-md mt-4" data-reveal>Interior design across Islamabad & Rawalpindi.</h2>
+      <div class="mt-10 flex flex-wrap gap-3">
+        {areasServed.map((area) => <span class="rounded-full border border-line bg-white/[0.04] px-4 py-2 text-xs uppercase tracking-[0.14em] text-white/65" data-reveal>{area}</span>)}
       </div>
     </div>
   </section>

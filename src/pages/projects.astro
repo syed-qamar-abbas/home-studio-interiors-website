@@ -2,46 +2,84 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { featuredProjects, galleryImages, heroImage } from '../data/site';
+import Icon from '../components/Icon.astro';
+import { projectPortfolio, galleryImages, heroImage, site } from '../data/site';
+const categories = ['All', ...Array.from(new Set(projectPortfolio.map((p) => p.service)))];
 ---
 <Base title="Projects — Interior Design Portfolio in Islamabad & Rawalpindi | Home Studio Interiors"
-  description="Recent interior transformations across Islamabad & Rawalpindi — kitchens, wardrobes, vanities, media walls and full-home fit-outs by Home Studio Interiors.">
-  <PageHero eyebrow="Selected work" title="Recent transformations."
-    subtitle="A selection of kitchens, wardrobes, doors, vanities and media walls — balanced for style, function and comfort across Islamabad & Rawalpindi."
+  description="Luxury interior design portfolio across Islamabad & Rawalpindi — kitchens, wardrobes, vanities, media walls and doors by Home Studio Interiors.">
+  <PageHero eyebrow="Selected work" title="A portfolio of crafted interiors."
+    subtitle="Explore real design directions from kitchens, wardrobes, doors, vanities and media walls — curated as a premium lookbook for your next home."
     image={heroImage} />
 
-  <!-- Featured -->
-  <section class="container-page py-24 md:py-32">
-    <div class="grid gap-6 md:grid-cols-2">
-      {featuredProjects.slice(0, 4).map((p, i) => (
-        <a href="/contact" class={`group relative block overflow-hidden ${i % 3 === 0 ? 'md:col-span-2' : ''}`} data-reveal="img">
-          <div class={i % 3 === 0 ? 'aspect-[16/9]' : 'aspect-[4/3]'}>
-            <img src={p.image} alt={p.title} loading="lazy" class="h-full w-full object-cover transition-transform duration-[1.3s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105" />
+  <section class="container-page py-20 md:py-28" data-projects>
+    <div class="grid gap-8 lg:grid-cols-12 lg:items-end">
+      <div class="lg:col-span-7">
+        <p class="section-kicker" data-reveal>Portfolio filter</p>
+        <h2 class="display-md mt-5" data-reveal>Choose a category, open any image, and send us the style you like.</h2>
+      </div>
+      <div class="flex gap-2 overflow-x-auto pb-2 lg:col-span-5 lg:justify-end" data-reveal>
+        {categories.map((cat, i) => (
+          <button type="button" data-project-filter={cat} class={`shrink-0 rounded-full border px-4 py-2.5 text-[0.66rem] font-semibold uppercase tracking-[0.16em] transition-all duration-300 ${i === 0 ? 'border-accent bg-accent text-white' : 'border-line text-white/65 hover:border-accent/60 hover:text-white'}`}>{cat}</button>
+        ))}
+      </div>
+    </div>
+
+    <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {projectPortfolio.map((p, i) => (
+        <article data-project-card={p.service} class={`signature-card group overflow-hidden rounded-[1.6rem] border border-line bg-surface/55 ${i === 0 || i === 7 ? 'lg:row-span-2' : ''}`} data-reveal>
+          <button type="button" data-lightbox={p.image} data-lightbox-title={p.title} class="card-hover image-frame block w-full border-0 text-left">
+            <img src={p.image} alt={p.title} loading="lazy" class={`w-full object-cover ${i === 0 || i === 7 ? 'aspect-[4/5] lg:h-full' : 'aspect-[4/3]'}`} />
+            <div class="card-hover-label pointer-events-none absolute inset-0 flex items-end justify-between p-5">
+              <span><span class="number-mark block">{String(i + 1).padStart(2, '0')}</span><span class="mt-1 block font-display text-2xl text-white">{p.title}</span></span>
+              <span class="grid h-10 w-10 place-items-center rounded-full bg-accent text-white"><Icon name="arrow" size={15} /></span>
+            </div>
+          </button>
+          <div class="p-5">
+            <p class="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-accent">{p.service}</p>
+            <h3 class="mt-2 font-display text-2xl">{p.title}</h3>
+            <a href={`https://wa.me/${site.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(`Hi Home Studio, I like the ${p.title} design. Please guide me.`)}`} class="link-underline mt-4 inline-block text-xs uppercase tracking-[0.16em] text-white/65 hover:text-accent">Book this style →</a>
           </div>
-          <div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-graphite/80 to-transparent p-8 text-white opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-            <p class="text-xs uppercase tracking-[0.2em] text-accent">{p.tag}</p>
-            <h3 class="font-display text-3xl">{p.title}</h3>
-          </div>
-        </a>
+        </article>
       ))}
     </div>
   </section>
 
-  <!-- Full gallery -->
-  <section class="bg-sand py-24 md:py-32">
+  <section class="bg-sand py-20 md:py-28">
     <div class="container-page">
-      <p class="eyebrow" data-reveal>The gallery</p>
-      <h2 class="display-md mt-4" data-reveal>Details, finishes & moments.</h2>
-      <div class="mt-14 columns-1 gap-6 sm:columns-2 lg:columns-3 [&>*]:mb-6">
-        {galleryImages.map((img) => (
-          <div class="overflow-hidden break-inside-avoid" data-reveal="img">
-            <img src={img} alt="Interior design detail by Home Studio Interiors" loading="lazy"
-              class="w-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.04]" />
-          </div>
+      <p class="section-kicker" data-reveal>Design details</p>
+      <h2 class="display-md mt-4" data-reveal>More finishes, moments and material moods.</h2>
+      <div class="mt-12 columns-1 gap-5 sm:columns-2 lg:columns-3 [&>*]:mb-5">
+        {galleryImages.map((img, i) => (
+          <button type="button" data-lightbox={img} data-lightbox-title={`Interior design detail ${String(i + 1).padStart(2, '0')}`} class="card-hover image-frame block break-inside-avoid rounded-[1.2rem]" data-reveal="img">
+            <img src={img} alt="Interior design detail by Home Studio Interiors" loading="lazy" class="w-full object-cover" />
+          </button>
         ))}
       </div>
     </div>
   </section>
 
-  <CtaBand title="Imagine your space, transformed." />
+  <script is:inline>
+    (function () {
+      var root = document.querySelector('[data-projects]'); if (!root) return;
+      var filters = root.querySelectorAll('[data-project-filter]');
+      var cards = root.querySelectorAll('[data-project-card]');
+      filters.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var cat = btn.getAttribute('data-project-filter');
+          filters.forEach(function (b) {
+            var on = b === btn;
+            b.classList.toggle('border-accent', on); b.classList.toggle('bg-accent', on); b.classList.toggle('text-white', on);
+            b.classList.toggle('border-line', !on); b.classList.toggle('text-white/65', !on);
+          });
+          cards.forEach(function (card) {
+            var show = cat === 'All' || card.getAttribute('data-project-card') === cat;
+            card.classList.toggle('hidden', !show);
+          });
+        });
+      });
+    })();
+  </script>
+
+  <CtaBand title="Imagine your space, transformed." text="Send us the design style you like and our team will guide you on layout, materials and execution." />
 </Base>

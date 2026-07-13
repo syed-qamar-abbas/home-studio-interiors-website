@@ -2,11 +2,18 @@
 import { nav, site } from '../data/site';
 import Icon from './Icon.astro';
 const current = Astro.url.pathname;
+const servicePreview = [
+  { label: 'Kitchens', href: '/services/kitchen', image: '/images/services/kitchen-live/09-1-18.webp' },
+  { label: 'Wardrobes', href: '/services/wardrobe', image: '/images/services/wardrobe-live/01-1-8.webp' },
+  { label: 'Vanities', href: '/services/vanities', image: '/images/services/vanities-live/01-3-1024x574.webp' },
+  { label: 'Media Walls', href: '/services/media-walls', image: '/images/services/media-walls-live/01-photo-stylish-wallmounted-entertainment-1024x574.webp' },
+  { label: 'Doors', href: '/services/doors', image: '/images/services/doors-live/01-coastal-interior-design-modern-entrance-hall-1-1024x574.webp' },
+];
 ---
 <header id="site-header" class="fixed top-0 left-0 z-40 w-full transition-all duration-500" data-header>
   <div class="container-page flex items-center justify-between py-4">
     <a href="/" aria-label={`${site.name} home`} class="block">
-      <img src="/logo.png" alt="Home Studio Interiors" class="h-10 w-auto md:h-11" width="182" height="120" />
+      <img src="/images/brand/hs-logo-cropped.png" alt="Home Studio Interiors" class="h-10 w-auto object-contain md:h-12" width="940" height="639" />
     </a>
 
     <nav class="hidden items-center gap-9 lg:flex" aria-label="Primary">
@@ -14,10 +21,18 @@ const current = Astro.url.pathname;
         <div class="group relative">
           <a href={item.href} class:list={["link-underline text-[0.82rem] font-medium uppercase tracking-[0.14em]", current === item.href ? "text-accent" : "text-white/90 hover:text-white"]} data-navlink>{item.label}</a>
           {item.children && (
-            <div class="invisible absolute left-1/2 top-full z-10 mt-4 w-56 -translate-x-1/2 translate-y-2 border border-white/10 bg-graphite/95 p-2 opacity-0 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] backdrop-blur transition-all duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
-              {item.children.map((c) => (
-                <a href={c.href} class="block px-4 py-2.5 text-[0.8rem] uppercase tracking-[0.12em] text-white/70 transition-colors hover:bg-white/5 hover:text-accent">{c.label}</a>
-              ))}
+            <div class="invisible absolute left-1/2 top-full z-10 mt-4 w-[44rem] -translate-x-1/2 translate-y-2 rounded-[1.35rem] border border-white/10 bg-graphite/95 p-3 opacity-0 shadow-[0_30px_80px_-35px_rgba(0,0,0,0.8)] backdrop-blur-xl transition-all duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+              <div class="grid grid-cols-5 gap-2">
+                {servicePreview.map((c) => (
+                  <a href={c.href} class="group/card overflow-hidden rounded-2xl border border-white/8 bg-white/[0.035] p-2 transition-all duration-300 hover:border-accent/50 hover:bg-accent/10">
+                    <img src={c.image} alt="" loading="lazy" class="h-20 w-full rounded-xl object-cover opacity-75 transition duration-500 group-hover/card:scale-105 group-hover/card:opacity-100" />
+                    <span class="mt-2 block text-center text-[0.64rem] font-semibold uppercase tracking-[0.14em] text-white/72 group-hover/card:text-white">{c.label}</span>
+                  </a>
+                ))}
+              </div>
+              <a href="/services" class="mt-2 flex items-center justify-between rounded-2xl border border-white/8 px-4 py-3 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-white/68 transition-colors hover:border-accent/50 hover:text-accent">
+                View all services <Icon name="arrow" size={13} />
+              </a>
             </div>
           )}
         </div>
@@ -39,15 +54,30 @@ const current = Astro.url.pathname;
 <div id="mobile-menu" class="fixed inset-0 z-50 hidden bg-graphite text-white">
   <div class="container-page flex h-full flex-col">
     <div class="flex items-center justify-between py-4">
-      <img src="/logo.png" alt="Home Studio Interiors" class="h-10 w-auto" />
+      <img src="/images/brand/hs-logo-cropped.png" alt="Home Studio Interiors" class="h-12 w-auto object-contain" />
       <button id="menu-close" class="text-4xl leading-none text-white" aria-label="Close menu">&times;</button>
     </div>
-    <nav class="mt-8 flex flex-col gap-1" aria-label="Mobile">
+    <nav class="mt-8 flex flex-col gap-1 overflow-y-auto" aria-label="Mobile">
       {nav.map((item) => (
-        <a href={item.href} class="border-b border-white/10 py-4 font-display text-3xl text-white">{item.label}</a>
+        <>
+          <a href={item.href} class="border-b border-white/10 py-4 font-display text-3xl text-white">{item.label}</a>
+          {item.children && (
+            <div class="grid grid-cols-2 gap-3 border-b border-white/10 py-4">
+              {servicePreview.map((c) => (
+                <a href={c.href} class="rounded-2xl border border-white/10 bg-white/[0.04] p-2">
+                  <img src={c.image} alt="" loading="lazy" class="h-20 w-full rounded-xl object-cover" />
+                  <span class="mt-2 block text-xs uppercase tracking-[0.14em] text-white/70">{c.label}</span>
+                </a>
+              ))}
+            </div>
+          )}
+        </>
       ))}
     </nav>
-    <a href={`tel:${site.phoneIntl}`} class="mt-auto py-8 text-lg tracking-wide text-accent">{site.phone}</a>
+    <div class="mt-auto grid grid-cols-2 gap-3 py-8">
+      <a href={`tel:${site.phoneIntl}`} class="btn btn-ghost justify-center text-white">Call</a>
+      <a href={`https://wa.me/${site.whatsapp.replace(/\D/g, '')}`} class="btn btn-solid justify-center">WhatsApp</a>
+    </div>
   </div>
 </div>
 

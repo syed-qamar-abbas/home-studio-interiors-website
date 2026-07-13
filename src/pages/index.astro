@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
-import { site, serviceTabs, processSteps, differentiators, deliverables, testimonials, faqs, heroImage, aboutImage, bandImage, heroFeatures, founder } from '../data/site';
+import { site, serviceTabs, processSteps, differentiators, deliverables, signatureCollections, materialHighlights, projectPortfolio, testimonials, faqs, heroImage, aboutImage, bandImage, heroFeatures, founder } from '../data/site';
 const socials = [
   { name: 'instagram', href: site.socials.instagram },
   { name: 'facebook', href: site.socials.facebook },
@@ -32,7 +32,15 @@ const jsonLd = {
 ---
 <Base jsonLd={jsonLd}>
   <!-- HERO -->
-  <section class="relative min-h-screen overflow-hidden" data-cursor-glow>
+  <section class="relative min-h-[86svh] overflow-hidden bg-graphite md:min-h-screen" data-cursor-glow>
+    <div class="absolute inset-0 z-0">
+      <img src={heroImage} alt="" class="h-full w-full scale-[1.04] object-cover object-center opacity-35 blur-sm" aria-hidden="true" />
+      <img src={heroImage} alt="Luxury orange-accent interior by Home Studio Interiors" class="absolute inset-0 h-full w-full object-contain object-center opacity-95" data-parallax="0.025" data-parallax-scale="1" fetchpriority="high" />
+      <div class="absolute inset-0 bg-gradient-to-r from-graphite via-graphite/70 to-graphite/18"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-graphite via-transparent to-graphite/35"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_68%_44%,rgba(242,112,37,.18),transparent_27%)]"></div>
+      <div class="absolute inset-y-0 right-0 hidden w-1/3 bg-gradient-to-l from-graphite/40 to-transparent lg:block"></div>
+    </div>
     <div class="pointer-events-none absolute inset-0 z-0 hidden lg:block" style="background: radial-gradient(28rem 28rem at var(--gx, 25%) var(--gy, 35%), rgba(242,112,37,0.12), transparent 62%);"></div>
     <!-- vertical socials -->
     <div class="absolute left-0 top-0 z-30 hidden h-full w-14 flex-col items-center justify-center gap-5 lg:flex">
@@ -45,36 +53,61 @@ const jsonLd = {
       <span class="mt-1 h-20 w-px bg-white/15"></span>
     </div>
 
-    <div class="grid min-h-screen items-stretch lg:grid-cols-[46fr_54fr]">
-      <!-- LEFT -->
-      <div class="relative z-10 flex flex-col justify-center px-6 pb-44 pt-36 sm:px-12 lg:pb-40 lg:pl-24 lg:pr-12">
+    <div class="container-page relative z-10 grid min-h-[86svh] items-center gap-10 pb-10 pt-28 md:min-h-screen md:pb-44 md:pt-32 lg:grid-cols-[minmax(0,1fr)_24rem] lg:pb-40">
+      <div class="max-w-3xl">
         <p class="eyebrow leading-[2]" data-reveal>Interior Design Studio<br />Islamabad &amp; Rawalpindi</p>
-        <h1 class="mt-6 font-display font-medium leading-[0.95] text-white" data-reveal style="--reveal-delay:.1s">
-          <span class="block text-[clamp(2.9rem,6.2vw,6.25rem)]">Crafting</span>
-          <span class="block text-[clamp(2.9rem,6.2vw,6.25rem)]">interiors,</span>
-          <span class="mt-1 block text-[clamp(2.9rem,6.2vw,6.25rem)] italic text-accent">defining lifestyles.</span>
+        <h1 class="hero-title mt-5 leading-[1.02] text-white md:mt-6" data-reveal style="--reveal-delay:.1s">
+          <span class="hero-line block text-[clamp(2.05rem,9.8vw,4.85rem)] md:text-[clamp(2.25rem,4.55vw,4.85rem)]">Crafting</span>
+          <span class="hero-line block text-[clamp(2.05rem,9.8vw,4.85rem)] md:text-[clamp(2.25rem,4.55vw,4.85rem)]">interiors,</span>
+          <span class="hero-line mt-1 block text-[clamp(2.05rem,9.8vw,4.85rem)] italic text-accent md:text-[clamp(2.25rem,4.55vw,4.85rem)]">defining lifestyles.</span>
         </h1>
-        <span class="accent-rule mt-8" data-reveal></span>
-        <p class="mt-8 max-w-md text-white/65" data-reveal style="--reveal-delay:.2s">
+        <span class="accent-rule mt-6 md:mt-8" data-reveal></span>
+        <p class="mt-6 max-w-xl text-sm leading-7 text-white/72 md:mt-8 md:text-base md:leading-8" data-reveal style="--reveal-delay:.2s">
           From concept and 3D visualisation to premium finishes and turnkey delivery, we craft calm, functional homes that mirror the people who live in them.
         </p>
-        <div class="mt-9 flex flex-wrap gap-4" data-reveal style="--reveal-delay:.3s">
-          <a href="/contact" class="btn btn-solid">Book a Free Consultation <Icon name="arrow" size={15} class="arrow" /></a>
-          <a href="/projects" class="btn btn-ghost">View Projects <Icon name="arrow" size={15} class="arrow" /></a>
+        <div class="mt-7 flex flex-wrap gap-3 md:mt-9 md:gap-4" data-reveal style="--reveal-delay:.3s">
+          <a href="/contact" data-open-quote class="btn btn-solid">Get a Quote <Icon name="arrow" size={15} class="arrow" /></a>
+          <a href="#what-we-do" class="btn btn-ghost">Explore Services <Icon name="arrow" size={15} class="arrow" /></a>
+        </div>
+        <div class="mt-12 hidden max-w-2xl grid-cols-3 gap-3 lg:grid" data-reveal style="--reveal-delay:.38s">
+          {deliverables.slice(0, 3).map((d) => (
+            <a href={`/services/${d.slug}`} class="group overflow-hidden rounded-2xl border border-white/12 bg-white/[0.05] p-2 backdrop-blur-md transition-all duration-500 hover:border-accent/60 hover:bg-white/[0.08]">
+              <img src={d.images[0]} alt={`${d.title} interior design`} loading="lazy" class="h-24 w-full rounded-xl object-cover opacity-85 transition duration-700 group-hover:scale-105 group-hover:opacity-100" />
+              <span class="mt-3 flex items-center justify-between px-1 pb-1 text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-white/72">
+                {d.title}
+                <Icon name="arrow" size={12} class="text-accent transition-transform group-hover:translate-x-0.5" />
+              </span>
+            </a>
+          ))}
         </div>
       </div>
-
-      <!-- RIGHT image -->
-      <div class="relative min-h-[52vh] lg:min-h-screen">
-        <img src={heroImage} alt="Luxury living room interior by Home Studio Interiors" class="absolute inset-0 h-full w-full object-cover" data-parallax="0.08" fetchpriority="high" />
-        <div class="absolute inset-y-0 left-0 w-2/5 bg-gradient-to-r from-bone via-bone/60 to-transparent"></div>
-        <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-bone/70 to-transparent"></div>
-        <div class="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-bone to-transparent"></div>
-      </div>
+      <aside class="hero-float-card hidden self-end rounded-[1.6rem] border border-white/12 bg-black/25 p-5 backdrop-blur-xl lg:block" data-reveal="right" style="--reveal-delay:.45s">
+        <div class="flex items-center justify-between border-b border-white/10 pb-4">
+          <span class="section-kicker">Studio scope</span>
+          <span class="h-2.5 w-2.5 rounded-full bg-accent shadow-[0_0_24px_rgba(242,112,37,.9)]"></span>
+        </div>
+        <div class="mt-5 space-y-3">
+          {deliverables.map((d, i) => (
+            <a href={`/services/${d.slug}`} class="group flex items-center gap-3 rounded-2xl border border-white/8 bg-white/[0.045] p-2 transition-all duration-500 hover:border-accent/50 hover:bg-accent/10">
+              <img src={d.images[0]} alt="" loading="lazy" class="h-14 w-16 rounded-xl object-cover opacity-75 transition duration-500 group-hover:opacity-100" />
+              <span class="min-w-0 flex-1">
+                <span class="number-mark block">{String(i + 1).padStart(2, '0')}</span>
+                <span class="block truncate text-sm font-semibold uppercase tracking-[0.16em] text-white/82">{d.title}</span>
+              </span>
+              <Icon name="arrow" size={13} class="text-accent transition-transform group-hover:translate-x-1" />
+            </a>
+          ))}
+        </div>
+      </aside>
     </div>
 
+    <a href="#what-we-do" class="absolute bottom-32 right-6 z-30 hidden items-center gap-3 text-[0.66rem] font-semibold uppercase tracking-[0.22em] text-white/45 transition-colors hover:text-accent lg:flex">
+      <span class="relative h-12 w-px overflow-hidden bg-white/15"><span class="scroll-pulse absolute left-0 top-0 h-5 w-px bg-accent"></span></span>
+      Scroll to explore
+    </a>
+
     <!-- feature strip -->
-    <div class="absolute inset-x-0 bottom-0 z-20 border-t border-white/10 bg-bone/70 backdrop-blur-md">
+    <div class="absolute inset-x-0 bottom-0 z-20 hidden border-t border-white/10 bg-bone/70 backdrop-blur-md md:block">
       <div class="mx-auto grid max-w-[86rem] grid-cols-2 gap-x-6 gap-y-5 px-6 py-5 sm:px-12 lg:grid-cols-4 lg:pl-24">
         {heroFeatures.map((f) => (
           <div class="group flex items-center gap-3.5">
@@ -105,26 +138,30 @@ const jsonLd = {
   </div>
 
   <!-- 2 · WHY CHOOSE -->
-  <section class="bg-sand py-28 md:py-36">
-    <div class="container-page grid items-center gap-16 lg:grid-cols-2">
+  <section class="bg-sand py-12 md:py-36">
+    <div class="container-page grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
       <!-- LEFT: framed image + testimonial card -->
-      <div class="relative">
+      <div class="relative hidden md:block">
         <div class="absolute -left-5 -top-5 z-0 hidden grid-cols-6 gap-2 lg:grid" aria-hidden="true">
           {Array.from({ length: 30 }).map(() => <span class="h-1 w-1 rounded-full bg-accent/40"></span>)}
         </div>
         <div class="relative overflow-hidden rounded-[1.75rem] border border-accent/30 p-2" data-reveal="img">
-          <img src="/images/living-a.webp" alt="Home Studio Interiors design process" loading="lazy" class="h-[30rem] w-full rounded-[1.4rem] object-cover" />
+          <img src="/images/home/design-sketch-founder.png" alt="Interior designer visualising a Home Studio Interiors concept sketch" loading="lazy" class="h-[30rem] w-full rounded-[1.4rem] object-cover object-center" />
+          <div class="pointer-events-none absolute inset-2 rounded-[1.4rem] bg-gradient-to-t from-graphite/35 via-transparent to-transparent"></div>
         </div>
         <!-- testimonial card -->
-        <div class="relative z-10 mx-4 -mt-20 rounded-2xl border border-accent/40 bg-gradient-to-br from-accent/30 via-accent/10 to-surface/95 p-7 backdrop-blur-md sm:mx-8 lg:absolute lg:bottom-5 lg:left-5 lg:-mt-0 lg:mx-0 lg:max-w-sm" data-reveal>
-          <p class="font-display text-6xl leading-[0.4] text-accent">&ldquo;</p>
-          <p class="mt-4 font-display text-xl italic leading-snug text-white">{founder.quote}</p>
-          <div class="mt-6 flex items-center gap-3 border-t border-white/15 pt-5">
-            <span class="grid h-11 w-11 place-items-center rounded-full bg-accent/20 font-sans text-sm font-semibold text-accent">HN</span>
+        <div class="relative z-10 mx-8 -mt-14 rounded-2xl border border-accent/35 bg-graphite/58 p-5 shadow-[0_24px_70px_-36px_rgba(0,0,0,.95)] backdrop-blur-xl lg:absolute lg:bottom-6 lg:right-6 lg:-mt-0 lg:mx-0 lg:max-w-[20rem]" data-reveal>
+          <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.08] via-transparent to-accent/[0.08]"></div>
+          <div class="relative">
+          <p class="font-display text-4xl leading-[0.4] text-accent">&ldquo;</p>
+          <p class="mt-3 font-display text-lg italic leading-snug text-white/92">{founder.quote}</p>
+          <div class="mt-5 flex items-center gap-3 border-t border-white/12 pt-4">
+            <span class="grid h-10 w-10 place-items-center rounded-full bg-accent/18 font-sans text-xs font-semibold text-accent ring-1 ring-accent/25">HN</span>
             <div>
               <p class="text-sm font-semibold text-white">{founder.name}</p>
               <p class="text-xs text-accent">{founder.role}</p>
             </div>
+          </div>
           </div>
         </div>
       </div>
@@ -137,10 +174,10 @@ const jsonLd = {
         <p class="mt-6 max-w-xl text-muted" data-reveal>
           Choosing the right interior designer in Islamabad shapes how you live every day. With <span class="font-medium text-accent">8+ years</span>, <span class="font-medium text-accent">95%+</span> positive feedback and <span class="font-medium text-accent">2,488+</span> satisfied clients, we pair local know-how with modern detail and accountable project management.
         </p>
-        <div class="mt-10 grid gap-x-8 gap-y-8 sm:grid-cols-2">
+        <div class="mt-8 grid gap-3 sm:grid-cols-2 md:mt-10 md:gap-x-8 md:gap-y-8">
           {differentiators.map((d, i) => (
-            <div class="group flex gap-4" data-reveal style={`--reveal-delay:${(i % 2) * 0.08}s`}>
-              <span class="grid h-12 w-12 shrink-0 place-items-center rounded-xl border border-accent/40 text-accent transition-all duration-500 group-hover:bg-accent group-hover:text-white">
+            <div class="group flex gap-3 rounded-2xl border border-line bg-white/[0.025] p-4 md:border-0 md:bg-transparent md:p-0" data-reveal style={`--reveal-delay:${(i % 2) * 0.08}s`}>
+              <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-accent/40 text-accent transition-all duration-500 group-hover:bg-accent group-hover:text-white md:h-12 md:w-12">
                 <Icon name={d.icon} size={22} />
               </span>
               <div>
@@ -154,13 +191,13 @@ const jsonLd = {
     </div>
 
     <!-- stats bar -->
-    <div class="container-page mt-16">
-      <div class="grid grid-cols-1 divide-y divide-line overflow-hidden rounded-3xl border border-line bg-surface/40 sm:grid-cols-3 sm:divide-x sm:divide-y-0" data-reveal>
+    <div class="container-page mt-10 md:mt-16">
+      <div class="grid grid-cols-3 divide-x divide-line overflow-hidden rounded-2xl border border-line bg-surface/40 md:rounded-3xl" data-reveal>
         {statBar.map((s) => (
-          <div class="spotlight group flex flex-col items-center px-6 py-12 text-center transition-colors hover:bg-surface/70">
-            <Icon name={s.icon} size={28} class="text-accent transition-transform duration-500 group-hover:scale-110" />
-            <p class="mt-4 font-display text-5xl text-white md:text-6xl" data-count={s.num} data-suffix={s.suffix}>{s.value}</p>
-            <p class="mt-2 text-xs uppercase tracking-[0.22em] text-muted">{s.label}</p>
+          <div class="spotlight group flex flex-col items-center px-2 py-4 text-center transition-colors hover:bg-surface/70 md:px-6 md:py-12">
+            <Icon name={s.icon} size={20} class="text-accent transition-transform duration-500 group-hover:scale-110 md:size-7" />
+            <p class="mt-2 font-display text-2xl text-white md:mt-4 md:text-6xl" data-count={s.num} data-suffix={s.suffix}>{s.value}</p>
+            <p class="mt-1 text-[0.58rem] uppercase leading-snug tracking-[0.12em] text-muted md:mt-2 md:text-xs md:tracking-[0.22em]">{s.label}</p>
           </div>
         ))}
       </div>
@@ -168,7 +205,7 @@ const jsonLd = {
   </section>
 
   <!-- 3 · WHAT WE DO (tabbed) -->
-  <section class="container-page py-28 md:py-36" data-tabs>
+  <section id="what-we-do" class="container-page py-12 md:py-32" data-tabs>
     <div class="grid gap-8 lg:grid-cols-2 lg:items-end">
       <div>
         <span class="inline-flex items-center gap-2.5 rounded-full border border-accent/50 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent" data-reveal><span class="h-2 w-2 rounded-full bg-accent"></span>What We Do</span>
@@ -180,8 +217,23 @@ const jsonLd = {
       </div>
     </div>
 
+    <!-- mobile service cards: direct browsing, no tab jump -->
+    <div class="mt-8 grid gap-4 lg:hidden">
+      {serviceTabs.map((t) => (
+        <a href={`/services/${t.slug}`} class="group grid grid-cols-[7.5rem_1fr] overflow-hidden rounded-[1.35rem] border border-line bg-surface/55" data-reveal>
+          <img src={t.image} alt={t.label} loading="lazy" class="h-full min-h-36 w-full object-cover" />
+          <div class="p-4">
+            <p class="number-mark">{t.eyebrow}</p>
+            <h3 class="mt-2 font-display text-2xl text-white">{t.label}</h3>
+            <p class="mt-2 line-clamp-2 text-xs leading-6 text-muted">{t.text}</p>
+            <span class="mt-3 inline-flex items-center gap-2 text-[0.66rem] font-semibold uppercase tracking-[0.14em] text-accent">Explore <Icon name="arrow" size={12} /></span>
+          </div>
+        </a>
+      ))}
+    </div>
+
     <!-- tabs -->
-    <div class="mt-12 flex flex-wrap gap-3 border-b border-line pb-12">
+    <div class="mt-12 hidden flex-wrap gap-3 border-b border-line pb-12 lg:flex">
       {serviceTabs.map((t, i) => (
         <button type="button" data-tab={t.slug} class:list={["flex items-center gap-3 rounded-full border px-6 py-3.5 text-sm font-semibold uppercase tracking-wide transition-all duration-300", i === 0 ? "border-accent bg-accent text-white" : "border-line text-white/70 hover:border-accent/60 hover:text-white"]}>
           <Icon name={t.tabIcon} size={20} />{t.label}
@@ -191,10 +243,10 @@ const jsonLd = {
 
     <!-- panels -->
     {serviceTabs.map((t, i) => (
-      <div data-panel={t.slug} class:list={["mt-12 grid items-center gap-12 lg:grid-cols-2", i === 0 ? "" : "hidden"]}>
+      <div data-panel={t.slug} class:list={["mt-12 max-lg:hidden lg:grid-cols-2 lg:items-center lg:gap-12", i === 0 ? "lg:grid" : "hidden"]}>
         <div>
           <div class="flex items-center gap-3"><span class="accent-rule"></span><span class="eyebrow">{t.eyebrow}</span></div>
-          <h3 class="mt-5 font-display text-[clamp(1.9rem,3.4vw,3rem)] font-medium leading-tight text-white">{t.headA}<span class="italic text-accent">{t.headItalic}</span>{t.headB}</h3>
+          <h3 class="mt-5 max-w-2xl break-words font-display text-[clamp(1.7rem,3.2vw,2.85rem)] font-medium leading-[1.16] text-white">{t.headA}<span class="italic text-accent">{t.headItalic}</span>{t.headB}</h3>
           <p class="mt-5 max-w-md text-muted">{t.text}</p>
           <div class="mt-8 grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-4">
             {t.features.map((f) => (
@@ -242,29 +294,165 @@ const jsonLd = {
             b.classList.toggle('border-accent', on); b.classList.toggle('bg-accent', on); b.classList.toggle('text-white', on);
             b.classList.toggle('border-line', !on); b.classList.toggle('text-white/70', !on);
           });
-          panels.forEach(function (p) { p.classList.toggle('hidden', p.getAttribute('data-panel') !== slug); });
+          panels.forEach(function (p) {
+            var active = p.getAttribute('data-panel') === slug;
+            p.classList.toggle('hidden', !active);
+            p.classList.toggle('lg:grid', active);
+          });
         });
       });
     })();
   </script>
 
   <!-- 5 · WHAT WE DELIVER -->
-  <section class="container-page py-28 md:py-36">
-    <div class="grid gap-14 lg:grid-cols-12">
-      <div class="lg:col-span-5">
-        <div class="flex items-center gap-3" data-reveal><span class="accent-rule"></span><span class="eyebrow">What We Deliver</span></div>
-        <h2 class="display-lg mt-5" data-reveal>Transforming ideas into timeless living spaces.</h2>
-        <p class="mt-6 max-w-md text-muted" data-reveal>From kitchens and wardrobes to doors, vanities and media walls, we design and build spaces that last. One team manages design, materials and turnkey installation across Islamabad &amp; Rawalpindi.</p>
+  <section class="relative hidden overflow-hidden bg-graphite py-24 lg:block lg:py-32" data-deliver>
+    <div class="absolute inset-0 opacity-[0.08] page-grid-line"></div>
+    <div class="container-page relative">
+      <div class="grid gap-10 lg:grid-cols-12 lg:items-start">
+        <div class="lg:col-span-4">
+          <div class="inline-flex items-center gap-3 rounded-full border border-accent px-6 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-white" data-reveal>
+            <span class="h-3 w-3 rounded-full bg-accent"></span> What We Deliver
+          </div>
+        </div>
+        <div class="lg:col-span-8">
+          <h2 class="display-lg max-w-5xl text-white" data-reveal>
+            Transforming <span class="italic text-accent">ideas into timeless living</span> spaces.
+          </h2>
+          <p class="mt-6 max-w-3xl text-base leading-8 text-white/68" data-reveal>
+            From kitchens and wardrobes to doors, vanities and media walls, we design and build spaces that last. One team manages design, materials and turnkey installation across Islamabad &amp; Rawalpindi.
+          </p>
+        </div>
       </div>
-      <div class="lg:col-span-7">
-        <div class="divide-y divide-line border-y border-line">
-          {deliverables.map((d) => (
-            <div class="spotlight group flex items-center gap-6 rounded-xl px-4 py-6 transition-colors hover:bg-surface/40" data-reveal>
-              <span class="grid h-12 w-12 shrink-0 place-items-center rounded-xl border border-accent/40 text-accent transition-all duration-500 group-hover:bg-accent group-hover:text-white"><Icon name={d.icon} size={22} /></span>
-              <div>
-                <h3 class="font-sans text-lg font-semibold text-white">{d.title}</h3>
-                <p class="mt-1 text-sm text-muted">{d.text}</p>
+
+      <div class="mt-14 flex gap-3 overflow-x-auto pb-3 md:flex-wrap md:justify-center md:overflow-visible" data-reveal>
+        {deliverables.map((d, i) => (
+          <button
+            type="button"
+            class={`deliver-tab shrink-0 rounded-full border px-6 py-3.5 text-xs font-bold uppercase tracking-[0.2em] transition-all duration-500 md:min-w-[10rem] md:px-7 md:py-4 ${i === 0 ? 'border-accent bg-accent text-white shadow-[0_20px_40px_-22px_rgba(242,112,37,0.9)]' : 'border-white/10 bg-white/[0.06] text-white/68 hover:border-accent/60 hover:text-white'}`}
+            data-deliver-tab={d.slug}
+            aria-pressed={i === 0 ? 'true' : 'false'}
+          >
+            {d.title}
+          </button>
+        ))}
+      </div>
+
+      <div class="relative mt-12 min-h-[44rem]">
+        {deliverables.map((d, i) => (
+          <div class={`deliver-panel ${i === 0 ? 'is-active' : 'hidden'}`} data-deliver-panel={d.slug}>
+            <div class="grid gap-6 lg:grid-cols-12 lg:items-stretch">
+              <a href={`/services/${d.slug}`} class="spotlight group relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.035] p-3 lg:col-span-7" data-reveal="img">
+                <img src={d.images[0]} alt={`${d.title} delivered by Home Studio Interiors`} loading="lazy" class="h-[24rem] w-full rounded-[1.55rem] object-cover transition duration-[1.2s] group-hover:scale-[1.035] md:h-[34rem]" />
+                <div class="absolute inset-3 rounded-[1.55rem] bg-gradient-to-t from-graphite/92 via-graphite/18 to-transparent"></div>
+                <div class="absolute inset-x-8 bottom-8 flex items-end justify-between gap-6">
+                  <div>
+                    <span class="number-mark">Selected {String(i + 1).padStart(2, '0')}</span>
+                    <h3 class="mt-2 font-display text-4xl text-white md:text-5xl">{d.title}</h3>
+                    <p class="mt-3 max-w-lg text-sm leading-7 text-white/72">{d.text}</p>
+                  </div>
+                  <span class="hidden h-14 w-14 shrink-0 place-items-center rounded-full bg-accent text-white shadow-[0_18px_35px_-18px_rgba(242,112,37,.9)] md:grid"><Icon name="arrow" size={18} /></span>
+                </div>
+              </a>
+
+              <div class="grid gap-5 lg:col-span-5">
+                <div class="rounded-[1.6rem] border border-white/10 bg-white/[0.04] p-6" data-reveal>
+                  <p class="section-kicker">What you get</p>
+                  <p class="mt-4 text-sm leading-7 text-white/70">{d.text}</p>
+                  <div class="mt-6 flex flex-wrap gap-2">
+                    {['Planning', 'Materials', 'Lighting', 'Turnkey install'].map((tag) => (
+                      <span class="rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-white/62">{tag}</span>
+                    ))}
+                  </div>
+                  <a href={`/services/${d.slug}`} class="btn btn-ghost mt-7">View {d.title} <Icon name="arrow" size={15} class="arrow" /></a>
+                </div>
+                <div class="grid grid-cols-2 gap-5">
+                  {d.images.slice(1).map((img, imageIndex) => (
+                    <a href={`/services/${d.slug}`} class="card-hover image-frame group block rounded-[1.4rem]" data-reveal="img" style={`--reveal-delay:${imageIndex * 0.08}s`}>
+                      <img src={img} alt={`${d.title} detail by Home Studio Interiors`} loading="lazy" class="aspect-[4/5] w-full object-cover" />
+                      <div class="card-hover-label pointer-events-none absolute inset-0 flex items-end justify-between p-4">
+                        <span><span class="number-mark block">{String(imageIndex + 2).padStart(2, '0')}</span><span class="mt-1 block font-display text-xl text-white">{d.title}</span></span>
+                      </div>
+                    </a>
+                  ))}
+                </div>
               </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNATURE COLLECTIONS -->
+  <section id="signature-collections" class="relative overflow-hidden bg-bone py-12 md:py-32">
+    <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/45 to-transparent"></div>
+    <div class="container-page">
+      <div class="grid gap-8 lg:grid-cols-12 lg:items-end">
+        <div class="lg:col-span-7">
+          <p class="section-kicker" data-reveal><span class="md:hidden">Popular Designs</span><span class="hidden md:inline">Signature Collections</span></p>
+          <h2 class="display-lg mt-5 max-w-4xl" data-reveal><span class="md:hidden">Swipe through our most requested looks.</span><span class="hidden md:inline">Real design names, curated into a <span class="italic text-accent">premium catalogue</span>.</span></h2>
+        </div>
+        <p class="max-w-md text-sm leading-7 text-muted lg:col-span-5 lg:justify-self-end" data-reveal>
+          A focused preview of the extracted live collection — kitchens, wardrobes, vanities, media walls and doors presented like an interior design lookbook.
+        </p>
+      </div>
+
+      <div class="-mx-5 mt-8 flex snap-x gap-4 overflow-x-auto px-5 pb-3 md:mx-0 md:mt-14 md:grid md:gap-5 md:overflow-visible md:px-0 md:pb-0 md:grid-cols-2 xl:grid-cols-3">
+        {signatureCollections.map((item, i) => (
+          <a href={item.href} class="signature-card spotlight group block w-[82vw] shrink-0 snap-start overflow-hidden rounded-[1.6rem] border border-line bg-surface/55 md:w-auto" data-reveal style={`--reveal-delay:${(i % 3) * 0.08}s`}>
+            <div class="relative overflow-hidden">
+              <img src={item.image} alt={`${item.name} ${item.service} collection`} loading="lazy" class="aspect-[16/11] w-full object-cover transition duration-[1.2s] group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-graphite/88 via-transparent to-transparent"></div>
+              <span class="absolute left-5 top-5 rounded-full border border-white/15 bg-black/30 px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-white/70 backdrop-blur">{item.service}</span>
+              <span class="absolute bottom-5 right-5 grid h-11 w-11 place-items-center rounded-full bg-accent text-white transition-transform duration-500 group-hover:translate-x-1"><Icon name="arrow" size={15} /></span>
+            </div>
+            <div class="p-6">
+              <div class="flex items-start justify-between gap-4">
+                <h3 class="font-display text-3xl text-white">{item.name}</h3>
+                <span class="number-mark">{String(i + 1).padStart(2, '0')}</span>
+              </div>
+              <p class="mt-3 text-sm leading-7 text-muted">{item.text}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- MOBILE RECENT WORK PREVIEW -->
+  <section class="bg-sand py-12 md:hidden">
+    <div class="container-page">
+      <p class="section-kicker" data-reveal>Recent Work</p>
+      <h2 class="display-md mt-4" data-reveal>See the kind of spaces we build.</h2>
+      <div class="mt-8 grid grid-cols-2 gap-4">
+        {projectPortfolio.slice(0, 4).map((p) => (
+          <a href="/projects" class="group overflow-hidden rounded-[1.2rem] border border-line bg-surface/55" data-reveal>
+            <img src={p.image} alt={p.title} loading="lazy" class="aspect-[4/5] w-full object-cover" />
+            <div class="p-3">
+              <p class="number-mark">{p.service}</p>
+              <h3 class="mt-1 font-display text-lg text-white">{p.title}</h3>
+            </div>
+          </a>
+        ))}
+      </div>
+      <a href="/projects" class="btn btn-solid mt-7">View Full Portfolio <Icon name="arrow" size={14} class="arrow" /></a>
+    </div>
+  </section>
+
+  <!-- MATERIALS & FINISHES -->
+  <section class="relative hidden overflow-hidden bg-sand py-24 md:block md:py-32">
+    <div class="container-page">
+      <div class="grid gap-10 lg:grid-cols-12">
+        <div class="lg:col-span-4">
+          <p class="section-kicker" data-reveal>Materials & Finishes</p>
+          <h2 class="display-md mt-5" data-reveal>Details that make a home feel expensive.</h2>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2 lg:col-span-8 lg:grid-cols-3">
+          {materialHighlights.map((m, i) => (
+            <div class="material-chip lux-card rounded-[1.25rem] p-5" data-reveal style={`--reveal-delay:${(i % 3) * 0.07}s`}>
+              <span class="number-mark">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="mt-4 font-display text-2xl text-white">{m.title}</h3>
+              <p class="mt-3 text-sm leading-7 text-muted">{m.text}</p>
             </div>
           ))}
         </div>
@@ -272,17 +460,49 @@ const jsonLd = {
     </div>
   </section>
 
+  <script is:inline>
+    (function () {
+      var root = document.querySelector('[data-deliver]'); if (!root) return;
+      var tabs = root.querySelectorAll('[data-deliver-tab]');
+      var panels = root.querySelectorAll('[data-deliver-panel]');
+      tabs.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var slug = btn.getAttribute('data-deliver-tab');
+          tabs.forEach(function (tab) {
+            var on = tab === btn;
+            tab.setAttribute('aria-pressed', on ? 'true' : 'false');
+            tab.classList.toggle('border-accent', on);
+            tab.classList.toggle('bg-accent', on);
+            tab.classList.toggle('text-white', on);
+            tab.classList.toggle('shadow-[0_20px_40px_-22px_rgba(242,112,37,0.9)]', on);
+            tab.classList.toggle('border-white/10', !on);
+            tab.classList.toggle('bg-white/[0.06]', !on);
+            tab.classList.toggle('text-white/68', !on);
+          });
+          panels.forEach(function (panel) {
+            var on = panel.getAttribute('data-deliver-panel') === slug;
+            panel.classList.toggle('hidden', !on);
+            panel.classList.toggle('is-active', on);
+          });
+        });
+      });
+    })();
+  </script>
+
   <!-- 6 · PROCESS -->
-  <section class="bg-sand py-28 md:py-36">
+  <section class="relative overflow-hidden bg-bone py-12 md:py-32">
+    <div class="absolute left-1/2 top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-accent/20 to-transparent lg:block"></div>
     <div class="container-page">
       <div class="flex items-center gap-3" data-reveal><span class="accent-rule"></span><span class="eyebrow">How We Work</span></div>
-      <h2 class="display-lg mt-5 max-w-3xl" data-reveal>Our interior design process.</h2>
-      <div class="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+      <h2 class="display-lg mt-5 max-w-3xl" data-reveal>From first idea to final handover.</h2>
+      <div class="mt-8 grid gap-4 md:mt-14 lg:grid-cols-4">
         {processSteps.map((step, i) => (
-          <div class="group relative border-t-2 border-line pt-6 transition-colors hover:border-accent" data-reveal style={`--reveal-delay:${i * 0.08}s`}>
-            <p class="font-display text-6xl text-accent">{step.no}</p>
-            <h3 class="mt-4 font-display text-2xl">{step.title}</h3>
-            <p class="mt-3 text-sm text-muted">{step.text}</p>
+          <div class="spotlight group relative overflow-hidden rounded-[1.35rem] border border-line bg-surface/55 p-5 transition-all duration-500 hover:-translate-y-1 hover:border-accent/50 md:rounded-[1.6rem] md:p-6" data-reveal style={`--reveal-delay:${i * 0.08}s`}>
+            <div class="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-accent/10 blur-2xl transition-opacity duration-500 group-hover:opacity-80"></div>
+            <p class="font-display text-4xl text-accent md:text-6xl">{step.no}</p>
+            <h3 class="mt-3 font-display text-xl md:mt-5 md:text-2xl">{step.title}</h3>
+            <p class="mt-3 text-sm leading-7 text-muted">{step.text}</p>
+            <div class="mt-5 h-px w-full bg-line md:mt-8"><span class="block h-px w-10 bg-accent transition-all duration-700 group-hover:w-full"></span></div>
           </div>
         ))}
       </div>
@@ -290,7 +510,7 @@ const jsonLd = {
   </section>
 
   <!-- CINEMATIC BAND -->
-  <section class="relative flex h-[62vh] min-h-[26rem] items-center overflow-hidden">
+  <section class="relative hidden h-[62vh] min-h-[26rem] items-center overflow-hidden md:flex">
     <div class="absolute inset-0">
       <img src={bandImage} alt="Luxury interior by Home Studio Interiors" class="h-full w-full scale-110 object-cover" data-parallax="0.14" loading="lazy" />
       <div class="absolute inset-0 bg-gradient-to-r from-bone via-bone/55 to-bone/10"></div>
@@ -305,7 +525,7 @@ const jsonLd = {
   </section>
 
   <!-- 7 · WHO WE ARE -->
-  <section class="container-page py-28 md:py-36">
+  <section class="container-page hidden py-28 md:block md:py-36">
     <div class="grid items-center gap-16 lg:grid-cols-2">
       <div class="overflow-hidden rounded-2xl border border-line p-2" data-reveal="img">
         <img src={aboutImage} alt="Home Studio Interiors" loading="lazy" class="h-[30rem] w-full rounded-xl object-cover" />
@@ -331,14 +551,14 @@ const jsonLd = {
   <CtaBand title="Ready to transform your space?" />
 
   <!-- 9 · TESTIMONIALS -->
-  <section class="bg-sand py-28 md:py-36">
+  <section class="bg-sand py-12 md:py-36">
     <div class="container-page">
       <div class="flex items-center gap-3" data-reveal><span class="accent-rule"></span><span class="eyebrow">Client Stories</span></div>
       <h2 class="display-lg mt-5 max-w-2xl" data-reveal>What our clients say about us.</h2>
-      <div class="mt-16 grid gap-8 md:grid-cols-2">
-        {testimonials.map((t) => (
-          <blockquote class="border-t border-line pt-8" data-reveal>
-            <p class="font-display text-2xl leading-snug text-ink">“{t.quote}”</p>
+      <div class="mt-8 grid gap-6 md:mt-16 md:grid-cols-2 md:gap-8">
+        {testimonials.map((t, i) => (
+          <blockquote class={`border-t border-line pt-6 md:pt-8 ${i > 1 ? 'hidden md:block' : ''}`} data-reveal>
+            <p class="font-display text-xl leading-snug text-ink md:text-2xl">“{t.quote}”</p>
             <footer class="mt-6 text-sm uppercase tracking-[0.14em] text-muted">{t.name} · <span class="text-accent">{t.place}</span></footer>
           </blockquote>
         ))}
@@ -347,7 +567,7 @@ const jsonLd = {
   </section>
 
   <!-- FAQ -->
-  <section class="container-page py-28 md:py-36">
+  <section class="container-page py-12 md:py-36">
     <div class="grid gap-14 lg:grid-cols-12">
       <div class="lg:col-span-4">
         <p class="eyebrow" data-reveal>Good to know</p>
