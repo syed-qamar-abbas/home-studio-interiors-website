@@ -34,12 +34,17 @@ const jsonLd = {
   <!-- HERO -->
   <section class="relative min-h-[86svh] overflow-hidden bg-graphite md:min-h-screen" data-cursor-glow>
     <div class="absolute inset-0 z-0">
-      <img src={heroImage} alt="" class="h-full w-full scale-[1.04] object-cover object-center opacity-35 blur-sm" aria-hidden="true" />
-      <img src={heroImage} alt="Luxury orange-accent interior by Home Studio Interiors" class="absolute inset-0 h-full w-full object-contain object-center opacity-95" data-parallax="0.025" data-parallax-scale="1" fetchpriority="high" />
-      <div class="absolute inset-0 bg-gradient-to-r from-graphite via-graphite/70 to-graphite/18"></div>
-      <div class="absolute inset-0 bg-gradient-to-t from-graphite via-transparent to-graphite/35"></div>
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_68%_44%,rgba(242,112,37,.18),transparent_27%)]"></div>
-      <div class="absolute inset-y-0 right-0 hidden w-1/3 bg-gradient-to-l from-graphite/40 to-transparent lg:block"></div>
+      <img src={heroImage} alt="" class="absolute inset-0 h-full w-full object-cover object-center opacity-92 md:hidden" fetchpriority="high" decoding="async" />
+      <div class="absolute inset-0 hidden md:block">
+        <img src={heroImage} alt="" class="h-full w-full scale-[1.04] object-cover object-center opacity-35 blur-sm" aria-hidden="true" />
+        <img src={heroImage} alt="Luxury orange-accent interior by Home Studio Interiors" class="absolute inset-0 h-full w-full object-contain object-center opacity-95" data-parallax="0.025" data-parallax-scale="1" fetchpriority="high" decoding="async" />
+        <div class="absolute inset-0 bg-gradient-to-r from-graphite via-graphite/70 to-graphite/18"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-graphite via-transparent to-graphite/35"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_68%_44%,rgba(242,112,37,.18),transparent_27%)]"></div>
+        <div class="absolute inset-y-0 right-0 hidden w-1/3 bg-gradient-to-l from-graphite/40 to-transparent lg:block"></div>
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-t from-graphite via-transparent to-graphite/45 md:hidden"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-graphite/30 via-transparent to-graphite/65 md:hidden"></div>
     </div>
     <div class="pointer-events-none absolute inset-0 z-0 hidden lg:block" style="background: radial-gradient(28rem 28rem at var(--gx, 25%) var(--gy, 35%), rgba(242,112,37,0.12), transparent 62%);"></div>
     <!-- vertical socials -->
@@ -53,7 +58,7 @@ const jsonLd = {
       <span class="mt-1 h-20 w-px bg-white/15"></span>
     </div>
 
-    <div class="container-page relative z-10 grid min-h-[86svh] items-center gap-10 pb-10 pt-28 md:min-h-screen md:pb-44 md:pt-32 lg:grid-cols-[minmax(0,1fr)_24rem] lg:pb-40">
+    <div class="container-page relative z-10 grid min-h-[78svh] items-center gap-10 pb-10 pt-28 md:min-h-screen md:pb-44 md:pt-32 lg:grid-cols-[minmax(0,1fr)_24rem] lg:pb-40">
       <div class="max-w-3xl">
         <p class="eyebrow leading-[2]" data-reveal>Interior Design Studio<br />Islamabad &amp; Rawalpindi</p>
         <h1 class="hero-title mt-5 leading-[1.02] text-white md:mt-6" data-reveal style="--reveal-delay:.1s">
@@ -146,7 +151,7 @@ const jsonLd = {
           {Array.from({ length: 30 }).map(() => <span class="h-1 w-1 rounded-full bg-accent/40"></span>)}
         </div>
         <div class="relative overflow-hidden rounded-[1.75rem] border border-accent/30 p-2" data-reveal="img">
-          <img src="/images/home/design-sketch-founder.png" alt="Interior designer visualising a Home Studio Interiors concept sketch" loading="lazy" class="h-[30rem] w-full rounded-[1.4rem] object-cover object-center" />
+          <img src="/images/home/design-sketch-founder.webp" alt="Interior designer visualising a Home Studio Interiors concept sketch" loading="lazy" decoding="async" class="h-[30rem] w-full rounded-[1.4rem] object-cover object-center" />
           <div class="pointer-events-none absolute inset-2 rounded-[1.4rem] bg-gradient-to-t from-graphite/35 via-transparent to-transparent"></div>
         </div>
         <!-- testimonial card -->

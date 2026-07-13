@@ -135,7 +135,7 @@ export function initMotion() {
   };
 
   // ---- Lenis ----
-  if (!reduce) {
+  if (!reduce && !isMobile) {
     const lenis = new Lenis({ duration: 1.15, lerp: 0.085, smoothWheel: true });
     lenis.on('scroll', (e: { scroll: number }) => { setHeader(e.scroll); applyParallax(); setProgress(); });
     applyParallax(); setProgress();

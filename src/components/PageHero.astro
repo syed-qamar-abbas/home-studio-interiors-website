@@ -2,13 +2,13 @@
 interface Props { eyebrow?: string; title: string; subtitle?: string; image: string; }
 const { eyebrow, title, subtitle, image } = Astro.props;
 ---
-<section class="relative flex min-h-[66vh] items-end overflow-hidden border-b border-white/10">
+<section class="relative flex min-h-[58vh] items-end overflow-hidden border-b border-white/10 md:min-h-[66vh]">
   <div class="absolute inset-0">
-    <img src={image} alt="" class="h-full w-full scale-[1.04] object-cover object-[55%_center] saturate-[.86]" data-parallax="0.1" fetchpriority="high" />
-    <div class="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/45 to-graphite/35"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_78%_24%,rgba(242,112,37,.22),transparent_26%)]"></div>
+    <img src={image} alt="" class="h-full w-full object-cover object-[55%_center] saturate-[.88] md:scale-[1.04] md:saturate-[.86]" fetchpriority="high" decoding="async" />
+    <div class="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/55 to-graphite/40 md:via-graphite/45 md:to-graphite/35"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_78%_24%,rgba(242,112,37,.14),transparent_26%)] md:bg-[radial-gradient(circle_at_78%_24%,rgba(242,112,37,.22),transparent_26%)]"></div>
   </div>
-  <div class="container-page relative z-10 pb-20 pt-40 text-white md:pb-24">
+  <div class="container-page relative z-10 pb-16 pt-32 text-white md:pb-24 md:pt-40">
     {eyebrow && <p class="eyebrow text-accent" data-reveal>{eyebrow}</p>}
     <h1 class="display-lg mt-5 max-w-4xl text-white" data-reveal style="--reveal-delay:.1s">{title}</h1>
     {subtitle && <p class="mt-6 max-w-2xl text-base leading-relaxed text-white/72 md:text-lg" data-reveal style="--reveal-delay:.2s">{subtitle}</p>}

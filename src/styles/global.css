@@ -400,3 +400,8 @@
   .js [data-reveal="img"] { filter: none; transform: translateY(18px); clip-path: inset(0 0 8% 0); }
   [data-reveal="img"] { transition-duration: .85s; }
 }
+
+main > section:not(:first-child) {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 1200px;
+}
