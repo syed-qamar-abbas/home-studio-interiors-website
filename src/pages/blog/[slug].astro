@@ -1,0 +1,144 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Icon from '../../components/Icon.astro';
+import { guideArticles } from '../../data/seo';
+import { site } from '../../data/site';
+
+export function getStaticPaths() {
+  return guideArticles.map((article) => ({ params: { slug: article.slug }, props: { article } }));
+}
+
+const { article } = Astro.props;
+const canonical = `${site.url}/blog/${article.slug}/`;
+const whatsappHref = `https://wa.me/${site.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(`Hi Home Studio Interiors, I read your guide "${article.title}" and want advice for my home.`)}`;
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  '@id': `${canonical}#article`,
+  headline: article.title,
+  description: article.description,
+  image: new URL(article.image, site.url).href,
+  datePublished: article.updated,
+  dateModified: article.updated,
+  author: { '@type': 'Organization', name: site.name, url: site.url },
+  publisher: { '@type': 'Organization', name: site.name, url: site.url },
+  mainEntityOfPage: canonical,
+};
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: article.faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+};
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: `${site.url}/blog` },
+    { '@type': 'ListItem', position: 3, name: article.title, item: canonical },
+  ],
+};
+---
+
+<Base title={`${article.title} | Home Studio Interiors`} description={article.description} image={article.image} path={`/blog/${article.slug}/`} jsonLd={[articleJsonLd, faqJsonLd, breadcrumbJsonLd]}>
+  <article>
+    <section class="relative flex min-h-[70vh] items-end overflow-hidden border-b border-white/10">
+      <div class="absolute inset-0">
+        <img src={article.image} alt="" class="h-full w-full object-cover object-center opacity-85 saturate-[.9]" fetchpriority="high" decoding="async" />
+        <div class="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/72 to-graphite/42"></div>
+      </div>
+      <div class="container-page relative z-10 pb-16 pt-36 md:pb-24 md:pt-44">
+        <p class="eyebrow text-accent" data-reveal>{article.category}</p>
+        <h1 class="display-lg mt-5 max-w-5xl text-white" data-reveal style="--reveal-delay:.08s">{article.title}</h1>
+        <p class="mt-6 max-w-3xl text-base leading-relaxed text-white/76 md:text-lg" data-reveal style="--reveal-delay:.16s">{article.summary}</p>
+        <div class="mt-8 flex flex-wrap gap-3 text-[0.68rem] uppercase tracking-[0.18em] text-white/55" data-reveal style="--reveal-delay:.24s">
+          <span>Last updated {new Date(article.updated).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+          <span>·</span>
+          <span>{article.readTime}</span>
+          <span>·</span>
+          <span>Islamabad & Rawalpindi</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="container-page py-16 md:py-24">
+      <div class="grid gap-10 lg:grid-cols-12">
+        <aside class="lg:col-span-4">
+          <div class="lg:sticky lg:top-28 rounded-[1.5rem] border border-line bg-surface/45 p-6" data-reveal>
+            <p class="section-kicker">Key takeaways</p>
+            <ul class="mt-6 space-y-4">
+              {article.keyTakeaways.map((item) => (
+                <li class="flex gap-3 text-sm leading-7 text-white/76">
+                  <span class="mt-2 grid h-5 w-5 shrink-0 place-items-center rounded-full border border-accent/45 text-[0.62rem] text-accent">✓</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <a href={whatsappHref} class="btn btn-solid mt-7 w-full justify-center">Ask on WhatsApp <Icon name="arrow" size={14} class="arrow" /></a>
+          </div>
+        </aside>
+        <div class="lg:col-span-8">
+          <div class="rounded-[1.5rem] border border-line bg-sand/45 p-6 md:p-8" data-reveal>
+            <p class="text-lg leading-8 text-white/82">{article.summary}</p>
+          </div>
+          <div class="mt-10 space-y-10">
+            {article.sections.map((section, i) => (
+              <section class="border-b border-line pb-10 last:border-b-0" data-reveal>
+                <p class="number-mark">{String(i + 1).padStart(2, '0')}</p>
+                <h2 class="mt-3 font-display text-4xl leading-tight text-ink">{section.title}</h2>
+                <p class="mt-5 text-base leading-8 text-muted">{section.text}</p>
+                {section.points && (
+                  <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+                    {section.points.map((point) => (
+                      <li class="rounded-xl border border-line bg-surface/40 p-4 text-sm leading-7 text-white/76">{point}</li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-sand py-16 md:py-24">
+      <div class="container-page">
+        <div class="grid gap-10 lg:grid-cols-12">
+          <div class="lg:col-span-4">
+            <p class="section-kicker" data-reveal>FAQ</p>
+            <h2 class="display-md mt-4" data-reveal>Short answers for homeowners.</h2>
+          </div>
+          <div class="space-y-4 lg:col-span-8">
+            {article.faqs.map((faq) => (
+              <details class="group rounded-[1.25rem] border border-line bg-bone/55 p-5" data-reveal>
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-2xl text-ink">
+                  {faq.question}
+                  <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-accent/45 text-accent transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <p class="mt-4 text-sm leading-7 text-muted">{faq.answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container-page py-16">
+      <div class="rounded-[1.8rem] border border-line bg-surface/45 p-6 md:p-8" data-reveal>
+        <p class="section-kicker">Related reading</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          {article.related.map((link) => (
+            <a href={link.href} class="rounded-full border border-white/12 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:border-accent hover:text-accent">{link.label}</a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <CtaBand title="Want this planned for your home?" text="Send photos, measurements and your preferred style on WhatsApp. We’ll guide you with the right next step." />
+</Base>

@@ -3,17 +3,17 @@ import { nav, site } from '../data/site';
 import Icon from './Icon.astro';
 const current = Astro.url.pathname;
 const servicePreview = [
-  { label: 'Kitchens', href: '/services/kitchen', image: '/images/services/kitchen-live/09-1-18.webp' },
-  { label: 'Wardrobes', href: '/services/wardrobe', image: '/images/services/wardrobe-live/01-1-8.webp' },
-  { label: 'Vanities', href: '/services/vanities', image: '/images/services/vanities-live/01-3-1024x574.webp' },
-  { label: 'Media Walls', href: '/services/media-walls', image: '/images/services/media-walls-live/01-photo-stylish-wallmounted-entertainment-1024x574.webp' },
-  { label: 'Doors', href: '/services/doors', image: '/images/services/doors-live/01-coastal-interior-design-modern-entrance-hall-1-1024x574.webp' },
+  { label: 'Kitchens', href: '/services/kitchen', image: '/images/services/kitchen-live/01-1-17-card.webp' },
+  { label: 'Wardrobes', href: '/services/wardrobe', image: '/images/services/wardrobe-live/01-1-8-card.webp' },
+  { label: 'Vanities', href: '/services/vanities', image: '/images/services/vanities-live/01-3-card.webp' },
+  { label: 'Media Walls', href: '/services/media-walls', image: '/images/services/media-walls-live/01-photo-stylish-wallmounted-entertainment-card.webp' },
+  { label: 'Doors', href: '/services/doors', image: '/images/services/doors-live/01-coastal-interior-design-modern-entrance-hall-1-card.webp' },
 ];
 ---
 <header id="site-header" class="fixed top-0 left-0 z-40 w-full transition-all duration-500" data-header>
   <div class="container-page flex items-center justify-between py-4">
     <a href="/" aria-label={`${site.name} home`} class="block">
-      <img src="/images/brand/hs-logo-cropped.png" alt="Home Studio Interiors" class="h-10 w-auto object-contain md:h-12" width="940" height="639" />
+      <img src="/images/brand/hs-logo-cropped-260.webp" alt="Home Studio Interiors" class="h-11 w-auto object-contain md:h-14" width="260" height="177" loading="eager" fetchpriority="high" decoding="async" />
     </a>
 
     <nav class="hidden items-center gap-9 lg:flex" aria-label="Primary">
@@ -54,7 +54,7 @@ const servicePreview = [
 <div id="mobile-menu" class="fixed inset-0 z-50 hidden bg-graphite text-white">
   <div class="container-page flex h-full flex-col">
     <div class="flex items-center justify-between py-4">
-      <img src="/images/brand/hs-logo-cropped.png" alt="Home Studio Interiors" class="h-12 w-auto object-contain" />
+      <img src="/images/brand/hs-logo-cropped-260.webp" alt="Home Studio Interiors" class="h-12 w-auto object-contain sm:h-14" width="260" height="177" loading="eager" fetchpriority="high" decoding="async" />
       <button id="menu-close" class="text-4xl leading-none text-white" aria-label="Close menu">&times;</button>
     </div>
     <nav class="mt-8 flex flex-col gap-1 overflow-y-auto" aria-label="Mobile">
@@ -95,7 +95,6 @@ const servicePreview = [
 <style>
   /* Elegant dark bar on scroll so the white wordmark reads in every state */
   [data-header].is-scrolled { background: rgba(32, 29, 24, 0.96); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.08); }
-  [data-header].is-scrolled .container-page { padding-block: 0.35rem; }
 
   .btn-cta { border: 1px solid rgba(255,255,255,0.55); color: #fff; }
   .btn-cta:hover { background: var(--color-accent); border-color: var(--color-accent); color: #fff; }

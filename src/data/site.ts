@@ -16,10 +16,25 @@ export const site = {
   address: 'Islamabad Capital Territory, Pakistan',
   rating: { value: '4.95', count: '260' },
   socials: {
-    facebook: 'https://facebook.com/',
-    instagram: 'https://instagram.com/',
-    linkedin: 'https://linkedin.com/',
+    facebook: '',
+    instagram: '',
+    linkedin: '',
   },
+};
+
+export const agencyAttribution = {
+  agencyName: 'Crea8iv Media',
+  agencyUrl: 'https://crea8ivmedia.com/',
+  entityId: 'https://crea8ivmedia.com/#organization',
+  attributionType: 'homepage' as 'homepage' | 'portfolio' | 'case-study',
+  clientSlug: 'home-studio-interiors',
+  logo: '/images/agency/crea8iv-media-logo.webp',
+  sameAs: [] as string[],
+  contact: {
+    email: '',
+    telephone: '',
+  },
+  founder: '',
 };
 
 export const stats = [
@@ -476,7 +491,7 @@ export const serviceTabs = [
       { t: 'Integrated mirror lighting', i: 'bulb' },
       { t: 'Easy-clean surfaces', i: 'sliders' },
     ],
-    image: '/images/services/vanities-live/01-3-1024x574.webp',
+    image: '/images/services/vanities-live/01-3-card.webp',
     cards: [{ label: 'Modern Vanities', image: '/images/services/vanities-live/06-modern-bathroom-vanity-with-elegant-mirror-design-1024x574.webp' }, { label: 'Classic Vanities', image: '/images/services/vanities-live/04-5-1024x574.webp' }],
   },
   {
@@ -490,7 +505,7 @@ export const serviceTabs = [
       { t: 'Concealed cable management', i: 'sliders' },
       { t: 'Ventilated equipment bays', i: 'layers' },
     ],
-    image: '/images/services/media-walls-live/01-photo-stylish-wallmounted-entertainment-1024x574.webp',
+    image: '/images/services/media-walls-live/01-photo-stylish-wallmounted-entertainment-card.webp',
     cards: [{ label: 'Slat Walls', image: '/images/services/media-walls-live/02-burnished-copper-tv-wall-panels-with-textured-designs-luxurious-copper-textured-tv-decor-ideas-1024x576.webp' }, { label: 'Panelled Walls', image: '/images/services/media-walls-live/08-black-white-room-with-tv-wall-shelf-with-tv-it-1024x1024.webp' }],
   },
 ];
@@ -509,28 +524,28 @@ export const deliverables = [
     title: 'Doors',
     text: 'Flush or grooved profiles with durable cores and minimalist hardware.',
     icon: 'key',
-    images: ['/images/services/doors-live/01-coastal-interior-design-modern-entrance-hall-1-1024x574.webp', '/images/services/doors-live/04-ai-generated-modern-styled-entryway-2-scaled.webp', '/images/services/doors-live/07-BRISTOL-door-image.webp'],
+    images: ['/images/services/doors-live/01-coastal-interior-design-modern-entrance-hall-1-card.webp', '/images/services/doors-live/04-ai-generated-modern-styled-entryway-2-scaled.webp', '/images/services/doors-live/07-BRISTOL-door-image.webp'],
   },
   {
     slug: 'media-walls',
     title: 'Media Walls',
     text: 'Cable-free TV walls with paneling, floating storage and layered lighting.',
     icon: 'home',
-    images: ['/images/services/media-walls-live/01-photo-stylish-wallmounted-entertainment-1024x574.webp', '/images/services/media-walls-live/03-modern-living-room-interior-design-with-blue-walls-large-tv-1024x574.webp', '/images/services/media-walls-live/08-black-white-room-with-tv-wall-shelf-with-tv-it-1024x1024.webp'],
+    images: ['/images/services/media-walls-live/01-photo-stylish-wallmounted-entertainment-card.webp', '/images/services/media-walls-live/03-modern-living-room-interior-design-with-blue-walls-large-tv-1024x574.webp', '/images/services/media-walls-live/08-black-white-room-with-tv-wall-shelf-with-tv-it-1024x1024.webp'],
   },
   {
     slug: 'vanities',
     title: 'Vanities',
     text: 'Moisture-resistant cabinetry with stone tops and integrated mirror lighting.',
     icon: 'compass',
-    images: ['/images/services/vanities-live/01-3-1024x574.webp', '/images/services/vanities-live/04-5-1024x574.webp', '/images/services/vanities-live/08-2-1024x574.webp'],
+    images: ['/images/services/vanities-live/01-3-card.webp', '/images/services/vanities-live/04-5-1024x574.webp', '/images/services/vanities-live/08-2-1024x574.webp'],
   },
   {
     slug: 'wardrobe',
     title: 'Wardrobe',
     text: 'Sliding, hinged and walk-in systems planned to the millimetre.',
     icon: 'armchair',
-    images: ['/images/services/wardrobe-live/01-1-8.webp', '/images/services/wardrobe-live/13-Gemini_Generated_Image_ig9wetig9wetig9w.webp', '/images/services/wardrobe-live/22-1-11.webp'],
+    images: ['/images/services/wardrobe-live/01-1-8-card.webp', '/images/services/wardrobe-live/13-Gemini_Generated_Image_ig9wetig9wetig9w.webp', '/images/services/wardrobe-live/22-1-11.webp'],
   },
 ];
 
@@ -664,7 +679,7 @@ export const featuredProjects = [
   { title: 'Aria Media Wall', tag: 'Media Wall', image: `${IMG}/kitchen-c.webp` },
 ];
 
-export const heroImage = '/images/hero/orange-stair-lounge.webp';
+export const heroImage = '/images/hero/orange-stair-lounge-q72.webp';
 export const heroImageAlt = `${IMG}/dark-kitchen.webp`;
 export const bandImage = '/images/hero/living.webp';
 export const aboutImage = `${IMG}/feature-1.webp`;

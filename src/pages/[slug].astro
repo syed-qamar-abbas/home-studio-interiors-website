@@ -1,0 +1,156 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { seoLandingPages, whatsappLeadHref } from '../data/seo';
+import { site } from '../data/site';
+
+export function getStaticPaths() {
+  return seoLandingPages.map((page) => ({ params: { slug: page.slug }, props: { page } }));
+}
+
+const { page } = Astro.props;
+const canonical = `${site.url}/${page.slug}/`;
+const whatsappText = encodeURIComponent(`Hi Home Studio Interiors, I found your ${page.serviceName} page and want a consultation. My location is ${page.city}.`);
+const pageWhatsappHref = `https://wa.me/${site.whatsapp.replace(/\D/g, '')}?text=${whatsappText}`;
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: page.faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+};
+const serviceJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${canonical}#service`,
+  name: page.serviceName,
+  serviceType: page.serviceType,
+  description: page.description,
+  url: canonical,
+  provider: {
+    '@type': 'LocalBusiness',
+    '@id': `${site.url}/#business`,
+    name: site.name,
+    telephone: site.phoneIntl,
+    areaServed: site.areaServed,
+  },
+  areaServed: {
+    '@type': 'City',
+    name: page.city,
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: `${page.serviceName} services`,
+    itemListElement: page.sections.flatMap((section) => section.points).slice(0, 8).map((item) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name: item },
+    })),
+  },
+};
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+    { '@type': 'ListItem', position: 2, name: page.serviceName, item: canonical },
+  ],
+};
+---
+
+<Base title={page.title} description={page.description} image={page.image} path={`/${page.slug}/`} jsonLd={[serviceJsonLd, faqJsonLd, breadcrumbJsonLd]}>
+  <section class="relative flex min-h-[76vh] items-end overflow-hidden border-b border-white/10">
+    <div class="absolute inset-0">
+      <img src={page.image} alt="" class="h-full w-full object-cover object-center opacity-88 saturate-[.9]" fetchpriority="high" decoding="async" />
+      <div class="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/68 to-graphite/40"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_78%_24%,rgba(242,112,37,.22),transparent_28%)]"></div>
+    </div>
+    <div class="container-page relative z-10 pb-16 pt-36 md:pb-24 md:pt-44">
+      <p class="eyebrow text-accent" data-reveal>{page.eyebrow}</p>
+      <h1 class="display-lg mt-5 max-w-5xl text-white" data-reveal style="--reveal-delay:.08s">{page.h1}</h1>
+      <p class="mt-6 max-w-3xl text-base leading-relaxed text-white/76 md:text-lg" data-reveal style="--reveal-delay:.16s">{page.intro}</p>
+      <div class="mt-10 flex flex-wrap gap-3" data-reveal style="--reveal-delay:.24s">
+        <a href={pageWhatsappHref} class="btn btn-solid">WhatsApp for quote <Icon name="arrow" size={14} class="arrow" /></a>
+        <a href="/contact" data-open-quote class="btn btn-ghost border-white/35 text-white">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-page page-grid-line py-20 md:py-28">
+    <div class="grid gap-8 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <p class="section-kicker" data-reveal>Why this page matters</p>
+        <h2 class="display-md mt-4" data-reveal>{page.serviceName} for serious homeowners.</h2>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2 lg:col-span-7">
+        {page.proof.map((item) => (
+          <div class="rounded-[1.25rem] border border-line bg-surface/50 p-5" data-reveal>
+            <span class="mb-4 grid h-10 w-10 place-items-center rounded-full border border-accent/45 text-accent"><Icon name="check" size={16} /></span>
+            <p class="text-sm leading-7 text-white/78">{item}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-sand py-20 md:py-28">
+    <div class="container-page">
+      <div class="grid gap-8 md:grid-cols-2">
+        {page.sections.map((section, i) => (
+          <article class={`signature-card rounded-[1.8rem] border border-line bg-bone/55 p-7 md:p-9 ${i === 0 ? 'md:row-span-2' : ''}`} data-reveal>
+            <p class="number-mark">{String(i + 1).padStart(2, '0')}</p>
+            <h2 class="mt-4 font-display text-3xl leading-tight md:text-4xl">{section.title}</h2>
+            <p class="mt-5 text-sm leading-7 text-muted md:text-base">{section.text}</p>
+            <ul class="mt-7 space-y-3">
+              {section.points.map((point) => (
+                <li class="flex gap-3 text-sm text-white/78">
+                  <span class="mt-2 h-px w-6 shrink-0 bg-accent"></span>
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="container-page py-20 md:py-28">
+    <div class="grid gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <p class="section-kicker" data-reveal>Search-ready answers</p>
+        <h2 class="display-md mt-4" data-reveal>Common questions about {page.serviceName}.</h2>
+        <p class="mt-5 text-sm leading-7 text-muted" data-reveal>These short answer blocks help homeowners and AI search systems understand the service clearly.</p>
+      </div>
+      <div class="space-y-4 lg:col-span-8">
+        {page.faqs.map((faq) => (
+          <details class="group rounded-[1.25rem] border border-line bg-surface/45 p-5" data-reveal>
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-2xl text-ink">
+              {faq.question}
+              <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-accent/45 text-accent transition-transform group-open:rotate-45">+</span>
+            </summary>
+            <p class="mt-4 text-sm leading-7 text-muted">{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-graphite py-18">
+    <div class="container-page">
+      <div class="rounded-[1.8rem] border border-white/10 bg-white/[0.035] p-6 md:p-8" data-reveal>
+        <p class="section-kicker">Related visibility pages</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          {page.related.map((link) => (
+            <a href={link.href} class="rounded-full border border-white/12 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:border-accent hover:text-accent">{link.label}</a>
+          ))}
+          <a href={whatsappLeadHref} class="rounded-full border border-accent bg-accent px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:bg-accent-dark">Ask on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title={`Need ${page.serviceName}?`} text={`Send your location, photos and measurements on WhatsApp. Our team will guide the next step for ${page.city}.`} />
+</Base>

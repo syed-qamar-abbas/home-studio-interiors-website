@@ -1,0 +1,149 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Icon from '../../components/Icon.astro';
+import { areaPages, whatsappLeadHref } from '../../data/seo';
+import { site } from '../../data/site';
+
+export function getStaticPaths() {
+  return areaPages.map((page) => ({ params: { slug: page.slug }, props: { page } }));
+}
+
+const { page } = Astro.props;
+const canonical = `${site.url}/service-areas/${page.slug}/`;
+const whatsappText = encodeURIComponent(`Hi Home Studio Interiors, I found your ${page.area} service-area page and want interior design guidance.`);
+const whatsappHref = `https://wa.me/${site.whatsapp.replace(/\D/g, '')}?text=${whatsappText}`;
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: page.faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+};
+const serviceJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${canonical}#service`,
+  name: `Interior design services in ${page.area}`,
+  description: page.description,
+  serviceType: 'Residential interior design and fit-out',
+  url: canonical,
+  provider: { '@id': `${site.url}/#business` },
+  areaServed: { '@type': 'Place', name: page.area },
+};
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+    { '@type': 'ListItem', position: 2, name: 'Service Areas', item: `${site.url}/service-areas/` },
+    { '@type': 'ListItem', position: 3, name: page.area, item: canonical },
+  ],
+};
+---
+
+<Base title={page.title} description={page.description} image={page.image} path={`/service-areas/${page.slug}/`} jsonLd={[serviceJsonLd, faqJsonLd, breadcrumbJsonLd]}>
+  <section class="relative flex min-h-[70vh] items-end overflow-hidden border-b border-white/10">
+    <div class="absolute inset-0">
+      <img src={page.image} alt="" class="h-full w-full object-cover object-center opacity-84 saturate-[.92]" fetchpriority="high" decoding="async" />
+      <div class="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/72 to-graphite/38"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_75%_22%,rgba(242,112,37,.18),transparent_30%)]"></div>
+    </div>
+    <div class="container-page relative z-10 pb-16 pt-36 md:pb-24 md:pt-44">
+      <p class="eyebrow text-accent" data-reveal>{page.area}</p>
+      <h1 class="display-lg mt-5 max-w-5xl text-white" data-reveal style="--reveal-delay:.08s">{page.h1}</h1>
+      <p class="mt-6 max-w-3xl text-base leading-relaxed text-white/76 md:text-lg" data-reveal style="--reveal-delay:.16s">{page.intro}</p>
+      <div class="mt-10 flex flex-wrap gap-3" data-reveal style="--reveal-delay:.24s">
+        <a href={whatsappHref} class="btn btn-solid">Ask on WhatsApp <Icon name="arrow" size={14} class="arrow" /></a>
+        <a href="/contact" data-open-quote class="btn btn-ghost border-white/35 text-white">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-page page-grid-line py-20 md:py-28">
+    <div class="grid gap-8 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <p class="section-kicker" data-reveal>Local fit</p>
+        <h2 class="display-md mt-4" data-reveal>Services matched to real home needs.</h2>
+        <p class="mt-5 text-sm leading-7 text-muted" data-reveal>
+          This page is written for homeowners comparing options in {page.area}. It avoids fake branch claims and focuses on scope, materials and planning.
+        </p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2 lg:col-span-8">
+        <div class="rounded-[1.35rem] border border-line bg-surface/50 p-6" data-reveal>
+          <p class="number-mark">Home types</p>
+          <ul class="mt-5 space-y-3">
+            {page.homeTypes.map((item) => (
+              <li class="flex gap-3 text-sm leading-7 text-white/76"><span class="mt-2 h-px w-6 shrink-0 bg-accent"></span>{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-[1.35rem] border border-line bg-surface/50 p-6" data-reveal>
+          <p class="number-mark">Best-fit services</p>
+          <ul class="mt-5 space-y-3">
+            {page.serviceFit.map((item) => (
+              <li class="flex gap-3 text-sm leading-7 text-white/76"><span class="mt-2 h-px w-6 shrink-0 bg-accent"></span>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-sand py-20 md:py-28">
+    <div class="container-page">
+      <div class="grid gap-6 md:grid-cols-2">
+        {page.sections.map((section, i) => (
+          <article class="signature-card rounded-[1.6rem] border border-line bg-bone/55 p-7" data-reveal>
+            <p class="number-mark">{String(i + 1).padStart(2, '0')}</p>
+            <h2 class="mt-4 font-display text-3xl leading-tight text-ink">{section.title}</h2>
+            <p class="mt-5 text-sm leading-7 text-muted">{section.text}</p>
+            <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+              {section.points.map((point) => (
+                <li class="rounded-xl border border-line bg-surface/35 p-4 text-sm leading-7 text-white/76">{point}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="container-page py-20 md:py-28">
+    <div class="grid gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <p class="section-kicker" data-reveal>Local answers</p>
+        <h2 class="display-md mt-4" data-reveal>Questions about {page.area} projects.</h2>
+      </div>
+      <div class="space-y-4 lg:col-span-8">
+        {page.faqs.map((faq) => (
+          <details class="group rounded-[1.25rem] border border-line bg-surface/45 p-5" data-reveal>
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-2xl text-ink">
+              {faq.question}
+              <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-accent/45 text-accent transition-transform group-open:rotate-45">+</span>
+            </summary>
+            <p class="mt-4 text-sm leading-7 text-muted">{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-graphite py-18">
+    <div class="container-page">
+      <div class="rounded-[1.8rem] border border-white/10 bg-white/[0.035] p-6 md:p-8" data-reveal>
+        <p class="section-kicker">Continue exploring</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          {page.related.map((link) => (
+            <a href={link.href} class="rounded-full border border-white/12 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:border-accent hover:text-accent">{link.label}</a>
+          ))}
+          <a href={whatsappLeadHref} class="rounded-full border border-accent bg-accent px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:bg-accent-dark">Ask on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title={`Planning interiors in ${page.area}?`} text="Send photos, measurements, location and required services on WhatsApp. We’ll guide the next step." />
+</Base>

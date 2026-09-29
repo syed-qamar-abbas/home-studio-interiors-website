@@ -1,0 +1,110 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { areaPages, seoLandingPages } from '../data/seo';
+import { heroImage, site } from '../data/site';
+
+const localCorePages = seoLandingPages.filter((page) =>
+  ['interior-designers-islamabad', 'interior-designers-rawalpindi', 'kitchen-design-islamabad', 'kitchen-design-rawalpindi'].includes(page.slug)
+);
+
+const canonical = `${site.url}/service-areas/`;
+const serviceAreaJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  '@id': `${canonical}#webpage`,
+  name: 'Home Studio Interiors Service Areas',
+  description: 'Service-area hub for Home Studio Interiors across Islamabad and Rawalpindi.',
+  url: canonical,
+  about: { '@id': `${site.url}/#business` },
+  mainEntity: areaPages.map((page) => ({
+    '@type': 'Place',
+    name: page.area,
+    url: `${site.url}/service-areas/${page.slug}/`,
+  })),
+};
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+    { '@type': 'ListItem', position: 2, name: 'Service Areas', item: canonical },
+  ],
+};
+---
+
+<Base
+  title="Interior Design Service Areas in Islamabad & Rawalpindi | Home Studio Interiors"
+  description="Home Studio Interiors serves homeowners across Islamabad and Rawalpindi with kitchens, wardrobes, media walls, vanities, doors and remodeling support."
+  image={heroImage}
+  path="/service-areas/"
+  jsonLd={[serviceAreaJsonLd, breadcrumbJsonLd]}
+>
+  <section class="relative flex min-h-[68vh] items-end overflow-hidden border-b border-white/10">
+    <div class="absolute inset-0">
+      <img src={heroImage} alt="" class="h-full w-full object-cover object-center opacity-80" fetchpriority="high" decoding="async" />
+      <div class="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/72 to-graphite/38"></div>
+    </div>
+    <div class="container-page relative z-10 pb-16 pt-36 md:pb-22 md:pt-44">
+      <p class="eyebrow text-accent" data-reveal>Service areas</p>
+      <h1 class="display-lg mt-5 max-w-5xl text-white" data-reveal style="--reveal-delay:.08s">Interior design services across Islamabad and Rawalpindi.</h1>
+      <p class="mt-6 max-w-3xl text-base leading-relaxed text-white/76 md:text-lg" data-reveal style="--reveal-delay:.16s">
+        Home Studio Interiors works with homeowners in the Islamabad/Rawalpindi metro market for kitchens, wardrobes, vanities, media walls, doors and full-home interior scopes. We do not claim fake branch offices; project availability is confirmed by scope and schedule.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-3" data-reveal style="--reveal-delay:.24s">
+        <a href="/contact" data-open-quote class="btn btn-solid">Get a Quote <Icon name="arrow" size={14} class="arrow" /></a>
+        <a href="/services" class="btn btn-ghost border-white/35 text-white">View Services</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-page page-grid-line py-20 md:py-28">
+    <div class="grid gap-8 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <p class="section-kicker" data-reveal>Local authority</p>
+        <h2 class="display-md mt-4" data-reveal>Useful local pages, not doorway pages.</h2>
+        <p class="mt-5 text-sm leading-7 text-muted" data-reveal>
+          These pages explain how our services fit different residential areas and home types. They are meant to help homeowners understand scope, not to imply separate offices.
+        </p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2 lg:col-span-8">
+        {areaPages.map((page) => (
+          <a href={`/service-areas/${page.slug}`} class="signature-card group overflow-hidden rounded-[1.45rem] border border-line bg-surface/50 transition-all duration-300 hover:-translate-y-1 hover:border-accent/50" data-reveal>
+            <div class="aspect-[16/9] overflow-hidden">
+              <img src={page.image} alt={`${page.area} interior design service area`} loading="lazy" class="h-full w-full object-cover transition-transform duration-[1.1s] group-hover:scale-105" />
+            </div>
+            <div class="p-5">
+              <p class="number-mark">{page.area}</p>
+              <h3 class="mt-2 font-display text-3xl leading-tight text-ink">{page.h1}</h3>
+              <p class="mt-3 line-clamp-3 text-sm leading-7 text-muted">{page.description}</p>
+              <span class="mt-5 inline-flex items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-accent">Open area page <Icon name="arrow" size={13} /></span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-sand py-20 md:py-28">
+    <div class="container-page">
+      <div class="grid gap-8 lg:grid-cols-12">
+        <div class="lg:col-span-4">
+          <p class="section-kicker" data-reveal>Core local pages</p>
+          <h2 class="display-md mt-4" data-reveal>Start from the main Islamabad and Rawalpindi guides.</h2>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2 lg:col-span-8">
+          {localCorePages.map((page) => (
+            <a href={`/${page.slug}`} class="rounded-[1.2rem] border border-line bg-bone/55 p-5 transition-colors hover:border-accent/50" data-reveal>
+              <p class="number-mark">{page.city}</p>
+              <h3 class="mt-2 font-display text-2xl text-ink">{page.serviceName}</h3>
+              <p class="mt-3 text-sm leading-7 text-muted">{page.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Want to confirm service in your area?" text="Send your area, photos and room measurements on WhatsApp. We’ll guide the most practical next step." />
+</Base>

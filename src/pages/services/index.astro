@@ -4,6 +4,20 @@ import PageHero from '../../components/PageHero.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import Icon from '../../components/Icon.astro';
 import { services, heroImage, designPackages } from '../../data/site';
+import { seoLandingPages } from '../../data/seo';
+
+const priorityLocalPages = seoLandingPages.filter((page) => [
+  'interior-designers-islamabad',
+  'interior-designers-rawalpindi',
+  'kitchen-design-islamabad',
+  'kitchen-design-rawalpindi',
+  'modular-kitchen-islamabad',
+  'wardrobe-design-islamabad',
+  'media-wall-design-islamabad',
+  'bathroom-vanities-islamabad',
+  'doors-design-islamabad',
+  'home-remodeling-islamabad',
+].includes(page.slug));
 ---
 <Base title="Interior Design Services — Kitchens, Wardrobes, Vanities, Media Walls & Doors | Home Studio Interiors"
   description="Full-spectrum interior design and fit-out services in Islamabad & Rawalpindi — kitchens, wardrobes, vanities, media walls and doors, from 3D design to turnkey installation.">
@@ -48,6 +62,28 @@ import { services, heroImage, designPackages } from '../../data/site';
             <h3 class="font-display text-2xl">{p.title}</h3>
             <p class="mt-3 text-sm leading-7 text-muted">{p.text}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="container-page py-20 md:py-28">
+    <div class="grid gap-8 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <p class="section-kicker" data-reveal>Local service pages</p>
+        <h2 class="display-md mt-4" data-reveal>Find the right interior service in Islamabad & Rawalpindi.</h2>
+        <p class="mt-5 text-sm leading-7 text-muted" data-reveal>
+          Dedicated pages for high-intent searches help homeowners compare services, budgets and next steps before contacting us on WhatsApp.
+        </p>
+      </div>
+      <div class="grid gap-3 sm:grid-cols-2 lg:col-span-8">
+        {priorityLocalPages.map((page) => (
+          <a href={`/${page.slug}`} class="group rounded-[1.15rem] border border-line bg-surface/45 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/50" data-reveal>
+            <p class="number-mark">{page.city}</p>
+            <h3 class="mt-2 font-display text-2xl leading-tight text-ink">{page.serviceName}</h3>
+            <p class="mt-3 line-clamp-2 text-sm leading-7 text-muted">{page.description}</p>
+            <span class="mt-4 inline-flex items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-accent">Open page <Icon name="arrow" size={13} /></span>
+          </a>
         ))}
       </div>
     </div>

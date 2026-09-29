@@ -1,0 +1,152 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { services, site } from '../data/site';
+import { seoLandingPages } from '../data/seo';
+
+const canonical = `${site.url}/faq/`;
+const faqGroups = [
+  {
+    label: 'Getting started',
+    items: [
+      {
+        question: 'What does Home Studio Interiors do?',
+        answer: 'Home Studio Interiors is a residential interior design and turnkey execution studio serving Islamabad and Rawalpindi. Core services include kitchens, wardrobes, media walls, bathroom vanities, interior doors and home remodeling.',
+      },
+      {
+        question: 'Which areas do you serve?',
+        answer: 'Home Studio Interiors primarily serves Islamabad and Rawalpindi. Service availability for a specific area is confirmed based on project scope, schedule and site requirements.',
+      },
+      {
+        question: 'How can I request a quote?',
+        answer: `You can request a quote by sharing your name, phone number, email, project type, estimated budget and expected start timeline through the website quote form or by WhatsApp at ${site.phone}.`,
+      },
+    ],
+  },
+  {
+    label: 'Services',
+    items: [
+      {
+        question: 'Do you design and install kitchens?',
+        answer: 'Yes. The kitchen service includes planning, material guidance and installation support for modern, classic and modular kitchen directions.',
+      },
+      {
+        question: 'Do you make wardrobes and walk-in closets?',
+        answer: 'Yes. Wardrobe work can include sliding wardrobes, hinged wardrobes and walk-in wardrobe planning, with internal storage designed around daily use.',
+      },
+      {
+        question: 'Can you handle media walls, vanities and doors?',
+        answer: 'Yes. Home Studio Interiors works on media walls, bathroom vanities and interior doors as standalone services or as part of a broader home interior scope.',
+      },
+    ],
+  },
+  {
+    label: 'Process and pricing',
+    items: [
+      {
+        question: 'What affects the final project cost?',
+        answer: 'Cost depends on measurements, materials, finish selection, hardware, countertop choice, lighting, accessories, site condition and installation scope.',
+      },
+      {
+        question: 'Can I get an exact price without measurements?',
+        answer: 'An initial range may be possible from photos and rough measurements, but an exact quote usually needs confirmed dimensions, material selection and scope details.',
+      },
+      {
+        question: 'Can I start with one room first?',
+        answer: 'Yes. Many homeowners begin with a kitchen, wardrobe, media wall, vanity or door upgrade before expanding to other areas of the home.',
+      },
+    ],
+  },
+];
+
+const allFaqs = faqGroups.flatMap((group) => group.items);
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: allFaqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+};
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+    { '@type': 'ListItem', position: 2, name: 'FAQ', item: canonical },
+  ],
+};
+const corePages = seoLandingPages.filter((page) =>
+  ['interior-designers-islamabad', 'kitchen-design-islamabad', 'wardrobe-design-islamabad', 'home-remodeling-islamabad'].includes(page.slug)
+);
+---
+
+<Base
+  title="FAQ — Home Studio Interiors Islamabad"
+  description="Answers about Home Studio Interiors services, service areas, quote process, pricing factors, kitchens, wardrobes, media walls, vanities, doors and remodeling."
+  image="/images/home/design-sketch-founder.webp"
+  path="/faq/"
+  jsonLd={[faqJsonLd, breadcrumbJsonLd]}
+>
+  <section class="container-page page-grid-line py-32 md:py-40">
+    <div class="grid gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <p class="section-kicker" data-reveal>FAQ</p>
+        <h1 class="display-lg mt-5" data-reveal>Clear answers before you start your interior project.</h1>
+        <p class="mt-6 max-w-xl text-base leading-relaxed text-muted" data-reveal>
+          Short, factual answers for homeowners comparing interior design, kitchen, wardrobe, media wall, vanity, door and remodeling services in Islamabad and Rawalpindi.
+        </p>
+        <a href="/contact" data-open-quote class="btn btn-solid mt-8" data-reveal>Get a Quote <Icon name="arrow" size={14} class="arrow" /></a>
+      </div>
+      <div class="space-y-8 lg:col-span-7">
+        {faqGroups.map((group) => (
+          <section class="rounded-[1.6rem] border border-line bg-surface/45 p-5 md:p-6" data-reveal>
+            <h2 class="font-display text-3xl text-ink">{group.label}</h2>
+            <div class="mt-5 space-y-3">
+              {group.items.map((faq) => (
+                <details class="group rounded-[1.15rem] border border-line bg-graphite/30 p-5">
+                  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-2xl text-ink">
+                    {faq.question}
+                    <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-accent/45 text-accent transition-transform group-open:rotate-45">+</span>
+                  </summary>
+                  <p class="mt-4 text-sm leading-7 text-muted">{faq.answer}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-sand py-20 md:py-28">
+    <div class="container-page">
+      <div class="grid gap-8 lg:grid-cols-12">
+        <div class="lg:col-span-4">
+          <p class="section-kicker" data-reveal>Next pages</p>
+          <h2 class="display-md mt-4" data-reveal>Continue from the answer that matches your intent.</h2>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2 lg:col-span-8">
+          {corePages.map((page) => (
+            <a href={`/${page.slug}`} class="rounded-[1.2rem] border border-line bg-bone/55 p-5 transition-colors hover:border-accent/50" data-reveal>
+              <p class="number-mark">{page.city}</p>
+              <h3 class="mt-2 font-display text-2xl text-ink">{page.serviceName}</h3>
+              <p class="mt-3 text-sm leading-7 text-muted">{page.description}</p>
+            </a>
+          ))}
+          {services.slice(0, 4).map((service) => (
+            <a href={`/services/${service.slug}`} class="rounded-[1.2rem] border border-line bg-bone/55 p-5 transition-colors hover:border-accent/50" data-reveal>
+              <p class="number-mark">Service</p>
+              <h3 class="mt-2 font-display text-2xl text-ink">{service.title}</h3>
+              <p class="mt-3 text-sm leading-7 text-muted">{service.excerpt}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Still deciding what your home needs?" text="Share photos and your priorities on WhatsApp. We’ll help you identify the right service and next step." />
+</Base>

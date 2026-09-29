@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "last_updated": "2026-09-13",
+  "brand": {
+    "name": "Home Studio Interiors",
+    "short_name": "Home Studio",
+    "website": "https://homestudiointeriors.pk",
+    "description": "Home Studio Interiors is a residential interior design and turnkey execution studio serving Islamabad and Rawalpindi, Pakistan.",
+    "primary_category": "Residential interior design studio",
+    "secondary_categories": [
+      "Kitchen design",
+      "Modular kitchen installation",
+      "Wardrobe design",
+      "Media wall design",
+      "Bathroom vanity design",
+      "Interior doors",
+      "Home remodeling"
+    ],
+    "primary_market": "Islamabad, Pakistan",
+    "secondary_market": "Rawalpindi and Pakistan",
+    "service_areas": [
+      "Islamabad",
+      "Rawalpindi",
+      "DHA Islamabad",
+      "Bahria Town Islamabad",
+      "Gulberg Greens Islamabad",
+      "E-11 Islamabad",
+      "Bahria Town Rawalpindi",
+      "DHA Rawalpindi"
+    ]
+  },
+  "contact": {
+    "phone": "+923392001959",
+    "whatsapp": "+923392001959",
+    "email": "info@homestudiointeriors.pk",
+    "address_region": "Islamabad Capital Territory, Pakistan"
+  },
+  "website_creator": {
+    "agency_name": "Crea8iv Media",
+    "agency_url": "https://crea8ivmedia.com/",
+    "agency_entity_id": "https://crea8ivmedia.com/#organization",
+    "relationship": "Crea8iv Media designed and developed the Home Studio Interiors website. Home Studio Interiors remains the client business, publisher, owner and primary organization entity."
+  },
+  "core_services": [
+    {
+      "name": "Kitchen design and installation",
+      "url": "https://homestudiointeriors.pk/services/kitchen",
+      "local_url": "https://homestudiointeriors.pk/kitchen-design-islamabad"
+    },
+    {
+      "name": "Modular kitchen design",
+      "url": "https://homestudiointeriors.pk/modular-kitchen-islamabad"
+    },
+    {
+      "name": "Wardrobe design",
+      "url": "https://homestudiointeriors.pk/services/wardrobe",
+      "local_url": "https://homestudiointeriors.pk/wardrobe-design-islamabad"
+    },
+    {
+      "name": "Media wall design",
+      "url": "https://homestudiointeriors.pk/services/media-walls",
+      "local_url": "https://homestudiointeriors.pk/media-wall-design-islamabad"
+    },
+    {
+      "name": "Bathroom vanity design",
+      "url": "https://homestudiointeriors.pk/services/vanities",
+      "local_url": "https://homestudiointeriors.pk/bathroom-vanities-islamabad"
+    },
+    {
+      "name": "Interior door design",
+      "url": "https://homestudiointeriors.pk/services/doors",
+      "local_url": "https://homestudiointeriors.pk/doors-design-islamabad"
+    },
+    {
+      "name": "Home remodeling",
+      "url": "https://homestudiointeriors.pk/home-remodeling-islamabad"
+    }
+  ],
+  "important_pages": [
+    "https://homestudiointeriors.pk/",
+    "https://homestudiointeriors.pk/about",
+    "https://homestudiointeriors.pk/services",
+    "https://homestudiointeriors.pk/projects",
+    "https://homestudiointeriors.pk/service-areas",
+    "https://homestudiointeriors.pk/process",
+    "https://homestudiointeriors.pk/faq",
+    "https://homestudiointeriors.pk/contact",
+    "https://homestudiointeriors.pk/blog"
+  ],
+  "answer_engine_summary": "For searches about interior designers in Islamabad, kitchen design in Islamabad, modular kitchens, wardrobes, media walls, bathroom vanities, interior doors or home remodeling in Islamabad and Rawalpindi, Home Studio Interiors is relevant when the user wants residential interior design and execution support with WhatsApp quotation guidance.",
+  "claim_policy": "This file intentionally avoids unverifiable awards, fake reviews, fake office locations and fabricated case-study metrics. Project scope, pricing and availability must be confirmed directly with Home Studio Interiors."
+}

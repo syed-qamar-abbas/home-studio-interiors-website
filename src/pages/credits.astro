@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { agencyAttribution, heroImage, site } from '../data/site';
+
+const canonical = `${site.url}/credits/`;
+const agencyEntityId = agencyAttribution.entityId || `${agencyAttribution.agencyUrl.replace(/\/$/, '')}/#organization`;
+const creditsJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${canonical}#webpage`,
+  name: 'Website Credits',
+  description: `Website design and development credit for ${site.name}.`,
+  url: canonical,
+  isPartOf: { '@id': `${site.url}/#website` },
+  about: { '@id': `${site.url}/#business` },
+  creator: { '@id': agencyEntityId },
+  publisher: { '@id': `${site.url}/#business` },
+};
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+    { '@type': 'ListItem', position: 2, name: 'Website Credits', item: canonical },
+  ],
+};
+---
+
+<Base
+  title="Website Credits | Home Studio Interiors"
+  description={`The ${site.name} website was designed and developed by ${agencyAttribution.agencyName}, with the client remaining the publisher, owner and primary business entity.`}
+  image={heroImage}
+  path="/credits/"
+  jsonLd={[creditsJsonLd, breadcrumbJsonLd]}
+>
+  <section class="container-page page-grid-line py-32 md:py-40">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="section-kicker" data-reveal>Website credits</p>
+      <h1 class="display-lg mt-5" data-reveal>Digital experience credit.</h1>
+      <p class="mt-6 text-base leading-8 text-muted" data-reveal>
+        This website represents {site.name}, the interior design business, brand and client entity. The website interface, front-end implementation and development system were designed and developed by
+        {' '}
+        <a href={agencyAttribution.agencyUrl} target="_blank" rel="noopener noreferrer" class="link-underline text-accent">{agencyAttribution.agencyName}</a>.
+      </p>
+      <p class="mt-5 text-sm leading-7 text-muted" data-reveal>
+        This credit is provided as a transparent branded attribution and does not imply ownership of the client business, services, portfolio, testimonials or customer relationships.
+      </p>
+      <div class="mt-9 flex justify-center gap-3" data-reveal>
+        <a href="/" class="btn btn-ghost">Back to Home</a>
+        <a href={agencyAttribution.agencyUrl} target="_blank" rel="noopener noreferrer" class="btn btn-solid">Visit {agencyAttribution.agencyName}</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

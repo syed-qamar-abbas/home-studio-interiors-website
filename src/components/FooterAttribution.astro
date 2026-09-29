@@ -1,0 +1,21 @@
+---
+import { agencyAttribution } from '../data/site';
+
+const { agencyName, agencyUrl, attributionType, clientSlug, logo } = agencyAttribution;
+const agencyBaseUrl = agencyUrl.replace(/\/$/, '');
+const cleanSlug = clientSlug.trim().replace(/^\/+|\/+$/g, '');
+const href =
+  attributionType === 'portfolio' && cleanSlug
+    ? `${agencyBaseUrl}/portfolio/${cleanSlug}`
+    : attributionType === 'case-study' && cleanSlug
+      ? `${agencyBaseUrl}/case-studies/${cleanSlug}`
+      : agencyUrl;
+---
+
+<p class="agency-attribution" aria-label={`Website designed and developed by ${agencyName}`}>
+  <span>Designed &amp; Developed by</span>
+  <a href={href} target="_blank" rel="noopener noreferrer" class="agency-attribution__link">
+    <img src={logo} alt="" width="240" height="240" loading="lazy" decoding="async" class="agency-attribution__mark" aria-hidden="true" />
+    <span>{agencyName}</span>
+  </a>
+</p>

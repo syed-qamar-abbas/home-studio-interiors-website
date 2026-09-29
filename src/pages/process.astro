@@ -1,0 +1,135 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { heroImage, processSteps, site } from '../data/site';
+
+const canonical = `${site.url}/process/`;
+const processQuestions = [
+  {
+    question: 'How does Home Studio Interiors start a project?',
+    answer: 'Most projects begin with a short consultation, photos, measurements, location and service priorities. The team then guides the next step: site visit, design direction, material discussion or quotation.',
+  },
+  {
+    question: 'Does every project need 3D design?',
+    answer: '3D design is useful for larger or visual-heavy scopes, but some smaller cabinetry, vanity or door scopes may begin with references, measurements and material selection.',
+  },
+  {
+    question: 'What information helps create a better quote?',
+    answer: 'Clear photos, approximate measurements, appliance list, preferred style, material expectations, location and timeline help the team understand scope before final measurements.',
+  },
+];
+const itemListJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  '@id': `${canonical}#process`,
+  name: 'Home Studio Interiors design and execution process',
+  itemListElement: processSteps.map((step, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: step.title,
+    description: step.text,
+  })),
+};
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: processQuestions.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+};
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+    { '@type': 'ListItem', position: 2, name: 'How We Work', item: canonical },
+  ],
+};
+---
+
+<Base
+  title="How We Work — Interior Design Process in Islamabad | Home Studio Interiors"
+  description="Learn the Home Studio Interiors process for consultation, measurements, design direction, material selection, quotation, execution and handover in Islamabad and Rawalpindi."
+  image={heroImage}
+  path="/process/"
+  jsonLd={[itemListJsonLd, faqJsonLd, breadcrumbJsonLd]}
+>
+  <section class="relative flex min-h-[68vh] items-end overflow-hidden border-b border-white/10">
+    <div class="absolute inset-0">
+      <img src={heroImage} alt="" class="h-full w-full object-cover object-center opacity-80" fetchpriority="high" decoding="async" />
+      <div class="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/72 to-graphite/38"></div>
+    </div>
+    <div class="container-page relative z-10 pb-16 pt-36 md:pb-22 md:pt-44">
+      <p class="eyebrow text-accent" data-reveal>How we work</p>
+      <h1 class="display-lg mt-5 max-w-5xl text-white" data-reveal style="--reveal-delay:.08s">A measured interior design process from first brief to handover.</h1>
+      <p class="mt-6 max-w-3xl text-base leading-relaxed text-white/76 md:text-lg" data-reveal style="--reveal-delay:.16s">
+        Home Studio Interiors combines design direction, material guidance, quotation clarity and execution planning so homeowners in Islamabad and Rawalpindi can make confident decisions before work begins.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-3" data-reveal style="--reveal-delay:.24s">
+        <a href="/contact" data-open-quote class="btn btn-solid">Get a Quote <Icon name="arrow" size={14} class="arrow" /></a>
+        <a href="/blog/interior-design-process-islamabad" class="btn btn-ghost border-white/35 text-white">Read full guide</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-page page-grid-line py-20 md:py-28">
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      {processSteps.map((step) => (
+        <article class="spotlight rounded-[1.45rem] border border-line bg-surface/45 p-6" data-reveal>
+          <p class="font-display text-5xl text-accent">{step.no}</p>
+          <h2 class="mt-4 font-display text-3xl leading-tight text-ink">{step.title}</h2>
+          <p class="mt-4 text-sm leading-7 text-muted">{step.text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-sand py-20 md:py-28">
+    <div class="container-page">
+      <div class="grid gap-10 lg:grid-cols-12">
+        <div class="lg:col-span-4">
+          <p class="section-kicker" data-reveal>Decision clarity</p>
+          <h2 class="display-md mt-4" data-reveal>What makes the process stronger.</h2>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2 lg:col-span-8">
+          {[
+            ['Scope before style', 'We first identify rooms, priorities and constraints so the design is grounded in the way the home will be used.'],
+            ['Materials before promises', 'Finishes, worktops, boards, hardware and lighting should be discussed before final pricing expectations are set.'],
+            ['Execution before decoration', 'Cabinet sizes, service points, installation access and sequencing are considered early to reduce rework.'],
+            ['Communication before confusion', 'WhatsApp-first coordination keeps photos, measurements, decisions and questions easy to track.'],
+          ].map(([title, text]) => (
+            <div class="rounded-[1.25rem] border border-line bg-bone/55 p-6" data-reveal>
+              <h3 class="font-display text-2xl text-ink">{title}</h3>
+              <p class="mt-3 text-sm leading-7 text-muted">{text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-page py-20 md:py-28">
+    <div class="grid gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <p class="section-kicker" data-reveal>Process FAQ</p>
+        <h2 class="display-md mt-4" data-reveal>Short answers before you begin.</h2>
+      </div>
+      <div class="space-y-4 lg:col-span-8">
+        {processQuestions.map((faq) => (
+          <details class="group rounded-[1.25rem] border border-line bg-surface/45 p-5" data-reveal>
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-2xl text-ink">
+              {faq.question}
+              <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-accent/45 text-accent transition-transform group-open:rotate-45">+</span>
+            </summary>
+            <p class="mt-4 text-sm leading-7 text-muted">{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Ready to start with clarity?" text="Send your location, photos, room measurements and design references. We’ll guide the right next step." />
+</Base>

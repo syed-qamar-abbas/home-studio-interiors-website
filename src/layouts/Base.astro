@@ -3,7 +3,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import QuoteModal from '../components/QuoteModal.astro';
-import { site } from '../data/site';
+import { agencyAttribution, services, site } from '../data/site';
 
 interface Props {
   title?: string;
@@ -21,20 +21,93 @@ const {
 } = Astro.props;
 
 const canonical = new URL(path, site.url).href;
+const absoluteImage = new URL(image, site.url).href;
+const agencyBaseUrl = agencyAttribution.agencyUrl.replace(/\/$/, '');
+const agencySlug = agencyAttribution.clientSlug.trim().replace(/^\/+|\/+$/g, '');
+const agencyHref =
+  agencyAttribution.attributionType === 'portfolio' && agencySlug
+    ? `${agencyBaseUrl}/portfolio/${agencySlug}`
+    : agencyAttribution.attributionType === 'case-study' && agencySlug
+      ? `${agencyBaseUrl}/case-studies/${agencySlug}`
+      : agencyAttribution.agencyUrl;
+const agencyEntityId = agencyAttribution.entityId || `${agencyBaseUrl}/#organization`;
+const verifiedSameAs = Object.values(site.socials).filter((url) => url && !/^https:\/\/(facebook|instagram|linkedin|pinterest)\.com\/?$/i.test(url));
 const baseJsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
+  '@type': ['LocalBusiness', 'ProfessionalService'],
   '@id': `${site.url}/#business`,
   name: site.name,
+  alternateName: site.shortName,
   url: site.url,
+  logo: new URL('/images/brand/hs-logo-cropped-260.webp', site.url).href,
+  image: absoluteImage,
+  description,
   telephone: site.phoneIntl,
   email: site.email,
   address: { '@type': 'PostalAddress', addressLocality: 'Islamabad', addressRegion: 'ICT', addressCountry: 'PK' },
-  areaServed: site.areaServed,
+  areaServed: site.areaServed.map((area) => ({ '@type': 'City', name: area, addressCountry: 'PK' })),
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: site.phoneIntl,
+    contactType: 'customer service',
+    areaServed: 'PK',
+    availableLanguage: ['English', 'Urdu'],
+  },
+  knowsAbout: [
+    'Residential interior design',
+    'Kitchen design',
+    'Modular kitchens',
+    'Wardrobe design',
+    'Media wall design',
+    'Bathroom vanities',
+    'Interior doors',
+    'Home remodeling',
+    'Islamabad interiors',
+    'Rawalpindi interiors',
+  ],
+  makesOffer: services.map((service) => ({
+    '@type': 'Offer',
+    itemOffered: {
+      '@type': 'Service',
+      name: service.title,
+      description: service.excerpt,
+      url: `${site.url}/services/${service.slug}`,
+    },
+  })),
+  ...(verifiedSameAs.length ? { sameAs: verifiedSameAs } : {}),
   priceRange: '$$',
-  aggregateRating: { '@type': 'AggregateRating', ratingValue: site.rating.value, reviewCount: site.rating.count },
 };
-const schema = jsonLd ? (Array.isArray(jsonLd) ? [baseJsonLd, ...jsonLd] : [baseJsonLd, jsonLd]) : baseJsonLd;
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${site.url}/#website`,
+  name: site.name,
+  alternateName: site.shortName,
+  url: site.url,
+  creator: { '@id': agencyEntityId },
+  copyrightHolder: { '@id': `${site.url}/#business` },
+  publisher: { '@id': `${site.url}/#business` },
+  inLanguage: 'en-PK',
+};
+const agencyJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': agencyEntityId,
+  name: agencyAttribution.agencyName,
+  url: agencyAttribution.agencyUrl,
+  logo: new URL(agencyAttribution.logo, site.url).href,
+  ...(agencyHref !== agencyAttribution.agencyUrl ? { subjectOf: { '@type': 'CreativeWork', url: agencyHref } } : {}),
+  ...(agencyAttribution.sameAs.length ? { sameAs: agencyAttribution.sameAs } : {}),
+  ...(agencyAttribution.contact.email ? { email: agencyAttribution.contact.email } : {}),
+  ...(agencyAttribution.contact.telephone ? { telephone: agencyAttribution.contact.telephone } : {}),
+  ...(agencyAttribution.founder ? { founder: { '@type': 'Person', name: agencyAttribution.founder } } : {}),
+};
+const schema = [
+  websiteJsonLd,
+  baseJsonLd,
+  ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : []),
+  agencyJsonLd,
+];
 ---
 <!doctype html>
 <html lang="en">
@@ -44,6 +117,8 @@ const schema = jsonLd ? (Array.isArray(jsonLd) ? [baseJsonLd, ...jsonLd] : [base
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="AI-readable site context" />
+    <link rel="alternate" type="text/markdown" href="/pricing.md" title="Pricing guidance" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -51,19 +126,32 @@ const schema = jsonLd ? (Array.isArray(jsonLd) ? [baseJsonLd, ...jsonLd] : [base
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={image} />
+    <meta property="og:image" content={absoluteImage} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={image} />
+    <meta name="twitter:image" content={absoluteImage} />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      rel="stylesheet"
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap"
+      />
+    </noscript>
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
@@ -72,6 +160,26 @@ const schema = jsonLd ? (Array.isArray(jsonLd) ? [baseJsonLd, ...jsonLd] : [base
 
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     <script is:inline>document.documentElement.classList.add('js');</script>
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript" is:inline>
+      (function(w,d,id){
+        var load=function(){
+          if(w.__hsClarityLoaded) return;
+          w.__hsClarityLoaded=true;
+          w.clarity=w.clarity||function(){(w.clarity.q=w.clarity.q||[]).push(arguments)};
+          var s=d.createElement("script");
+          s.async=true;
+          s.src="https://www.clarity.ms/tag/"+id;
+          var first=d.getElementsByTagName("script")[0];
+          first.parentNode.insertBefore(s,first);
+        };
+        if("requestIdleCallback" in w) {
+          w.requestIdleCallback(load,{timeout:2500});
+        } else {
+          w.addEventListener("load",function(){setTimeout(load,1200)},{once:true});
+        }
+      })(window,document,"ynqgn37p2j");
+    </script>
   </head>
   <body>
     <div class="bg-orbs" aria-hidden="true"><span></span><span></span><span></span></div>

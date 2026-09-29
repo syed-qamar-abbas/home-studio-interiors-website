@@ -6,31 +6,16 @@ import { site, serviceTabs, processSteps, differentiators, deliverables, signatu
 const socials = [
   { name: 'instagram', href: site.socials.instagram },
   { name: 'facebook', href: site.socials.facebook },
-  { name: 'pinterest', href: 'https://pinterest.com/' },
   { name: 'linkedin', href: site.socials.linkedin },
-];
+].filter((social) => social.href);
 const statBar = [
   { num: 8, suffix: '+', value: '8+', label: 'Years of Experience', icon: 'award' },
   { num: 95, suffix: '+', value: '95+', label: 'Positive Feedback', icon: 'thumb' },
   { num: 2488, suffix: '+', value: '2,488+', label: 'Satisfied Clients', icon: 'users' },
 ];
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  '@id': `${site.url}/#business`,
-  name: site.name,
-  image: heroImage,
-  url: site.url,
-  telephone: site.phoneIntl,
-  email: site.email,
-  address: { '@type': 'PostalAddress', addressLocality: 'Islamabad', addressRegion: 'ICT', addressCountry: 'PK' },
-  areaServed: site.areaServed,
-  priceRange: '$$',
-  aggregateRating: { '@type': 'AggregateRating', ratingValue: site.rating.value, reviewCount: site.rating.count },
-};
 ---
-<Base jsonLd={jsonLd}>
+<Base>
   <!-- HERO -->
   <section class="relative min-h-[86svh] overflow-hidden bg-graphite md:min-h-screen" data-cursor-glow>
     <div class="absolute inset-0 z-0">

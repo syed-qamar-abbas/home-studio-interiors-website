@@ -373,11 +373,8 @@
 .card-hover:hover .card-hover-label { opacity: 1; transform: none; }
 
 /* Editorial details shared by every page */
-[data-header] { padding-top: .2rem; }
-[data-header] .container-page { transition: padding .45s var(--ease-lux); }
-@media (min-width: 1024px) {
-  [data-header]:not(.is-scrolled) .container-page { padding-top: 1.4rem; padding-bottom: 1.4rem; }
-}
+[data-header] { padding-top: 0; }
+[data-header] .container-page { transition: background-color .45s var(--ease-lux), border-color .45s var(--ease-lux); }
 .page-grid-line { background-image: linear-gradient(to right, rgba(255,255,255,.055) 1px, transparent 1px); background-size: 25% 100%; }
 .number-mark { font-family: var(--font-sans); font-size: .7rem; letter-spacing: .18em; color: var(--color-accent); }
 .font-display,
@@ -388,6 +385,59 @@
 }
 .font-display.font-medium {
   font-weight: 300;
+}
+
+/* Agency attribution — single branded footer credit, subtle but accessible */
+.agency-attribution {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .42rem;
+  margin: 0;
+  color: rgba(255,255,255,.68);
+  font-size: .68rem;
+  font-weight: 500;
+  line-height: 1.7;
+  letter-spacing: .12em;
+  text-align: center;
+  text-transform: uppercase;
+}
+.agency-attribution__link {
+  display: inline-flex;
+  align-items: center;
+  gap: .38rem;
+  min-height: 1.5rem;
+  border-radius: 999px;
+  color: rgba(255,255,255,.86);
+  text-decoration: none;
+  transition: color .3s var(--ease-lux), opacity .3s var(--ease-lux), transform .3s var(--ease-lux);
+}
+.agency-attribution__link:hover {
+  color: #fff;
+  transform: translateY(-1px);
+}
+.agency-attribution__link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+.agency-attribution__mark {
+  width: 1rem;
+  height: 1rem;
+  object-fit: contain;
+  opacity: .82;
+  transition: opacity .3s var(--ease-lux), transform .3s var(--ease-lux);
+}
+.agency-attribution__link:hover .agency-attribution__mark {
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+@media (min-width: 768px) {
+  .agency-attribution {
+    justify-content: flex-end;
+    text-align: right;
+  }
 }
 
 @media (max-width: 767px) {
