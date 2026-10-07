@@ -1,0 +1,12 @@
+DirectoryIndex public_html/index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteRule ^$ public_html/index.html [L]
+
+  RewriteCond %{REQUEST_URI} !^/public_html/
+  RewriteCond %{DOCUMENT_ROOT}/public_html%{REQUEST_URI} -f [OR]
+  RewriteCond %{DOCUMENT_ROOT}/public_html%{REQUEST_URI} -d
+  RewriteRule ^(.*)$ public_html/$1 [L]
+</IfModule>
