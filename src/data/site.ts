@@ -627,6 +627,121 @@ export const projectPortfolio = [
   { title: 'Snowfall Door', service: 'Door', image: '/images/services/doors-live/08-double-central-door-glass-panels-white-colonial-lampposts-4-scaled.webp' },
 ];
 
+export type CaseStudy = {
+  slug: string;
+  title: string;
+  location: string;
+  service: string;
+  serviceHref: string;
+  summary: string;
+  proof: string[];
+  images: string[];
+  cover: string;
+  cta: string;
+};
+
+const caseStudyImages = (folder: string, count: number) =>
+  Array.from({ length: count }, (_, index) => `/images/case-studies/${folder}/slide-${String(index + 1).padStart(2, '0')}.webp`);
+
+export const caseStudies: CaseStudy[] = [
+  {
+    slug: 'f8-3-residence-kitchen-wardrobe',
+    title: 'F8/3 Residence',
+    location: 'F8/3 Islamabad',
+    service: 'Kitchen + Wardrobe',
+    serviceHref: '/services/kitchen',
+    summary: 'A residential design presentation for F8/3 Islamabad showing modern kitchen planning, refined wardrobe storage and calm material direction for a connected home interior.',
+    proof: ['Modern kitchen presentation', 'Wardrobe storage direction', 'Warm lighting and neutral finishes', 'Location-specific portfolio proof'],
+    images: caseStudyImages('f8-3-residence', 7),
+    cover: '/images/case-studies/f8-3-residence/slide-01.webp',
+    cta: 'Discuss a similar F8/3 residence',
+  },
+  {
+    slug: 'f8-3-kitchen-design-islamabad',
+    title: 'F-8/3 Kitchen Design',
+    location: 'F-8/3 Islamabad',
+    service: 'Kitchen',
+    serviceHref: '/services/kitchen',
+    summary: 'A modern kitchen case-study carousel for F-8/3 Islamabad, focused on clean cabinet lines, practical workflow and a premium residential kitchen mood.',
+    proof: ['Kitchen-focused design direction', 'Clean cabinet planning', 'Premium countertop and storage mood', 'Islamabad kitchen portfolio proof'],
+    images: caseStudyImages('f8-3-kitchen-design', 4),
+    cover: '/images/case-studies/f8-3-kitchen-design/slide-01.webp',
+    cta: 'Request a kitchen quote like this',
+  },
+  {
+    slug: 'i-14-kitchen-design-islamabad',
+    title: 'I-14 Kitchen',
+    location: 'I-14 Islamabad',
+    service: 'Kitchen',
+    serviceHref: '/services/kitchen',
+    summary: 'A kitchen design study for I-14 Islamabad with warm finishes, everyday-use planning and integrated storage details for a practical family kitchen.',
+    proof: ['Warm kitchen material palette', 'Everyday living workflow', 'Integrated storage direction', 'I-14 Islamabad local relevance'],
+    images: caseStudyImages('i-14-kitchen', 5),
+    cover: '/images/case-studies/i-14-kitchen/slide-01.webp',
+    cta: 'Plan an I-14 kitchen consultation',
+  },
+  {
+    slug: 'dha-2-wardrobe-residence',
+    title: 'DHA 2 Wardrobe Residence',
+    location: 'DHA 2 Islamabad',
+    service: 'Wardrobe',
+    serviceHref: '/services/wardrobe',
+    summary: 'A wardrobe design presentation for a DHA 2 residence, showing organized storage, premium fronts and a calm bedroom storage experience.',
+    proof: ['Wardrobe-focused case study', 'Organized storage planning', 'Premium wardrobe front direction', 'DHA residential portfolio proof'],
+    images: caseStudyImages('dha-2-wardrobe-residence', 3),
+    cover: '/images/case-studies/dha-2-wardrobe-residence/slide-01.webp',
+    cta: 'Discuss a DHA wardrobe design',
+  },
+  {
+    slug: 'dha-5-residence-luxury-kitchen',
+    title: 'DHA 5 Residence',
+    location: 'DHA 5',
+    service: 'Full Home',
+    serviceHref: '/home-remodeling-islamabad',
+    summary: 'A luxury residence carousel for DHA 5 showing kitchen, dining, bedroom, stair and courtyard moments as a broader full-home interior direction.',
+    proof: ['Luxury kitchen direction', 'Dining and bedroom mood', 'Stair and courtyard details', 'Full-home interior presentation'],
+    images: caseStudyImages('dha-5-residence', 5),
+    cover: '/images/case-studies/dha-5-residence/slide-01.webp',
+    cta: 'Start a full-home design discussion',
+  },
+  {
+    slug: 'dha-1-living-lounge',
+    title: 'DHA 1 Living Lounge',
+    location: 'DHA 1',
+    service: 'Living & Dining',
+    serviceHref: '/services/media-walls',
+    summary: 'A DHA 1 living and dining presentation with calm lounge planning, a refined foyer direction and dining-room detail references.',
+    proof: ['Living lounge presentation', 'Grand foyer direction', 'Dining-space planning', 'DHA 1 residential design proof'],
+    images: caseStudyImages('dha-1-living-lounge', 4),
+    cover: '/images/case-studies/dha-1-living-lounge/slide-01.webp',
+    cta: 'Discuss a living lounge concept',
+  },
+  {
+    slug: 'dha-1-bathroom-suite',
+    title: 'DHA 1 Bathroom Suite',
+    location: 'DHA 1',
+    service: 'Vanity',
+    serviceHref: '/services/vanities',
+    summary: 'A bathroom-suite case study for DHA 1, focused on vanity detailing, shower view planning and a clean, premium bath interior mood.',
+    proof: ['Bathroom suite presentation', 'Vanity detail direction', 'Shower-view planning', 'DHA 1 vanity portfolio proof'],
+    images: caseStudyImages('dha-1-bathroom-suite', 3),
+    cover: '/images/case-studies/dha-1-bathroom-suite/slide-01.webp',
+    cta: 'Plan a bathroom vanity quote',
+  },
+  {
+    slug: 'dha-1-vanity-perspective',
+    title: 'DHA 1 Vanity Perspective',
+    location: 'DHA 1',
+    service: 'Vanity',
+    serviceHref: '/services/vanities',
+    summary: 'A compact vanity perspective case study from DHA 1, useful for homeowners comparing sink, mirror, storage and bathroom finish direction.',
+    proof: ['Vanity perspective', 'Bathroom storage direction', 'Mirror and sink planning', 'Compact case-study proof'],
+    images: caseStudyImages('dha-1-vanity-perspective', 2),
+    cover: '/images/case-studies/dha-1-vanity-perspective/slide-01.webp',
+    cta: 'Ask about a similar vanity',
+  },
+];
+
 export const processSteps = [
   { no: '01', title: 'Consultation & Site Visit', text: 'We map your lifestyle, rooms and budget, then measure the space to begin a personalised plan for your home.' },
   { no: '02', title: 'Design & Planning', text: 'Layouts, mood boards and 3D interior visuals with material options — delivered with an itemised BOQ and schedule for sign-off.' },

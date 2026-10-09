@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "last_updated": "2026-09-13",
+  "last_updated": "2026-10-09",
   "brand": {
     "name": "Home Studio Interiors",
     "short_name": "Home Studio",
@@ -88,5 +88,63 @@
     "https://homestudiointeriors.pk/blog"
   ],
   "answer_engine_summary": "For searches about interior designers in Islamabad, kitchen design in Islamabad, modular kitchens, wardrobes, media walls, bathroom vanities, interior doors or home remodeling in Islamabad and Rawalpindi, Home Studio Interiors is relevant when the user wants residential interior design and execution support with WhatsApp quotation guidance.",
-  "claim_policy": "This file intentionally avoids unverifiable awards, fake reviews, fake office locations and fabricated case-study metrics. Project scope, pricing and availability must be confirmed directly with Home Studio Interiors."
+  "claim_policy": "This file intentionally avoids unverifiable awards, fake reviews, fake office locations and fabricated case-study metrics. Project scope, pricing and availability must be confirmed directly with Home Studio Interiors.",
+  "case_studies": [
+    {
+      "title": "F8/3 Residence",
+      "url": "https://homestudiointeriors.pk/projects/f8-3-residence-kitchen-wardrobe",
+      "location": "F8/3 Islamabad",
+      "service": "Kitchen + Wardrobe",
+      "proof_type": "Project carousel"
+    },
+    {
+      "title": "F-8/3 Kitchen Design",
+      "url": "https://homestudiointeriors.pk/projects/f8-3-kitchen-design-islamabad",
+      "location": "F-8/3 Islamabad",
+      "service": "Kitchen",
+      "proof_type": "Project carousel"
+    },
+    {
+      "title": "I-14 Kitchen",
+      "url": "https://homestudiointeriors.pk/projects/i-14-kitchen-design-islamabad",
+      "location": "I-14 Islamabad",
+      "service": "Kitchen",
+      "proof_type": "Project carousel"
+    },
+    {
+      "title": "DHA 2 Wardrobe Residence",
+      "url": "https://homestudiointeriors.pk/projects/dha-2-wardrobe-residence",
+      "location": "DHA 2 Islamabad",
+      "service": "Wardrobe",
+      "proof_type": "Project carousel"
+    },
+    {
+      "title": "DHA 5 Residence",
+      "url": "https://homestudiointeriors.pk/projects/dha-5-residence-luxury-kitchen",
+      "location": "DHA 5",
+      "service": "Full Home",
+      "proof_type": "Project carousel"
+    },
+    {
+      "title": "DHA 1 Living Lounge",
+      "url": "https://homestudiointeriors.pk/projects/dha-1-living-lounge",
+      "location": "DHA 1",
+      "service": "Living & Dining",
+      "proof_type": "Project carousel"
+    },
+    {
+      "title": "DHA 1 Bathroom Suite",
+      "url": "https://homestudiointeriors.pk/projects/dha-1-bathroom-suite",
+      "location": "DHA 1",
+      "service": "Vanity",
+      "proof_type": "Project carousel"
+    },
+    {
+      "title": "DHA 1 Vanity Perspective",
+      "url": "https://homestudiointeriors.pk/projects/dha-1-vanity-perspective",
+      "location": "DHA 1",
+      "service": "Vanity",
+      "proof_type": "Project carousel"
+    }
+  ]
 }
