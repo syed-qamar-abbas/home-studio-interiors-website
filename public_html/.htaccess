@@ -1,6 +1,11 @@
 Options -MultiViews
 DirectoryIndex index.html
 
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^public_html/(.*)$ /$1 [R=301,L,NE]
+</IfModule>
+
 <IfModule mod_headers.c>
   <FilesMatch "\.(css|js|png|jpe?g|gif|webp|avif|svg|ico|woff2?)$">
     Header set Cache-Control "public, max-age=31536000, immutable"

@@ -3,6 +3,8 @@ DirectoryIndex public_html/index.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
+RewriteRule ^public_html/(.*)$ /$1 [R=301,L,NE]
+
   RewriteRule ^$ public_html/index.html [L]
 
   RewriteCond %{REQUEST_URI} !^/public_html/
