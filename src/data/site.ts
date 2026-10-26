@@ -107,6 +107,7 @@ type ServiceDetail = {
   materials: string[];
   gallery: string[];
   collections?: ServiceCollection[];
+  video?: { src: string; poster: string; title: string; description: string };
 };
 
 // Per-service detail: long intro + gallery + materials
@@ -232,6 +233,12 @@ export const serviceDetail: Record<string, ServiceDetail> = {
     intro: 'From sliding and hinged to full walk-in dressing rooms, we plan storage to the millimetre — smart internals, elegant fronts and finishes that wear beautifully over years of daily use.',
     materials: ['Sliding · hinged · walk-in systems', 'Premium boards & veneers', 'Soft-close & push-to-open', 'Integrated wardrobe lighting'],
     gallery: ['/images/services/wardrobe-live/01-1-8.webp', '/images/services/wardrobe-live/05-1-9.webp', '/images/services/wardrobe-live/09-photo-minimalist-wardrobe-with-sliding-doors-minimal-handles-scaled.webp', '/images/services/wardrobe-live/13-Gemini_Generated_Image_ig9wetig9wetig9w.webp', '/images/services/wardrobe-live/18-1-10.webp', '/images/services/wardrobe-live/22-1-11.webp'],
+    video: {
+      src: '/videos/wardrobe-design-reel.mp4',
+      poster: '/images/case-studies/reel-posters/wardrobe-design.webp',
+      title: 'Wardrobe design details',
+      description: 'A short studio reel showing a dark, illuminated wardrobe interior with drawers and hanging storage.',
+    },
     collections: [
       {
         label: 'Wardrobe collection',
@@ -276,6 +283,12 @@ export const serviceDetail: Record<string, ServiceDetail> = {
     intro: 'Built for humid spaces and everyday ease — moisture-resistant cabinetry, stone tops and integrated mirror lighting that make bathrooms feel considered, calm and easy to maintain.',
     materials: ['Moisture-resistant cores', 'Stone & quartz tops', 'Integrated mirror lighting', 'Easy-clean surfaces'],
     gallery: ['/images/services/vanities-live/01-3-1024x574.webp', '/images/services/vanities-live/02-7-1024x574.webp', '/images/services/vanities-live/03-4-1024x574.webp', '/images/services/vanities-live/04-5-1024x574.webp', '/images/services/vanities-live/05-6-1024x574.webp', '/images/services/vanities-live/06-modern-bathroom-vanity-with-elegant-mirror-design-1024x574.webp', '/images/services/vanities-live/07-8-1024x574.webp', '/images/services/vanities-live/08-2-1024x574.webp'],
+    video: {
+      src: '/videos/home-studio-essentials-reel.mp4',
+      poster: '/images/case-studies/reel-posters/home-studio-essentials.webp',
+      title: 'Bathroom statement piece',
+      description: 'A close-up studio reel featuring a sculptural bathroom vessel and warm accent lighting.',
+    },
     collections: [
       {
         label: 'Vanity collection',
@@ -638,6 +651,7 @@ export type CaseStudy = {
   images: string[];
   cover: string;
   cta: string;
+  video?: { src: string; poster: string; title: string; description: string };
 };
 
 const caseStudyImages = (folder: string, count: number) =>
@@ -655,6 +669,12 @@ export const caseStudies: CaseStudy[] = [
     images: caseStudyImages('f8-3-residence', 7),
     cover: '/images/case-studies/f8-3-residence/slide-01.webp',
     cta: 'Discuss a similar F8/3 residence',
+    video: {
+      src: '/videos/f8-3-residence-reel.mp4',
+      poster: '/images/case-studies/reel-posters/f8-3-residence.webp',
+      title: 'F8 residence project reel',
+      description: 'A short project film carrying the F8 project label, with exterior and interior moments from the residence.',
+    },
   },
   {
     slug: 'f8-3-kitchen-design-islamabad',
@@ -703,6 +723,24 @@ export const caseStudies: CaseStudy[] = [
     images: caseStudyImages('dha-5-residence', 5),
     cover: '/images/case-studies/dha-5-residence/slide-01.webp',
     cta: 'Start a full-home design discussion',
+  },
+  {
+    slug: 'dha-phase-1-foyer-staircase',
+    title: 'DHA Phase 1 Foyer & Staircase',
+    location: 'DHA Phase 1, Islamabad',
+    service: 'Foyer & Staircase',
+    serviceHref: '/services',
+    summary: 'A project reel labelled DHA Phase 1, Islamabad, showing a double-height foyer, a feature staircase, warm timber ceiling detail, layered lighting and stone-look finishes.',
+    proof: ['DHA Phase 1, Islamabad project label visible in the reel', 'Double-height foyer and sculptural staircase', 'Warm timber ceiling and layered pendant lighting', 'Stone-look wall finish and coordinated floor palette'],
+    images: [],
+    cover: '/images/case-studies/reel-posters/dha-phase-1.webp',
+    cta: 'Plan a similar foyer',
+    video: {
+      src: '/videos/dha-phase-1-project-reel.mp4',
+      poster: '/images/case-studies/reel-posters/dha-phase-1.webp',
+      title: 'DHA Phase 1 foyer and staircase project reel',
+      description: 'A short project film labelled DHA Phase 1, Islamabad, showing the foyer, staircase and interior finish direction.',
+    },
   },
   {
     slug: 'dha-1-living-lounge',

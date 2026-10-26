@@ -30,7 +30,16 @@ const caseStudyJsonLd = {
   ],
   creator: { '@id': `${site.url}/#business` },
   publisher: { '@id': `${site.url}/#business` },
-  image: study.images.map((image) => new URL(image, site.url).href),
+  image: (study.images.length ? study.images : [study.cover]).map((image) => new URL(image, site.url).href),
+  ...(study.video ? {
+    video: {
+      '@type': 'VideoObject',
+      name: study.video.title,
+      description: study.video.description,
+      contentUrl: new URL(study.video.src, site.url).href,
+      thumbnailUrl: new URL(study.video.poster, site.url).href,
+    },
+  } : {}),
 };
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
@@ -73,7 +82,7 @@ const breadcrumbJsonLd = {
       {[
         ['Location', study.location],
         ['Scope', study.service],
-        ['Proof type', 'Project carousel'],
+        ['Proof type', study.video ? (study.images.length ? 'Project carousel + reel' : 'Project reel') : 'Project carousel'],
         ['Lead action', 'WhatsApp quote'],
       ].map(([label, value]) => (
         <div class="rounded-[1.3rem] border border-line bg-surface/55 p-5" data-reveal>
@@ -82,6 +91,30 @@ const breadcrumbJsonLd = {
         </div>
       ))}
     </div>
+
+    {study.video && (
+      <section class="mt-14 grid gap-8 rounded-[1.8rem] border border-line bg-surface/45 p-6 md:p-8 lg:grid-cols-12 lg:items-center">
+        <div class="lg:col-span-7">
+          <p class="section-kicker" data-reveal>Project reel</p>
+          <h2 class="display-md mt-4" data-reveal>{study.video.title}</h2>
+          <p class="mt-5 max-w-xl text-sm leading-7 text-muted" data-reveal>{study.video.description}</p>
+          <p class="mt-4 text-xs leading-6 text-muted" data-reveal>Press play to load the locally hosted, compressed video.</p>
+        </div>
+        <div class="lg:col-span-5 lg:justify-self-end" data-reveal>
+          <video
+            controls
+            playsinline
+            preload="none"
+            poster={study.video.poster}
+            aria-label={study.video.title}
+            class="mx-auto aspect-[9/16] max-h-[38rem] w-full max-w-[21rem] rounded-[1.4rem] border border-line bg-black object-cover"
+          >
+            <source src={study.video.src} type="video/mp4" />
+            Your browser does not support embedded video.
+          </video>
+        </div>
+      </section>
+    )}
 
     <div class="mt-14 grid gap-10 lg:grid-cols-12">
       <div class="lg:col-span-4">

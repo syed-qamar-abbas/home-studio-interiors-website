@@ -908,6 +908,40 @@ export const guideArticles: GuideArticle[] = [
       { label: 'Get a Quote', href: '/contact' },
     ],
   },
+  {
+    slug: 'foyer-staircase-design-islamabad',
+    category: 'Project planning',
+    title: 'How to Plan a Foyer and Staircase for an Islamabad Home',
+    description: 'A practical guide to planning a welcoming foyer and staircase, covering circulation, lighting, finishes, proportions and coordination for Islamabad homes.',
+    image: '/images/case-studies/reel-posters/dha-phase-1.webp',
+    updated: '2026-10-26',
+    readTime: '6 min read',
+    summary: 'A foyer and staircase work best when planned as one connected arrival sequence. Start with safe, comfortable circulation, then coordinate lighting, handrails, wall finishes, flooring and storage so the entrance feels welcoming without obstructing movement.',
+    keyTakeaways: [
+      'Plan the route from the entrance through the foyer and onto the stairs before selecting finishes.',
+      'Layer ambient and feature lighting while keeping stair treads and changes in level clearly visible.',
+      'Coordinate flooring, stair finish, handrail, wall treatment and ceiling details as one palette.',
+      'Use the DHA Phase 1 project reel as a visual example of a double-height foyer and feature staircase, not as a universal template.',
+    ],
+    sections: [
+      { title: 'Begin with circulation and proportions', text: 'Map how residents and guests enter, pause, turn and move toward the living areas or upper floor. Keep the route visually clear and avoid placing consoles, planters or decorative objects where they narrow the path. The stair geometry and local safety requirements should be checked by the relevant design and construction professionals.', points: ['Measure the entrance and stair approach', 'Keep doors and walking routes unobstructed', 'Plan useful landing space', 'Confirm stair and handrail details with the project team'] },
+      { title: 'Build a coordinated material palette', text: 'A foyer can connect the home’s architecture to its interior style. Choose a small number of complementary finishes for flooring, stair surfaces, handrail, wall treatment and ceiling details. A feature material is most effective when the surrounding surfaces give it room to read.', points: ['Select one focal finish', 'Coordinate floor and stair tones', 'Balance timber, stone-look and painted surfaces', 'Request samples under the home’s actual lighting'] },
+      { title: 'Layer lighting for welcome and visibility', text: 'Use general lighting for safe movement and carefully placed accent lighting to give the entrance depth. Pendant or chandelier scale should suit the ceiling height and remain clear of circulation. Avoid glare and shadows that make stair edges difficult to see.', points: ['Combine ambient and accent lighting', 'Light landings and transitions clearly', 'Check fixture scale and clearance', 'Choose warm, comfortable light for the arrival area'] },
+      { title: 'Keep the foyer useful, not crowded', text: 'A foyer may need a place for keys, shoes or a brief pause, but storage should not dominate the first view. Slim cabinetry, a console or a restrained display can work when planned around the door swing and walking width.', points: ['List the items that need a home', 'Check door swing and access', 'Prefer closed storage for everyday clutter', 'Keep decor limited to a few intentional pieces'] },
+      { title: 'Use project references thoughtfully', text: 'The Home Studio Interiors DHA Phase 1 project reel shows one double-height foyer and staircase direction with warm ceiling detail, layered lighting and a stone-look feature wall. Treat it as a project reference: the right proportions, finishes and lighting for another home depend on its own measurements, architecture and brief.', points: ['Review the DHA Phase 1 foyer and staircase case study', 'Share photos and approximate measurements', 'Discuss material and lighting preferences', 'Confirm the actual scope before requesting a quotation'] },
+    ],
+    faqs: [
+      { question: 'What should be planned first in a foyer and staircase?', answer: 'Plan circulation, stair geometry, door movement and clearances first. Then coordinate lighting, handrail, flooring, wall finishes and storage around the measured space.' },
+      { question: 'How can I make a staircase feel like part of the interior design?', answer: 'Coordinate the stair finish, handrail, lighting, nearby flooring and wall treatment with the home’s wider material palette while keeping movement and visibility practical.' },
+      { question: 'Can the DHA Phase 1 project be copied in another house?', answer: 'It is a visual reference, not a ready-made specification. A similar direction should be adapted to the other home’s dimensions, architecture, circulation and client preferences.' },
+      { question: 'What should I send for a foyer design consultation in Islamabad?', answer: 'Share entrance and staircase photos, approximate dimensions, ceiling height if known, your location and a few references. The team can then discuss the appropriate next step.' },
+    ],
+    related: [
+      { label: 'DHA Phase 1 Foyer & Staircase Case Study', href: '/projects/dha-phase-1-foyer-staircase' },
+      { label: 'Interior Design Process in Islamabad', href: '/blog/interior-design-process-islamabad' },
+      { label: 'Get a Design Quote', href: '/contact' },
+    ],
+  },
 ];
 
 export const areaPages: AreaPage[] = [
