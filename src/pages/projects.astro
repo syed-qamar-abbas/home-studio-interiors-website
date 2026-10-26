@@ -16,9 +16,9 @@ const categories = ['All', ...Array.from(new Set(projectPortfolio.map((p) => p.s
     <div class="grid gap-8 lg:grid-cols-12 lg:items-end">
       <div class="lg:col-span-8">
         <p class="section-kicker" data-reveal>Case studies</p>
-        <h2 class="display-md mt-5" data-reveal>Real project carousels with location, scope and design proof.</h2>
+        <h2 class="display-md mt-5" data-reveal>Projects, design studies and progress — clearly distinguished.</h2>
         <p class="mt-6 max-w-3xl text-base leading-8 text-muted md:text-lg" data-reveal>
-          Home Studio Interiors documents project work through case-study carousels showing the location, room type, finish direction and design scope. These case studies help Islamabad and Rawalpindi homeowners compare kitchens, wardrobes, living lounges and bathroom suites before requesting a WhatsApp quote.
+          Explore supplied project imagery and reels alongside clearly labelled design concepts and work-in-progress updates. Each page describes what its source material confirms, so homeowners can compare kitchens, wardrobes, vanities and interior ideas without mistaking a concept for a completed installation.
         </p>
       </div>
       <div class="lg:col-span-4 lg:text-right" data-reveal>
@@ -30,7 +30,7 @@ const categories = ['All', ...Array.from(new Set(projectPortfolio.map((p) => p.s
       {caseStudies.map((study, i) => (
         <article class="signature-card group overflow-hidden rounded-[1.5rem] border border-line bg-surface/60" data-reveal>
           <a href={`/projects/${study.slug}`} class="card-hover image-frame block">
-            <img src={study.cover} alt={`${study.title} ${study.service} case study in ${study.location}`} loading={i < 2 ? 'eager' : 'lazy'} class="aspect-[4/5] w-full object-cover" />
+            <img src={study.cover} alt={`${study.title} — ${study.service}${study.location ? ` in ${study.location}` : ''}`} loading={i < 2 ? 'eager' : 'lazy'} class="aspect-[4/5] w-full object-cover" />
             <div class="card-hover-label pointer-events-none absolute inset-0 flex items-end justify-between p-5">
               <span>
                 <span class="number-mark block">{String(i + 1).padStart(2, '0')}</span>
@@ -40,7 +40,7 @@ const categories = ['All', ...Array.from(new Set(projectPortfolio.map((p) => p.s
             </div>
           </a>
           <div class="p-5">
-            <p class="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-accent">{study.service} · {study.location}</p>
+            <p class="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-accent">{study.stage || 'Project case study'} · {study.service}{study.location ? ` · ${study.location}` : ''}</p>
             <p class="mt-3 line-clamp-3 text-sm leading-6 text-muted">{study.summary}</p>
             <a href={`/projects/${study.slug}`} class="link-underline mt-5 inline-block text-xs uppercase tracking-[0.16em] text-white/70 hover:text-accent">View case study →</a>
           </div>

@@ -14,19 +14,27 @@ export function getStaticPaths() {
 const { study } = Astro.props;
 const pageUrl = `${site.url}/projects/${study.slug}`;
 const whatsappText = `Hi Home Studio, I reviewed the ${study.title} case study and want to discuss a similar ${study.service} project.`;
+const locationLabel = study.location || 'Not specified in supplied material';
+const pageDescriptor = study.stage || 'Project case study';
+const relatedStudies = caseStudies
+  .filter((item) => item.slug !== study.slug)
+  .sort((a, b) => {
+    const score = (item) => (item.service === study.service ? 2 : 0) + (study.location && item.location === study.location ? 1 : 0);
+    return score(b) - score(a);
+  })
+  .slice(0, 3);
 const caseStudyJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'CreativeWork',
   '@id': `${pageUrl}/#case-study`,
   name: `${study.title} case study`,
-  headline: `${study.title}, ${study.service} in ${study.location}`,
+  headline: `${study.title} — ${study.service}${study.location ? ` in ${study.location}` : ''}`,
   description: study.summary,
   url: `${pageUrl}/`,
   inLanguage: 'en-PK',
   about: [
     { '@type': 'Thing', name: study.service },
-    { '@type': 'Place', name: study.location },
-    { '@type': 'Thing', name: 'Residential interior design' },
+    ...(study.location ? [{ '@type': 'Place', name: study.location }] : []),
   ],
   creator: { '@id': `${site.url}/#business` },
   publisher: { '@id': `${site.url}/#business` },
@@ -53,7 +61,7 @@ const breadcrumbJsonLd = {
 ---
 
 <Base
-  title={`${study.title} — ${study.service} Case Study in ${study.location} | Home Studio Interiors`}
+  title={`${study.title} | Home Studio Interiors`}
   description={study.summary}
   image={study.cover}
   path={`/projects/${study.slug}/`}
@@ -72,16 +80,17 @@ const breadcrumbJsonLd = {
             <li aria-current="page" class="text-white/85">{study.title}</li>
           </ol>
         </nav>
-        <p class="section-kicker" data-reveal>Project case study</p>
+        <p class="section-kicker" data-reveal>{pageDescriptor}</p>
         <h1 class="display-lg mt-5 max-w-[15ch]" data-reveal>{study.title} <span class="text-accent">, {study.service}</span></h1>
         <p class="mt-6 max-w-3xl text-base leading-8 text-muted md:text-lg" data-reveal>{study.summary}</p>
+        {study.sourceNote && <p class="mt-4 max-w-3xl border-l border-accent/60 pl-4 text-sm leading-6 text-muted" data-reveal>{study.sourceNote}</p>}
         <div class="mt-8 flex flex-wrap gap-3" data-reveal>
           <a href={`https://wa.me/${site.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(whatsappText)}`} class="btn btn-primary">Discuss similar project</a>
           <a href={study.serviceHref} class="btn btn-ghost">View related service</a>
         </div>
       </div>
       <div class="signature-card rounded-[1.5rem] border border-white/12 bg-surface/75 p-3 sm:p-4 lg:col-span-5" data-reveal>
-        <img src={study.cover} alt={`${study.title} cover image showing ${study.service} design direction in ${study.location}`} class="aspect-[4/5] w-full rounded-[1.1rem] object-cover" fetchpriority="high" decoding="async" />
+        <img src={study.cover} alt={`${study.title} — ${study.service}${study.location ? ` in ${study.location}` : ''}`} class="aspect-[4/5] w-full rounded-[1.1rem] object-cover" fetchpriority="high" decoding="async" />
       </div>
     </div>
   </section>
@@ -89,9 +98,9 @@ const breadcrumbJsonLd = {
   <section class="container-page py-16 md:py-24">
     <div class="grid gap-5 md:grid-cols-4">
       {[
-        ['Location', study.location],
+        ['Location', locationLabel],
         ['Scope', study.service],
-        ['Proof type', study.video ? (study.images.length ? 'Project carousel + reel' : 'Project reel') : 'Project carousel'],
+        ['Evidence', study.video ? (study.images.length ? 'Carousel + reel' : 'Project reel') : study.images.length ? 'Project carousel' : 'Design image'],
         ['Lead action', 'WhatsApp quote'],
       ].map(([label, value]) => (
         <div class="rounded-[1.3rem] border border-line bg-surface/55 p-5" data-reveal>
@@ -147,7 +156,7 @@ const breadcrumbJsonLd = {
             <button type="button" data-lightbox={image} data-lightbox-title={`${study.title} slide ${index + 1}`} class="card-hover image-frame block rounded-[1.4rem]" data-reveal="img">
               <img
                 src={image}
-                alt={`${study.title} ${study.service} case study slide ${index + 1} in ${study.location}`}
+                alt={`${study.title} — ${study.service}${study.location ? ` in ${study.location}` : ''}, image ${index + 1}`}
                 loading={index < 2 ? 'eager' : 'lazy'}
                 class="aspect-[4/5] w-full object-cover"
               />
@@ -162,14 +171,37 @@ const breadcrumbJsonLd = {
     <div class="container-page grid gap-8 lg:grid-cols-12 lg:items-center">
       <div class="lg:col-span-8">
         <p class="section-kicker" data-reveal>Answer for visitors</p>
-        <h2 class="display-md mt-5 text-ink" data-reveal>Can Home Studio Interiors handle similar projects?</h2>
+          <h2 class="display-md mt-5 text-ink" data-reveal>{study.stage === 'Design study' || study.stage === 'Design concept' ? 'How can this design direction be adapted?' : study.stage === 'In progress' || study.stage === 'Installation in progress' ? 'What does this project update show?' : 'Can Home Studio Interiors handle similar projects?'}</h2>
         <p class="mt-6 max-w-3xl text-base leading-8 text-black/70" data-reveal>
-          Yes. Home Studio Interiors works with homeowners across Islamabad and Rawalpindi for kitchens, wardrobes, vanities, media walls, doors and full-home remodeling. Share this case study on WhatsApp so the team can guide you on layout, materials, budget range and next steps for a similar project.
+          {study.answer || `Home Studio Interiors works with homeowners across Islamabad and Rawalpindi on kitchens, wardrobes, vanities, media walls, doors and full-home remodeling. Share this project page on WhatsApp to discuss whether a similar brief fits your space and requirements.`}
         </p>
       </div>
       <div class="lg:col-span-4 lg:text-right" data-reveal>
         <a href={`https://wa.me/${site.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(whatsappText)}`} class="btn btn-primary">{study.cta}</a>
       </div>
+    </div>
+  </section>
+
+  <section class="container-page py-16 md:py-20" aria-labelledby="related-projects-heading">
+    <div class="flex flex-wrap items-end justify-between gap-5">
+      <div>
+        <p class="section-kicker" data-reveal>Continue exploring</p>
+        <h2 id="related-projects-heading" class="display-sm mt-4" data-reveal>Related project stories</h2>
+      </div>
+      <a href="/projects/" class="link-underline text-xs uppercase tracking-[0.16em] text-white/70 hover:text-accent">View all projects →</a>
+    </div>
+    <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {relatedStudies.map((related) => (
+        <article class="signature-card overflow-hidden rounded-[1.3rem] border border-line bg-surface/55" data-reveal>
+          <a href={`/projects/${related.slug}/`} class="image-frame block">
+            <img src={related.cover} alt={`${related.title} — ${related.service}${related.location ? ` in ${related.location}` : ''}`} loading="lazy" decoding="async" class="aspect-[16/10] w-full object-cover" />
+          </a>
+          <div class="p-5">
+            <p class="text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-accent">{related.stage || 'Project case study'} · {related.service}</p>
+            <h3 class="mt-2 font-display text-xl text-white"><a href={`/projects/${related.slug}/`} class="transition-colors hover:text-accent">{related.title}</a></h3>
+          </div>
+        </article>
+      ))}
     </div>
   </section>
 
