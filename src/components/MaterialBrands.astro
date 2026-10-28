@@ -1,0 +1,127 @@
+---
+import { materialBrands } from '../data/materialBrands';
+
+interface Props {
+  context?: 'home' | 'kitchen' | 'wardrobe';
+}
+
+const { context = 'home' } = Astro.props;
+const brands = materialBrands.filter((brand) =>
+  context === 'home' || (brand.services as readonly string[]).includes(context),
+);
+const heading = context === 'wardrobe'
+  ? 'Thoughtful storage. Considered hardware.'
+  : 'Considered brands. Lasting detail.';
+const introduction = context === 'wardrobe'
+  ? 'Our fitted wardrobe specifications include hardware from Unihopper, Blum, Salice and Häfele. The fittings are selected around your storage layout, finish and budget.'
+  : 'For kitchens and fitted interiors in Islamabad and Rawalpindi, we specify products from Unihopper, Amica, Blum, Salice, DuPont, Häfele and Bosch across hardware, appliances and surface materials.';
+---
+
+<section class:list={['material-brands', { 'material-brands--home': context === 'home' }]} id="materials-brands" aria-labelledby="materials-brands-heading">
+  <div class="container-page">
+    <div class="material-brands__intro">
+      <div>
+        <p class="eyebrow">Brands we specify</p>
+        <h2 id="materials-brands-heading">{heading}</h2>
+      </div>
+      <p class="material-brands__description">{introduction}</p>
+    </div>
+    <ul class="material-brands__list" aria-label="Hardware, appliance and material brands">
+      {brands.map((brand) => (
+        <li class="material-brands__item">
+          <figure>
+            <div class="material-brands__logo">
+              <img src={`/images/material-brands/${brand.slug}.webp`} alt="" width="480" height="192" loading="lazy" decoding="async" />
+            </div>
+            <figcaption>
+              <span class="material-brands__name">{brand.name}</span>
+              <span class="material-brands__category">{brand.category}</span>
+            </figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+    <div class="material-brands__note">
+      <p>Brand, model, finish and availability are confirmed in your project quotation.</p>
+      <a href="/contact" data-open-quote>Discuss your specification <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .material-brands {
+    border-block: 1px solid var(--color-line);
+    background: var(--color-graphite);
+    padding-block: clamp(2rem, 4vw, 3.5rem);
+  }
+  .material-brands__intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+    gap: 2rem;
+  }
+  .material-brands h2 {
+    margin-top: .65rem;
+    font-size: clamp(1.6rem, 2.6vw, 2.45rem);
+    font-weight: 300;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+  .material-brands__description {
+    max-width: 38rem;
+    justify-self: end;
+    font-size: .85rem;
+    line-height: 1.8;
+  }
+  .material-brands__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .75rem;
+    margin-top: 1.75rem;
+    padding: 0;
+    list-style: none;
+  }
+  .material-brands__item { flex: 0 0 calc((100% - 4.5rem) / 7); min-width: 0; }
+  .material-brands__logo {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1.85;
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    border-radius: .5rem;
+    background: #fff;
+    padding: .65rem;
+  }
+  .material-brands__logo img { width: 100%; height: 100%; object-fit: contain; }
+  .material-brands figcaption { margin-top: .65rem; text-align: center; }
+  .material-brands__name { display: block; color: var(--color-ink); font-size: .8rem; line-height: 1.5; }
+  .material-brands__category { display: block; color: var(--color-muted); font-size: .75rem; line-height: 1.6; }
+  .material-brands__note {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: .75rem 2rem;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-line);
+    font-size: .75rem;
+    line-height: 1.7;
+  }
+  .material-brands__note a { display: inline-flex; align-items: center; gap: .5rem; min-height: 44px; color: var(--color-ink); text-decoration: underline; text-underline-offset: .3em; }
+  .material-brands__note a:hover { color: var(--color-accent); }
+  .material-brands__note a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 5px; border-radius: .15rem; }
+  @media (max-width: 1023px) {
+    .material-brands__item { flex-basis: calc((100% - 2.25rem) / 4); }
+    .material-brands__logo { aspect-ratio: 2.3; }
+  }
+  @media (max-width: 639px) {
+    .material-brands__intro { grid-template-columns: 1fr; gap: .85rem; }
+    .material-brands__description { justify-self: start; font-size: .8rem; }
+    .material-brands__list { gap: 1rem .5rem; margin-top: 1.25rem; }
+    .material-brands__item { flex-basis: calc((100% - 1rem) / 3); }
+    .material-brands__logo { aspect-ratio: 1.85; padding: .4rem; }
+    .material-brands__category { display: none; }
+    .material-brands__note { flex-direction: column; gap: .25rem; margin-top: 1.1rem; }
+  }
+</style>

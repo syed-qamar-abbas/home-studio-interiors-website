@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "last_updated": "2026-10-09",
+  "last_updated": "2026-10-28",
   "brand": {
     "name": "Home Studio Interiors",
     "short_name": "Home Studio",
@@ -28,6 +28,12 @@
       "Bahria Town Rawalpindi",
       "DHA Rawalpindi"
     ]
+  },
+  "materials_and_product_brands": {
+    "relationship": "Product brands Home Studio Interiors specifies or uses, confirmed by the business owner. This is not a claim of global partnership, authorized dealership or brand endorsement.",
+    "brands": ["Unihopper", "Amica", "Blum", "Salice", "DuPont", "Häfele", "Bosch"],
+    "scope": "Hardware, kitchen appliances and surface materials. Brand, model, finish and availability are confirmed in each project quotation.",
+    "visible_source": "https://homestudiointeriors.pk/#materials-brands"
   },
   "contact": {
     "phone": "+923392001959",

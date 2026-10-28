@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
+import MaterialBrands from '../components/MaterialBrands.astro';
 import { site, serviceTabs, processSteps, differentiators, deliverables, signatureCollections, materialHighlights, projectPortfolio, testimonials, faqs, heroImage, aboutImage, bandImage, heroFeatures, founder } from '../data/site';
 const socials = [
   { name: 'instagram', href: site.socials.instagram },
@@ -113,6 +114,8 @@ const statBar = [
       </div>
     </div>
   </section>
+
+  <MaterialBrands />
 
   <!-- MARQUEE BAND -->
   <div class="marquee border-y border-line bg-sand py-6">

@@ -13,6 +13,14 @@ Home Studio Interiors designs and builds calm, functional residential interiors 
 - WhatsApp / Phone: [+92 339 2001959](https://wa.me/923392001959)
 - Email: [info@homestudiointeriors.pk](mailto:info@homestudiointeriors.pk)
 
+## Hardware, appliance and material specifications
+
+Home Studio Interiors specifies or uses products from Unihopper, Amica, Blum, Salice, DuPont, Häfele and Bosch across hardware, kitchen appliances and surface materials. Brand, model, finish and availability are confirmed in each project quotation. This describes product specification, not an assertion of global partnership or authorized dealership.
+
+- [Brands we specify](https://homestudiointeriors.pk/#materials-brands)
+- [Kitchen specifications](https://homestudiointeriors.pk/services/kitchen/#materials-brands)
+- [Wardrobe hardware](https://homestudiointeriors.pk/services/wardrobe/#materials-brands)
+
 ## Agent resources
 
 - [AI context JSON](https://homestudiointeriors.pk/ai-context.json)

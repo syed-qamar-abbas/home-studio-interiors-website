@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import Icon from '../../components/Icon.astro';
+import MaterialBrands from '../../components/MaterialBrands.astro';
 import { services, serviceDetail, site } from '../../data/site';
 
 export function getStaticPaths() {
@@ -61,6 +62,10 @@ const jsonLd = {
       </div>
     </div>
   </section>
+
+  {(service.slug === 'kitchen' || service.slug === 'wardrobe') && (
+    <MaterialBrands context={service.slug} />
+  )}
 
   {hasCollections ? (
     <section class="bg-sand py-24 md:py-32">
