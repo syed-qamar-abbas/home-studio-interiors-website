@@ -14,7 +14,7 @@ const heading = context === 'wardrobe'
   : 'Considered brands. Lasting detail.';
 const introduction = context === 'wardrobe'
   ? 'Our fitted wardrobe specifications include hardware from Unihopper, Blum, Salice and Häfele. The fittings are selected around your storage layout, finish and budget.'
-  : 'For kitchens and fitted interiors in Islamabad and Rawalpindi, we specify products from Unihopper, Amica, Blum, Salice, DuPont, Häfele and Bosch across hardware, appliances and surface materials.';
+  : 'We specify considered hardware, appliances and surface materials for kitchens and fitted interiors in Islamabad and Rawalpindi. Explore the manufacturers below; your final selection is confirmed in your quotation.';
 ---
 
 <section class:list={['material-brands', { 'material-brands--home': context === 'home' }]} id="materials-brands" aria-labelledby="materials-brands-heading">
@@ -26,32 +26,47 @@ const introduction = context === 'wardrobe'
       </div>
       <p class="material-brands__description">{introduction}</p>
     </div>
-    <ul class="material-brands__list" aria-label="Hardware, appliance and material brands">
+    <div class="material-brands__toolbar">
+      <p>Explore the makers <span aria-hidden="true">—</span> <span class="material-brands__hint">tap a logo to visit the official website</span></p>
+      <button type="button" class="material-brands__motion" aria-pressed="false" hidden>Pause motion</button>
+    </div>
+    <ul class="material-brands__list" aria-label="Product brands — swipe to explore on mobile">
       {brands.map((brand) => (
         <li class="material-brands__item">
+          <a class="material-brands__link" href={brand.url} target="_blank" rel="noopener noreferrer" aria-label={`Explore ${brand.name} official website (opens in a new tab)`}>
           <figure>
             <div class="material-brands__logo">
               <img src={`/images/material-brands/${brand.slug}.webp`} alt="" width="480" height="192" loading="lazy" decoding="async" />
             </div>
             <figcaption>
-              <span class="material-brands__name">{brand.name}</span>
+              <span class="material-brands__name">{brand.name}<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 18 18 6M6 6h12v12" /></svg></span>
               <span class="material-brands__category">{brand.category}</span>
             </figcaption>
           </figure>
+          </a>
         </li>
       ))}
     </ul>
     <div class="material-brands__note">
-      <p>Brand, model, finish and availability are confirmed in your project quotation.</p>
+      <div>
+        <p>Brand, model, finish and availability are confirmed in your project quotation.</p>
+        <nav class="material-brands__related" aria-label="Explore project specifications">
+          <a href="/services/kitchen/">Kitchen design</a><span aria-hidden="true">/</span><a href="/services/wardrobe/">Wardrobe design</a>
+        </nav>
+      </div>
       <a href="/contact" data-open-quote>Discuss your specification <span aria-hidden="true">↗</span></a>
     </div>
   </div>
 </section>
 
+<script>
+  import '../scripts/material-brands';
+</script>
+
 <style>
   .material-brands {
     border-block: 1px solid var(--color-line);
-    background: var(--color-graphite);
+    background: linear-gradient(135deg, var(--color-sand), var(--color-graphite) 65%);
     padding-block: clamp(2rem, 4vw, 3.5rem);
   }
   .material-brands__intro {
@@ -78,11 +93,30 @@ const introduction = context === 'wardrobe'
     flex-wrap: wrap;
     justify-content: center;
     gap: .75rem;
-    margin-top: 1.75rem;
+    margin-top: .75rem;
     padding: 0;
     list-style: none;
   }
   .material-brands__item { flex: 0 0 calc((100% - 4.5rem) / 7); min-width: 0; }
+  .material-brands__link {
+    display: block;
+    position: relative;
+    height: 100%;
+    padding: .65rem;
+    border: 1px solid var(--color-line);
+    border-radius: .9rem;
+    background: linear-gradient(145deg, rgb(255 255 255 / .055), rgb(255 255 255 / .015));
+    transition: transform .35s var(--ease-lux), border-color .35s, box-shadow .35s;
+  }
+  .material-brands__link::after { content: ''; position: absolute; bottom: -1px; inset-inline: 25%; height: 1px; background: var(--color-accent); transform: scaleX(0); transition: transform .35s var(--ease-lux); }
+  .material-brands__link:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+  @media (hover: hover) {
+    .material-brands__link:hover { transform: translateY(-5px); border-color: var(--color-accent); box-shadow: 0 16px 35px -20px rgb(242 112 37 / .3); }
+    .material-brands__link:hover::after { transform: scaleX(1); }
+    .material-brands__link:hover img { transform: scale(1.045); }
+    .material-brands__link:hover .material-brands__name svg { color: var(--color-accent); transform: translate(1px, -1px); }
+  }
+  .material-brands__link:active { transform: translateY(-1px) scale(.985); }
   .material-brands__logo {
     display: grid;
     place-items: center;
@@ -93,10 +127,18 @@ const introduction = context === 'wardrobe'
     background: #fff;
     padding: .65rem;
   }
-  .material-brands__logo img { width: 100%; height: 100%; object-fit: contain; }
+  .material-brands__logo img { width: 100%; height: 100%; object-fit: contain; transition: transform .45s var(--ease-lux); }
   .material-brands figcaption { margin-top: .65rem; text-align: center; }
-  .material-brands__name { display: block; color: var(--color-ink); font-size: .8rem; line-height: 1.5; }
+  .material-brands__name { display: flex; align-items: center; justify-content: space-between; gap: .35rem; color: var(--color-ink); font-size: .8rem; line-height: 1.5; }
+  .material-brands__name svg { color: var(--color-muted); transition: transform .3s, color .3s; }
   .material-brands__category { display: block; color: var(--color-muted); font-size: .75rem; line-height: 1.6; }
+  .material-brands figcaption { text-align: left; padding-inline: .1rem; }
+  .material-brands__toolbar { display: flex; align-items: center; justify-content: space-between; gap: .5rem; min-height: 44px; margin-top: 1.25rem; }
+  .material-brands__toolbar p { color: var(--color-ink); font-size: .75rem; line-height: 1.6; }
+  .material-brands__hint { color: var(--color-muted); }
+  .material-brands__motion { flex-shrink: 0; min-height: 44px; padding-inline: .65rem; border: 1px solid var(--color-line); border-radius: 2rem; color: var(--color-ink); background: transparent; font-size: .75rem; }
+  .material-brands__motion:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+  .material-brands__related { display: flex; align-items: center; gap: .7rem; margin-top: .25rem; }
   .material-brands__note {
     display: flex;
     align-items: baseline;
@@ -116,12 +158,20 @@ const introduction = context === 'wardrobe'
     .material-brands__logo { aspect-ratio: 2.3; }
   }
   @media (max-width: 639px) {
+    .material-brands { padding-block: 1.7rem; }
     .material-brands__intro { grid-template-columns: 1fr; gap: .85rem; }
     .material-brands__description { justify-self: start; font-size: .8rem; }
-    .material-brands__list { gap: 1rem .5rem; margin-top: 1.25rem; }
-    .material-brands__item { flex-basis: calc((100% - 1rem) / 3); }
-    .material-brands__logo { aspect-ratio: 1.85; padding: .4rem; }
+    .material-brands__toolbar { margin-top: .8rem; }
+    .material-brands__toolbar p { flex: 1; }
+    .material-brands__toolbar p > span[aria-hidden] { display: none; }
+    .material-brands__hint { display: block; }
+    .material-brands__list { flex-wrap: nowrap; justify-content: flex-start; gap: .6rem; overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-width: thin; scrollbar-color: var(--color-line) transparent; padding: .45rem .25rem .65rem; margin-inline: -.25rem; margin-top: .1rem; }
+    .material-brands__item { flex: 0 0 7.5rem; }
+    .material-brands__link { padding: .45rem; border-radius: .7rem; }
+    .material-brands__logo { aspect-ratio: 2; padding: .3rem; }
     .material-brands__category { display: none; }
     .material-brands__note { flex-direction: column; gap: .25rem; margin-top: 1.1rem; }
   }
+  @media (min-width: 640px), (prefers-reduced-motion: reduce) { .material-brands__motion { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .material-brands__link, .material-brands__link::after, .material-brands__logo img, .material-brands__name svg { transition: none; } }
 </style>
